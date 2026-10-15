@@ -4,115 +4,117 @@ Website trưng bày và giới thiệu trang phục may đo phong cách tối gi
 
 ---
 
-## ✨ Điểm nổi bật & Yêu cầu thiết kế
+## 📸 Bảng Thông Số Kích Thước Ảnh Chuẩn (Image Specifications)
 
-1. **Thẩm mỹ tối giản, tông trắng chủ đạo**:
-   - Tông màu trắng thanh lịch (`#ffffff`, `#fafafa`), hairline border siêu mảnh (`#eeeeee`).
-   - Border radius chuẩn mực: chỉ từ **2px đến 4px** (`--radius-xs: 2px`, `--radius-sm: 3px`, `--radius-md: 4px`), tạo nét hiện đại, sang trọng như các lookbook thời trang quốc tế.
-   - Không dùng đổ bóng đậm, chỉ có shadow nhẹ nhàng tinh tế.
-2. **Hệ thống Flat Icon chuẩn mực**:
-   - Hoàn toàn dùng SVG flat icons tinh gọn (Facebook, Instagram, Zalo, Share, Globe, Copy, Check, Filter, Search, Bag,...).
-   - **Tuyệt đối không dùng emoji hay icon dạng ký tự**.
-3. **Chức năng Chia sẻ (Social Share)**:
-   - Nút chia sẻ trực tiếp lên **Facebook**, **Instagram**, và **Zalo**.
-   - Hỗ trợ sao chép link (Copy to clipboard) có thông báo toast phản hồi.
-   - Hỗ trợ Web Share API nguyên bản trên thiết bị di động.
-4. **Nút dịch song ngữ (Tiếng Việt ⟷ Tiếng Anh)**:
-   - Nút chuyển ngữ trực quan `VI / EN` trên Header với flat Globe icon.
-   - Dịch tức thời toàn bộ tiêu đề, mô tả, chất liệu, hướng dẫn bảo quản, bảng kích cỡ và nút bấm.
-5. **Headless Prismic CMS (`hub-cms.prismic.io`)**:
-   - Cấu hình repo name: `hub-cms`.
-   - Đã sinh sẵn toàn bộ cấu trúc **Custom Types** (`product`, `category`, `homepage`, `shop_settings`) và **Shared Slices** (`HeroBanner`, `FeaturedCollection`, `Lookbook`, `BrandStory`).
-   - Có sẵn lệnh đẩy tự động **`npm run prismic:push`** lên Prismic API mà không cần tạo từng type thủ công trên giao diện web.
-   - Cơ chế **Fail-safe fallback**: Khi Prismic chưa có dữ liệu hoặc chưa cấu hình token, website vẫn hiển thị dữ liệu mẫu thời trang chất lượng cao, hình ảnh sắc nét, trải nghiệm đầy đủ ngay lập tức.
+Admin nên chuẩn bị hình ảnh theo đúng tỉ lệ và kích thước khuyến nghị bên dưới để ảnh hiển thị sắc nét, đồng đều và tối ưu tốc độ tải trang:
+
+| Vị trí hiển thị | Tỉ lệ ảnh | Kích thước khuyến nghị | Định dạng tối ưu | Ghi chú |
+| :--- | :---: | :---: | :---: | :--- |
+| **Ảnh đại diện sản phẩm** (`featured_image`) | **3:4** (Dọc) | **900 x 1200 px** *(tối thiểu 600 x 800 px)* | JPG / WebP | Khung hình người mẫu chụp đứng, chuẩn lookbook thời trang |
+| **Album ảnh chi tiết sản phẩm** (`gallery`) | **3:4** (Dọc) | **900 x 1200 px** *(tối thiểu 600 x 800 px)* | JPG / WebP | Các góc chụp cận vải, chi tiết cổ áo, đường may, lưng áo |
+| **Logo thương hiệu** (`logo`) | Ngang | **300 x 80 px** *(hoặc SVG)* | PNG trong suốt / SVG | Nền trong suốt để hiển thị hài hòa trên nền trắng |
+| **Favicon tab trình duyệt** (`favicon`) | **1:1** (Vuông) | **64 x 64 px** *(hoặc 32 x 32 px)* | PNG / ICO | Icon hiển thị trên tab trình duyệt |
+| **Ảnh chia sẻ mạng xã hội** (`og_image`) | **1.91:1** (Ngang) | **1200 x 630 px** | JPG / PNG | Ảnh xem trước khi gửi link qua Zalo, Facebook, iMessage |
+| **Ảnh bìa Hero Banner** (`hero_image`) | **16:9** (Ngang rộng) | **1920 x 1080 px** | JPG / WebP | Ảnh banner ngang mở đầu trang chủ |
+
+> 💡 **Mẹo tối ưu:** Sử dụng các công cụ như [TinyPNG](https://tinypng.com/) hoặc xuất định dạng **WebP** trước khi upload lên Prismic để trang web mở nhanh tức thì.
 
 ---
 
-## 🛠️ Cấu trúc thư mục
+## 📝 Hướng Dẫn Quản Trị & Đăng Bài Trên Prismic CMS
 
-```text
-shop-vuong/
-├── customtypes/                     # Định nghĩa schema JSON của Custom Types
-│   ├── product/index.json           # Type: Sản phẩm thời trang (bilingual, sizes, colors, gallery)
-│   ├── category/index.json          # Type: Danh mục quần áo
-│   ├── homepage/index.json          # Type: Trang chủ & Slice zone
-│   └── shop_settings/index.json     # Type: Thông tin hotline, địa chỉ, Zalo, FB
-├── src/
-│   ├── slices/                      # Prismic Shared Slices
-│   │   ├── HeroBanner/              # Banner mở đầu lookbook
-│   │   ├── FeaturedCollection/      # Danh mục trang phục nổi bật
-│   │   ├── Lookbook/                # Bộ ảnh lookbook thời trang
-│   │   └── BrandStory/              # Câu chuyện thương hiệu & triết lý vải sợi
-│   ├── components/
-│   │   ├── FlatIcons.tsx            # Bộ icon flat SVG (Zalo, FB, IG, Globe, Share,...)
-│   │   ├── Navbar.tsx               # Header, thanh thông báo, nút dịch VI/EN, chat Zalo
-│   │   ├── ProductCard.tsx          # Thẻ sản phẩm với nút Xem nhanh & Chia sẻ
-│   │   ├── ProductDetailModal.tsx   # Modal xem chi tiết hình ảnh, size, chất liệu, Zalo
-│   │   ├── ShareModal.tsx           # Modal chia sẻ lên Facebook, Zalo, Instagram
-│   │   ├── ShopClient.tsx           # Quản lý state bộ lọc, tìm kiếm, sắp xếp & ngôn ngữ
-│   │   └── Footer.tsx               # Chân trang & thông tin shop
-│   ├── lib/
-│   │   ├── types.ts                 # Type definitions
-│   │   ├── mock-data.ts             # Dữ liệu mẫu trang phục tự nhiên
-│   │   └── prismic.ts               # Prismic client & helper methods
-│   └── app/
-│       ├── layout.tsx               # Next.js Root Layout & SEO Meta
-│       ├── page.tsx                 # Trang chủ Server Component
-│       └── globals.css              # Reset & biến CSS tông trắng chủ đạo
-├── scripts/
-│   └── sync-prismic.mjs             # Script đẩy Custom Types & Slices tự động lên Prismic
-├── slicemachine.config.json         # Cấu hình Slice Machine cho repo hub-cms
-├── .env.example                     # Biến môi trường mẫu
-└── .env.local                       # Cấu hình local
+> **Địa chỉ trang quản trị:** `https://hub-cms.prismic.io`  
+> **Lưu ý quan trọng:** Admin **chỉ cần nhập 100% tiếng Việt**. Khi khách hàng bấm chọn `EN` ngoài website, hệ thống sẽ **tự động dịch sang tiếng Anh** mà admin không cần nhập bất kỳ nội dung tiếng Anh nào.
+
+### 1. Cách đăng một Sản Phẩm mới (`product`)
+
+1. Đăng nhập vào `hub-cms.prismic.io` → chọn mục **Documents** trên menu bên trái.
+2. Bấm nút **Create new** ở góc trên bên phải → chọn loại tài liệu **`Sản phẩm Quần Áo / Clothing Product`**.
+3. Điền các trường thông tin theo hướng dẫn:
+   - **URL Slug**: Nhập mã định danh viết thường, không dấu, cách nhau bởi dấu gạch ngang.  
+     *Ví dụ:* `dam-ngan-linen-co-vuong`, `set-bo-ao-sat-nach-linen`.
+   - **Tên sản phẩm**: Nhập tên tiếng Việt có dấu.  
+     *Ví dụ:* `Đầm Ngắn Linen Trắng Cổ Vuông`.
+   - **Danh mục**: Chọn 1 trong 3 danh mục từ menu dropdown:
+     - `dam-ngan` (Đầm ngắn)
+     - `dam-dai` (Đầm dài)
+     - `set-bo` (Set bộ)
+   - **Giá bán (VND)**: Nhập số nguyên tiền Việt (không nhập chữ hay dấu chấm).  
+     *Ví dụ:* `580000`. *(Website sẽ hiển thị: 580.000đ)*
+   - **Giá bán (USD)**: Nhập số tiền đô la tương ứng để phục vụ khách nước ngoài.  
+     *Ví dụ:* `24`. *(Website sẽ hiển thị: $24 USD)*
+   - **Giá gốc (VND & USD - tuỳ chọn)**: Nhập nếu sản phẩm đang có giá khuyến mãi để web tự gạch ngang giá gốc.
+   - **Huy hiệu**: Nhập tag nổi bật như `Mới`, `Bán chạy`, `Giới hạn` (hoặc để trống nếu là sản phẩm thường).
+   - **Còn hàng**: Mặc định là `true` (còn hàng). Tắt đi nếu đã hết hàng.
+   - **Ảnh đại diện (Tỉ lệ 3:4)**: Bấm chọn và upload file ảnh đứng (kích thước khuyên dùng **900 x 1200 px**).
+   - **Album ảnh sản phẩm**: Bấm nút **Add an item** để thêm từng ảnh chụp các góc độ khác nhau của trang phục (cận chất vải, mặt sau, góc nghiêng,...).
+   - **Mô tả sản phẩm**: Nhập mô tả kiểu dáng, đặc điểm nổi bật, chất liệu vải bằng tiếng Việt.
+4. Bấm nút **Save** ở góc trên bên phải, sau đó bấm **Publish** để đưa sản phẩm lên website ngay lập tức.
+
+---
+
+### 2. Cài đặt Thông tin Shop & SEO (`shop_settings`)
+
+1. Vào **Documents** → tìm và mở tài liệu **`Cài đặt Cửa Hàng & SEO / Shop Settings`** (tài liệu này chỉ có 1 bản duy nhất).
+2. **Tab `General` (Thông tin liên hệ & Logo):**
+   - **Tên shop**: Ví dụ `VƯƠNG SHOP`.
+   - **Logo thương hiệu**: Upload ảnh logo file PNG nền trong suốt (nếu chưa upload, web sẽ tự hiển thị Text Logo thanh lịch).
+   - **Khẩu hiệu / Slogan**: Câu slogan của tiệm (ví dụ: *Thời trang may đo tối giản tông trắng*).
+   - **Hotline**: Số điện thoại liên hệ (ví dụ: `0988 123 456`).
+   - **Link Facebook, Instagram, Shopee**: Dán đường link trang shop của bạn để khách bấm vào là mở trực tiếp.
+   - **Địa chỉ cửa hàng**: Nhập địa chỉ tiếng Việt. *(Hệ thống tự dịch sang tiếng Anh cho khách quốc tế xem ở footer)*.
+3. **Tab `SEO & Metadata` (Cấu hình Google Search & Tab web):**
+   - **Tiêu đề web trên Tab (SEO)**: Tiêu đề hiển thị trên thanh tab của trình duyệt và kết quả Google Search.
+   - **Mô tả Google (SEO)**: Đoạn văn ngắn 1-2 câu tóm tắt giới thiệu shop hiển thị trên Google.
+   - **Favicon tab web**: Upload ảnh icon vuông nhỏ 64x64px để hiện icon shop trên tab trình duyệt.
+   - **Ảnh chia sẻ link MXH**: Upload ảnh ngang tỉ lệ 1200x630px để khi gửi link web qua Zalo, Messenger, Facebook sẽ hiện ảnh bìa đại diện sang trọng.
+   - **Từ khoá SEO**: Các từ khoá ngăn cách bằng dấu phẩy (ví dụ: *thời trang tối giản, đầm trắng, đầm linen, set bộ*).
+4. Bấm **Save** → bấm **Publish**.
+
+---
+
+### 3. Cấu hình 3 Danh mục sản phẩm (`category`)
+
+Website đã thiết lập sẵn 3 danh mục chính:
+1. `dam-ngan` — Đầm ngắn
+2. `dam-dai` — Đầm dài
+3. `set-bo` — Set bộ
+
+Nếu cần điều chỉnh tên hiển thị hoặc câu giới thiệu ngắn của từng danh mục, vào **Documents** → mở danh mục tương ứng → chỉnh sửa → bấm **Publish**.
+
+---
+
+## 💻 Hướng Dẫn Kỹ Thuật (Dành Cho Developer)
+
+### Cài đặt môi trường
+Tạo file `.env.local` ở thư mục gốc:
+```env
+NEXT_PUBLIC_PRISMIC_ENVIRONMENT=hub-cms
+PRISMIC_REPOSITORY_NAME=hub-cms
+# Token Custom Types API để tự động sync schema (lấy tại Settings -> Permanent Access Tokens trên Prismic)
+PRISMIC_CUSTOM_TYPES_API_TOKEN=your_token_here
 ```
 
----
-
-## 🚀 Hướng dẫn khởi chạy Local
-
+### Các câu lệnh thường dùng
 ```bash
-# Cài đặt dependencies
-npm install
-
-# Chạy server development
+# 1. Chạy môi trường phát triển cục bộ
 npm run dev
-```
 
-Mở trình duyệt tại [http://localhost:3000](http://localhost:3000).
+# 2. Kiểm tra biên dịch Next.js (TypeScript, Turbopack, SSR)
+npm run build
 
----
-
-## 🔄 Hướng dẫn đồng bộ lên Prismic (`hub-cms.prismic.io`)
-
-Bạn **không cần** vào web Prismic tạo từng field hay custom type:
-
-1. Đăng nhập vào repository Prismic của bạn: [https://hub-cms.prismic.io](https://hub-cms.prismic.io).
-2. Vào **Settings** -> **Permanent Access Tokens** (hoặc Custom Types API).
-3. Tạo 1 token với quyền **Custom Types API**, sau đó dán vào file `.env.local`:
-   ```env
-   PRISMIC_CUSTOM_TYPES_API_TOKEN=your_token_here
-   ```
-4. Chạy lệnh đồng bộ:
-   ```bash
-   npm run prismic:push
-   ```
-   Lệnh sẽ tự động đẩy toàn bộ `product`, `category`, `homepage`, `shop_settings` và các slices `hero_banner`, `featured_collection`, `lookbook`, `brand_story` lên Prismic CMS.
-
-Hoặc nếu bạn muốn dùng giao diện Slice Machine UI:
-```bash
-npm run slicemachine
+# 3. Đẩy toàn bộ Custom Types và Slices mới nhất lên Prismic API
+npm run prismic:push
 ```
 
 ---
 
-## ☁️ Hướng dẫn Deploy lên Vercel
+## 🎨 Điểm Nhấn Thiết Kế & Tính Năng Nổi Bật
 
-1. Đẩy code lên GitHub / GitLab / Bitbucket.
-2. Truy cập [Vercel](https://vercel.com) -> **Add New Project** -> Chọn repo `shop-vuong`.
-3. Trong phần **Environment Variables**, điền:
-   - `NEXT_PUBLIC_PRISMIC_ENVIRONMENT`: `hub-cms`
-   - `PRISMIC_REPOSITORY_NAME`: `hub-cms`
-   - `PRISMIC_CUSTOM_TYPES_API_TOKEN`: *(nếu cần)*
-   - `PRISMIC_ACCESS_TOKEN`: *(nếu repo Prismic để private)*
-   - `NEXT_PUBLIC_SITE_URL`: Domain Vercel của bạn (ví dụ `https://shop-vuong.vercel.app`)
-4. Bấm **Deploy**. Project sẽ tự động build và online trong vòng 1-2 phút!
+- **Tông trắng chủ đạo & Đường nét tối giản**: Viền mỏng 1px (`#eeeeee`), bo góc nhẹ 2-4px, không đổ bóng thô ráp.
+- **Trải nghiệm lướt xem không gián đoạn (History-synced Modal)**:
+  - Khi click vào sản phẩm ở trang danh mục, modal chi tiết bật lên tức thì không reload trang.
+  - Đồng thời cập nhật URL thành `/product/[uid]` và **ghi vào lịch sử trình duyệt (Browser History)**, giúp người dùng dễ dàng tìm lại hôm sau hoặc copy URL chia sẻ cho bạn bè.
+- **Tùy chọn hiển thị 10 / 20 / 30 sản phẩm**: Tự động lưu tham số query `?limit=...` trên URL để khi tải lại trang vẫn giữ nguyên lựa chọn của khách.
+- **Responsive Mobile chuẩn mực**: Hiển thị **2 sản phẩm mỗi dòng** (`repeat(2, 1fr)`) đồng đều trên điện thoại cả ở trang danh mục lẫn phần sản phẩm gợi ý.
+- **Hiệu ứng chuyển trang mượt mà**: Lớp phủ làm mờ toàn màn hình kết hợp vòng xoay tròn loading circle tinh tế.

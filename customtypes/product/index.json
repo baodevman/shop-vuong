@@ -8,7 +8,7 @@
       "uid": {
         "type": "UID",
         "config": {
-          "label": "URL Slug sản phẩm (Ví dụ: dam-ngan-linen-co-vuong)",
+          "label": "URL Slug",
           "placeholder": "dam-ngan-linen-co-vuong"
         }
       },
@@ -16,7 +16,7 @@
         "type": "StructuredText",
         "config": {
           "single": "heading1",
-          "label": "Tên sản phẩm (Tiếng Việt)",
+          "label": "Tên sản phẩm",
           "placeholder": "Đầm Ngắn Linen Trắng Cổ Vuông"
         }
       },
@@ -35,35 +35,35 @@
       "price_vnd": {
         "type": "Number",
         "config": {
-          "label": "Giá bán (VND) — Dùng khi hiển thị Tiếng Việt",
+          "label": "Giá bán (VND)",
           "placeholder": "580000"
         }
       },
       "price_usd": {
         "type": "Number",
         "config": {
-          "label": "Giá bán (USD) — Dùng khi hiển thị Tiếng Anh",
+          "label": "Giá bán (USD)",
           "placeholder": "24"
         }
       },
       "original_price_vnd": {
         "type": "Number",
         "config": {
-          "label": "Giá gốc so sánh (VND - tuỳ chọn khuyến mãi)",
+          "label": "Giá gốc (VND - tuỳ chọn)",
           "placeholder": "690000"
         }
       },
       "original_price_usd": {
         "type": "Number",
         "config": {
-          "label": "Giá gốc so sánh (USD - tuỳ chọn khuyến mãi)",
+          "label": "Giá gốc (USD - tuỳ chọn)",
           "placeholder": "29"
         }
       },
       "badge": {
         "type": "Text",
         "config": {
-          "label": "Nhãn nổi bật (Ví dụ: Mới, Bán chạy, Giảm giá...)",
+          "label": "Huy hiệu (Mới / Bán chạy)",
           "placeholder": "Mới"
         }
       },
@@ -77,7 +77,7 @@
       "featured_image": {
         "type": "Image",
         "config": {
-          "label": "Ảnh chính (Tỉ lệ chuẩn 3:4 — Khuyên dùng 900x1200px hoặc 600x800px)",
+          "label": "Ảnh đại diện (Tỉ lệ 3:4)",
           "constraint": {
             "width": 900,
             "height": 1200
@@ -94,12 +94,12 @@
       "gallery": {
         "type": "Group",
         "config": {
-          "label": "Bộ sưu tập ảnh chi tiết (Tỉ lệ chuẩn 3:4)",
+          "label": "Album ảnh sản phẩm",
           "fields": {
             "image": {
               "type": "Image",
               "config": {
-                "label": "Ảnh chi tiết (Tỉ lệ 3:4, khuyên dùng 900x1200px)",
+                "label": "Ảnh chi tiết",
                 "constraint": {
                   "width": 900,
                   "height": 1200
@@ -114,7 +114,7 @@
         "type": "StructuredText",
         "config": {
           "multi": "paragraph, preformatted, strong, em, hyperlink, image, embed, list-item, o-list-item",
-          "label": "Mô tả sản phẩm (Tiếng Việt)",
+          "label": "Mô tả sản phẩm",
           "placeholder": "Mô tả chi tiết sản phẩm bằng tiếng Việt..."
         }
       }

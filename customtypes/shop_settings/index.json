@@ -15,7 +15,7 @@
       "logo": {
         "type": "Image",
         "config": {
-          "label": "Logo thương hiệu (Ảnh PNG nền trong suốt hoặc SVG)",
+          "label": "Logo thương hiệu",
           "constraint": {},
           "thumbnails": []
         }
@@ -30,35 +30,35 @@
       "phone_number": {
         "type": "Text",
         "config": {
-          "label": "Số điện thoại hotline",
+          "label": "Hotline",
           "placeholder": "0988 123 456"
         }
       },
       "facebook_url": {
         "type": "Text",
         "config": {
-          "label": "Link Facebook Shop",
+          "label": "Link Facebook",
           "placeholder": "https://facebook.com/vuongshop"
         }
       },
       "instagram_url": {
         "type": "Text",
         "config": {
-          "label": "Link Instagram Shop",
+          "label": "Link Instagram",
           "placeholder": "https://instagram.com/vuongshop"
         }
       },
       "shopee_url": {
         "type": "Text",
         "config": {
-          "label": "Link Shopee Shop",
+          "label": "Link Shopee",
           "placeholder": "https://shopee.vn/vuongshop"
         }
       },
       "address": {
         "type": "Text",
         "config": {
-          "label": "Địa chỉ cửa hàng (Tiếng Việt - Hệ thống tự dịch sang Tiếng Anh)",
+          "label": "Địa chỉ cửa hàng",
           "placeholder": "128 Đường Lê Lợi, Phường Bến Thành, Quận 1, TP. Hồ Chí Minh"
         }
       }
@@ -67,21 +67,21 @@
       "site_title": {
         "type": "Text",
         "config": {
-          "label": "Tên web hiển thị trên Tab trình duyệt (SEO Title)",
+          "label": "Tiêu đề web trên Tab (SEO)",
           "placeholder": "VƯƠNG SHOP — Minimalist Clothing Atelier | Thời Trang May Đo Tối Giản"
         }
       },
       "meta_description": {
         "type": "Text",
         "config": {
-          "label": "Mô tả web hiển thị trên Google Search (Meta Description)",
+          "label": "Mô tả Google (SEO)",
           "placeholder": "Cửa hàng đầm và set bộ may đo tối giản tông trắng thanh lịch từ sợi tự nhiên."
         }
       },
       "favicon": {
         "type": "Image",
         "config": {
-          "label": "Favicon tab trình duyệt (Ảnh vuông 32x32px hoặc 64x64px PNG/ICO)",
+          "label": "Favicon tab web",
           "constraint": {
             "width": 64,
             "height": 64
@@ -92,7 +92,7 @@
       "og_image": {
         "type": "Image",
         "config": {
-          "label": "Ảnh xem trước khi chia sẻ link Facebook/Zalo/Google (OpenGraph Image, khuyên dùng 1200x630px)",
+          "label": "Ảnh chia sẻ link MXH",
           "constraint": {
             "width": 1200,
             "height": 630
@@ -103,7 +103,7 @@
       "keywords": {
         "type": "Text",
         "config": {
-          "label": "Từ khoá SEO (ngăn cách bởi dấu phẩy)",
+          "label": "Từ khoá SEO",
           "placeholder": "thời trang tối giản, đầm trắng, đầm linen, set bộ, vương shop"
         }
       }
