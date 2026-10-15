@@ -16,7 +16,7 @@
         "type": "StructuredText",
         "config": {
           "single": "heading1",
-          "label": "Tên sản phẩm",
+          "label": "Tên sản phẩm (Tiếng Việt)",
           "placeholder": "Đầm Ngắn Linen Trắng Cổ Vuông"
         }
       },
@@ -32,18 +32,32 @@
           "default_value": "dam-ngan"
         }
       },
-      "price": {
+      "price_vnd": {
         "type": "Number",
         "config": {
-          "label": "Giá bán hiện tại (VND)",
+          "label": "Giá bán (VND) — Dùng khi hiển thị Tiếng Việt",
           "placeholder": "580000"
         }
       },
-      "original_price": {
+      "price_usd": {
         "type": "Number",
         "config": {
-          "label": "Giá gốc so sánh (VND - tuỳ chọn khi có khuyến mãi)",
+          "label": "Giá bán (USD) — Dùng khi hiển thị Tiếng Anh",
+          "placeholder": "24"
+        }
+      },
+      "original_price_vnd": {
+        "type": "Number",
+        "config": {
+          "label": "Giá gốc so sánh (VND - tuỳ chọn khuyến mãi)",
           "placeholder": "690000"
+        }
+      },
+      "original_price_usd": {
+        "type": "Number",
+        "config": {
+          "label": "Giá gốc so sánh (USD - tuỳ chọn khuyến mãi)",
+          "placeholder": "29"
         }
       },
       "badge": {

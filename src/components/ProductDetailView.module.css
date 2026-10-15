@@ -2,6 +2,44 @@
   max-width: 1200px;
   margin: 0 auto;
   padding: 24px 24px 64px 24px;
+  position: relative;
+}
+
+.modalContainer {
+  padding: 32px 32px 48px 32px;
+  max-width: 100%;
+}
+
+.modalCloseBtn {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  width: 36px;
+  height: 36px;
+  background-color: #ffffff;
+  border: 1px solid #e5e5e5;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: #333333;
+  z-index: 10;
+  transition: all 0.15s ease;
+}
+
+.modalCloseBtn:hover {
+  background-color: #111111;
+  color: #ffffff;
+  border-color: #111111;
+}
+
+.modalCategoryBadge {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  color: #777777;
+  margin-bottom: 20px;
 }
 
 .breadcrumb {
@@ -252,10 +290,11 @@
 .relatedSection {
   padding-top: 48px;
   border-top: 1px solid #eeeeee;
+  margin-top: 40px;
 }
 
 .relatedHeader {
-  margin-bottom: 28px;
+  margin-bottom: 24px;
 }
 
 .relatedSub {
@@ -279,8 +318,15 @@
 
 .relatedGrid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   gap: 24px;
+}
+
+@media (max-width: 1024px) {
+  .relatedGrid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
 }
 
 @media (max-width: 860px) {
@@ -295,14 +341,25 @@
   }
 }
 
-@media (max-width: 600px) {
+@media (max-width: 768px) {
   .container {
-    padding: 16px 16px 48px 16px;
+    padding: 16px 14px 48px 14px;
   }
 
   .relatedGrid {
-    grid-template-columns: 1fr;
-    gap: 16px;
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 12px !important;
+  }
+}
+
+@media (max-width: 600px) {
+  .container {
+    padding: 16px 12px 48px 12px;
+  }
+
+  .relatedGrid {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 10px !important;
   }
 
   .actionsWrap {

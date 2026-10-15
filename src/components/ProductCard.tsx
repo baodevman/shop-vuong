@@ -11,9 +11,14 @@ import styles from './ProductCard.module.css';
 interface ProductCardProps {
   product: ProductItem;
   language: Language;
+  onSelectProduct?: (product: ProductItem) => void;
 }
 
-export default function ProductCard({ product, language }: ProductCardProps) {
+export default function ProductCard({
+  product,
+  language,
+  onSelectProduct,
+}: ProductCardProps) {
   const [isHovered, setIsHovered] = useState(false);
   const [isShareOpen, setIsShareOpen] = useState(false);
 
@@ -21,14 +26,16 @@ export default function ProductCard({ product, language }: ProductCardProps) {
   const title = isEn ? product.title_en : product.title;
 
   const priceText = isEn
-    ? `$${(product.price / 25000).toFixed(0)} USD`
-    : `${product.price.toLocaleString('vi-VN')}đ`;
+    ? `$${product.price_usd} USD`
+    : `${product.price_vnd.toLocaleString('vi-VN')}đ`;
 
-  const originalPriceText = product.original_price
-    ? isEn
-      ? `$${(product.original_price / 25000).toFixed(0)} USD`
-      : `${product.original_price.toLocaleString('vi-VN')}đ`
-    : null;
+  const originalPriceText = isEn
+    ? product.original_price_usd
+      ? `$${product.original_price_usd} USD`
+      : null
+    : product.original_price_vnd
+      ? `${product.original_price_vnd.toLocaleString('vi-VN')}đ`
+      : null;
 
   const displayImage = isHovered && product.gallery && product.gallery.length > 1
     ? product.gallery[1]
@@ -61,6 +68,13 @@ export default function ProductCard({ product, language }: ProductCardProps) {
 
   const badgeText = getBadgeLabel();
 
+  const handleProductClick = (e: React.MouseEvent) => {
+    if (onSelectProduct) {
+      e.preventDefault();
+      onSelectProduct(product);
+    }
+  };
+
   return (
     <>
       <div
@@ -70,6 +84,7 @@ export default function ProductCard({ product, language }: ProductCardProps) {
       >
         <Link
           href={`/product/${product.uid}`}
+          onClick={handleProductClick}
           className={styles.imageLink}
           aria-label={title}
         >
@@ -78,7 +93,7 @@ export default function ProductCard({ product, language }: ProductCardProps) {
               src={displayImage}
               alt={title}
               fill
-              sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+              sizes="(max-width: 640px) 50vw, (max-width: 1024px) 50vw, 33vw"
               className={styles.image}
             />
 
@@ -120,7 +135,11 @@ export default function ProductCard({ product, language }: ProductCardProps) {
           </div>
 
           <h3 className={styles.title}>
-            <Link href={`/product/${product.uid}`} className={styles.titleLink}>
+            <Link
+              href={`/product/${product.uid}`}
+              onClick={handleProductClick}
+              className={styles.titleLink}
+            >
               {title}
             </Link>
           </h3>

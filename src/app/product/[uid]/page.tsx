@@ -39,10 +39,10 @@ export default async function ProductPage({ params }: ProductPageProps) {
     notFound();
   }
 
-  // Pick 3 other random or sequential products
+  // Pick 4 other products for balanced 2x2 grid on mobile
   const relatedProducts = allProducts
     .filter((p) => p.uid !== product.uid)
-    .slice(0, 3);
+    .slice(0, 4);
 
   return (
     <ShopLayout settings={settings}>

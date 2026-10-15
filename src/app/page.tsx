@@ -17,6 +17,7 @@ export default async function HomePage() {
         products={products}
         categories={categories}
         activeCategoryUid="all"
+        settings={settings}
       />
     </ShopLayout>
   );

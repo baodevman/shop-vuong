@@ -5,7 +5,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { ProductItem, ShopSettings } from '@/lib/types';
 import { useLanguage } from '@/context/LanguageContext';
-import { ShareIcon, ShopeeIcon } from './FlatIcons';
+import { ShareIcon, ShopeeIcon, CloseIcon } from './FlatIcons';
 import ProductCard from './ProductCard';
 import ShareModal from './ShareModal';
 import styles from './ProductDetailView.module.css';
@@ -14,12 +14,18 @@ interface ProductDetailViewProps {
   product: ProductItem;
   settings: ShopSettings;
   relatedProducts?: ProductItem[];
+  isModal?: boolean;
+  onClose?: () => void;
+  onSelectRelatedProduct?: (product: ProductItem) => void;
 }
 
 export default function ProductDetailView({
   product,
   settings,
   relatedProducts = [],
+  isModal = false,
+  onClose,
+  onSelectRelatedProduct,
 }: ProductDetailViewProps) {
   const { language } = useLanguage();
   const [activeImgIdx, setActiveImgIdx] = useState(0);
@@ -30,14 +36,16 @@ export default function ProductDetailView({
   const description = isEn ? product.description_en : product.description;
 
   const priceText = isEn
-    ? `$${(product.price / 25000).toFixed(0)} USD`
-    : `${product.price.toLocaleString('vi-VN')}đ`;
+    ? `$${product.price_usd} USD`
+    : `${product.price_vnd.toLocaleString('vi-VN')}đ`;
 
-  const originalPriceText = product.original_price
-    ? isEn
-      ? `$${(product.original_price / 25000).toFixed(0)} USD`
-      : `${product.original_price.toLocaleString('vi-VN')}đ`
-    : null;
+  const originalPriceText = isEn
+    ? product.original_price_usd
+      ? `$${product.original_price_usd} USD`
+      : null
+    : product.original_price_vnd
+      ? `${product.original_price_vnd.toLocaleString('vi-VN')}đ`
+      : null;
 
   const gallery = product.gallery && product.gallery.length > 0
     ? product.gallery
@@ -74,19 +82,37 @@ export default function ProductDetailView({
 
   return (
     <>
-      <div className={styles.container}>
+      <div className={`${styles.container} ${isModal ? styles.modalContainer : ''}`}>
+        {/* Modal Close Button */}
+        {isModal && onClose && (
+          <button
+            type="button"
+            className={styles.modalCloseBtn}
+            onClick={onClose}
+            aria-label="Close"
+          >
+            <CloseIcon size={18} />
+          </button>
+        )}
+
         {/* Breadcrumb navigation - pure single language */}
-        <nav className={styles.breadcrumb} aria-label="Breadcrumb">
-          <Link href="/" className={styles.crumbLink}>
-            {isEn ? 'Home' : 'Trang chủ'}
-          </Link>
-          <span className={styles.crumbSep}>/</span>
-          <Link href={`/category/${product.category}`} className={styles.crumbLink}>
-            {categoryName}
-          </Link>
-          <span className={styles.crumbSep}>/</span>
-          <span className={styles.crumbCurrent}>{title}</span>
-        </nav>
+        {!isModal ? (
+          <nav className={styles.breadcrumb} aria-label="Breadcrumb">
+            <Link href="/" className={styles.crumbLink}>
+              {isEn ? 'Home' : 'Trang chủ'}
+            </Link>
+            <span className={styles.crumbSep}>/</span>
+            <Link href={`/category/${product.category}`} className={styles.crumbLink}>
+              {categoryName}
+            </Link>
+            <span className={styles.crumbSep}>/</span>
+            <span className={styles.crumbCurrent}>{title}</span>
+          </nav>
+        ) : (
+          <div className={styles.modalCategoryBadge}>
+            <span>{categoryName.toUpperCase()}</span>
+          </div>
+        )}
 
         <div className={styles.productLayout}>
           {/* Gallery Column: 3:4 aspect ratio */}
@@ -204,11 +230,12 @@ export default function ProductDetailView({
             </div>
 
             <div className={styles.relatedGrid}>
-              {relatedProducts.slice(0, 3).map((item) => (
+              {relatedProducts.slice(0, 4).map((item) => (
                 <ProductCard
                   key={item.id}
                   product={item}
                   language={language}
+                  onSelectProduct={onSelectRelatedProduct}
                 />
               ))}
             </div>

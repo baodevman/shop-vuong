@@ -7,8 +7,10 @@ export interface ProductItem {
   title_en: string;
   subtitle?: string;
   category: 'dam-ngan' | 'dam-dai' | 'set-bo' | string;
-  price: number;
-  original_price?: number;
+  price_vnd: number;
+  price_usd: number;
+  original_price_vnd?: number;
+  original_price_usd?: number;
   badge?: string;
   badge_en?: string;
   in_stock: boolean;

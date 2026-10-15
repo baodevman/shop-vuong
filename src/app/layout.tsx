@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import './globals.css';
 import { LanguageProvider } from '@/context/LanguageContext';
+import PageTransitionLoading from '@/components/PageTransitionLoading';
 
 export const metadata: Metadata = {
   title: 'VƯƠNG SHOP — Minimalist Clothing Atelier | Thời Trang May Đo Tối Giản',
@@ -21,6 +22,7 @@ export default function RootLayout({
     <html lang="en">
       <body>
         <LanguageProvider>
+          <PageTransitionLoading />
           {children}
         </LanguageProvider>
       </body>

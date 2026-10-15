@@ -36,8 +36,8 @@ export default function ShareModal({
 
   const title = isEn ? product.title_en : product.title;
   const priceText = isEn
-    ? `$${(product.price / 25000).toFixed(0)} USD`
-    : `${product.price.toLocaleString('vi-VN')}đ`;
+    ? `$${product.price_usd} USD`
+    : `${product.price_vnd.toLocaleString('vi-VN')}đ`;
 
   const shareText = isEn
     ? `Discover ${title} (${priceText}) at Vuong Shop`

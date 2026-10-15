@@ -109,11 +109,50 @@
   color: #666666;
 }
 
+.limitButtons {
+  display: flex;
+  border: 1px solid #dcdcdc;
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.limitBtn {
+  background-color: #ffffff;
+  border: none;
+  border-right: 1px solid #eeeeee;
+  padding: 6px 12px;
+  font-size: 12px;
+  font-weight: 500;
+  color: #555555;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.limitBtn:last-child {
+  border-right: none;
+}
+
+.limitBtn:hover {
+  background-color: #f7f7f7;
+  color: #111111;
+}
+
+.limitBtnActive {
+  background-color: #111111;
+  color: #ffffff;
+  font-weight: 600;
+}
+
+.limitBtnActive:hover {
+  background-color: #111111;
+  color: #ffffff;
+}
+
 .selectInput {
   background-color: #ffffff;
   border: 1px solid #dcdcdc;
   border-radius: 3px;
-  padding: 8px 12px;
+  padding: 7px 12px;
   font-size: 12px;
   color: #111111;
   outline: none;
@@ -148,10 +187,84 @@
   cursor: pointer;
 }
 
+/* Product Grid: 3 columns on desktop */
 .grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 28px;
+}
+
+/* Pagination */
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  margin-top: 48px;
+  padding-top: 24px;
+  border-top: 1px solid #eeeeee;
+}
+
+.pageBtn {
+  background-color: #ffffff;
+  border: 1px solid #e0e0e0;
+  border-radius: 3px;
+  padding: 8px 16px;
+  font-size: 12px;
+  font-weight: 500;
+  color: #111111;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.pageBtn:hover:not(:disabled) {
+  border-color: #111111;
+  background-color: #f7f7f7;
+}
+
+.pageBtn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  border-color: #eeeeee;
+}
+
+.pageNumbers {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.pageNumberBtn {
+  min-width: 34px;
+  height: 34px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #ffffff;
+  border: 1px solid #e0e0e0;
+  border-radius: 3px;
+  font-size: 12px;
+  font-weight: 500;
+  color: #333333;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.pageNumberBtn:hover {
+  border-color: #111111;
+  color: #111111;
+}
+
+.pageNumberBtnActive {
+  background-color: #111111;
+  border-color: #111111;
+  color: #ffffff;
+  font-weight: 600;
+}
+
+.pageNumberBtnActive:hover {
+  background-color: #111111;
+  color: #ffffff;
 }
 
 .emptyContainer {
@@ -186,12 +299,56 @@
   background-color: #333333;
 }
 
-@media (max-width: 900px) {
-  .grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 16px;
-  }
+/* Modal Popup Styles */
+.modalBackdrop {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(4px);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  overflow-y: auto;
+  animation: fadeIn 0.2s ease-out;
+}
 
+.modalContent {
+  background-color: #ffffff;
+  border-radius: 3px;
+  border: 1px solid #e0e0e0;
+  width: 100%;
+  max-width: 1100px;
+  max-height: 90vh;
+  overflow-y: auto;
+  position: relative;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+  animation: modalSlideUp 0.25s ease-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes modalSlideUp {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsive Media Queries */
+@media (max-width: 900px) {
   .controlBar {
     flex-direction: column;
     align-items: stretch;
@@ -200,15 +357,39 @@
   .searchBox {
     width: 100%;
   }
+
+  .filterSelectors {
+    justify-content: space-between;
+  }
 }
 
-@media (max-width: 600px) {
-  .grid {
-    grid-template-columns: 1fr;
-    gap: 16px;
+/* CRITICAL: Mobile display MUST show 2 items per row */
+@media (max-width: 768px) {
+  .catalogWrapper {
+    padding: 16px 12px 48px 12px;
   }
 
-  .catalogWrapper {
-    padding: 20px 16px 48px 16px;
+  .grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 12px !important;
+  }
+
+  .modalBackdrop {
+    padding: 10px;
+  }
+
+  .modalContent {
+    max-height: 95vh;
+  }
+}
+
+@media (max-width: 480px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 10px !important;
+  }
+
+  .filterSelectors {
+    gap: 10px;
   }
 }

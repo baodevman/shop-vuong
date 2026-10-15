@@ -43,6 +43,7 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
         products={products}
         categories={categories}
         activeCategoryUid={uid}
+        settings={settings}
       />
     </ShopLayout>
   );
