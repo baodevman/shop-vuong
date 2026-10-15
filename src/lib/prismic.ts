@@ -21,7 +21,6 @@ export function createClient(config: prismic.ClientConfig = {}) {
 function mapProductDoc(doc: any): ProductItem {
   const d = doc.data;
   const titleVi = prismic.asText(d.title) || d.title || 'Sản phẩm';
-  // If English title is not provided in Prismic, fallback to English title or Vietnamese title
   const titleEn = prismic.asText(d.title_en) || d.title_en || titleVi;
   const descVi = prismic.asText(d.description) || d.description || '';
   const descEn = prismic.asText(d.description_en) || d.description_en || descVi;
@@ -44,18 +43,12 @@ function mapProductDoc(doc: any): ProductItem {
     price: Number(d.price) || 0,
     original_price: d.original_price ? Number(d.original_price) : undefined,
     badge: d.badge || undefined,
+    badge_en: d.badge_en || undefined,
     in_stock: d.in_stock !== false,
     featured_image: mainImageUrl,
     gallery: galleryUrls.length > 0 ? galleryUrls : [mainImageUrl],
     description: descVi,
     description_en: descEn,
-    material: d.material || 'Linen & Cotton tự nhiên',
-    material_en: d.material_en || '100% Natural Organic Linen',
-    care_instructions: d.care_instructions || 'Giặt tay nhẹ nhàng, phơi bóng râm',
-    care_instructions_en: d.care_instructions_en || 'Gentle hand wash, dry in shade',
-    sizes: Array.isArray(d.sizes) && d.sizes.length > 0
-      ? d.sizes.map((s: any) => ({ size_name: s.size_name || 'Freesize', available: s.available !== false }))
-      : [{ size_name: 'S', available: true }, { size_name: 'M', available: true }, { size_name: 'L', available: true }],
   };
 }
 
@@ -75,7 +68,7 @@ export async function getProducts(categoryUid?: string): Promise<ProductItem[]> 
       return response.map(mapProductDoc);
     }
   } catch {
-    // Graceful fallback to mock data
+    // Graceful fallback
   }
 
   if (categoryUid && categoryUid !== 'all') {
@@ -90,7 +83,7 @@ export async function getProductByUid(uid: string): Promise<ProductItem | null> 
     const doc = await client.getByUID('product', uid);
     if (doc) return mapProductDoc(doc);
   } catch {
-    // Fallback to mock data
+    // Fallback
   }
   const found = mockProducts.find((p) => p.uid === uid || p.id === uid);
   return found || null;
@@ -128,7 +121,6 @@ export async function getShopSettings(): Promise<ShopSettings> {
         facebook_url: d.facebook_url || mockShopSettings.facebook_url,
         instagram_url: d.instagram_url || mockShopSettings.instagram_url,
         shopee_url: d.shopee_url || mockShopSettings.shopee_url,
-        zalo_phone: d.zalo_phone || mockShopSettings.zalo_phone,
         address: d.address || mockShopSettings.address,
         address_en: d.address_en || mockShopSettings.address_en,
       };

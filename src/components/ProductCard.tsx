@@ -35,10 +35,31 @@ export default function ProductCard({ product, language }: ProductCardProps) {
     : product.featured_image;
 
   const categoryName = {
-    'dam-ngan': isEn ? 'Mini Dress' : 'Đầm ngắn',
+    'dam-ngan': isEn ? 'Short Dress' : 'Đầm ngắn',
     'dam-dai': isEn ? 'Maxi Dress' : 'Đầm dài',
     'set-bo': isEn ? 'Matching Set' : 'Set bộ',
   }[product.category] || product.category;
+
+  // Single language badge formatting
+  const getBadgeLabel = () => {
+    if (!product.badge) return null;
+    const b = product.badge.toLowerCase();
+    if (b.includes('mới') || b.includes('new')) {
+      return isEn ? 'NEW' : 'MỚI';
+    }
+    if (b.includes('bán chạy') || b.includes('best seller')) {
+      return isEn ? 'BEST SELLER' : 'BÁN CHẠY';
+    }
+    if (b.includes('thủ công') || b.includes('artisan')) {
+      return isEn ? 'ARTISAN' : 'THỦ CÔNG';
+    }
+    if (b.includes('giới hạn') || b.includes('limited')) {
+      return isEn ? 'LIMITED' : 'GIỚI HẠN';
+    }
+    return product.badge;
+  };
+
+  const badgeText = getBadgeLabel();
 
   return (
     <>
@@ -61,8 +82,8 @@ export default function ProductCard({ product, language }: ProductCardProps) {
               className={styles.image}
             />
 
-            {product.badge && (
-              <span className={styles.badge}>{product.badge}</span>
+            {badgeText && (
+              <span className={styles.badge}>{badgeText}</span>
             )}
 
             <div className={styles.cardOverlay}>
@@ -91,7 +112,7 @@ export default function ProductCard({ product, language }: ProductCardProps) {
                 e.stopPropagation();
                 setIsShareOpen(true);
               }}
-              title={isEn ? 'Share to Facebook, Zalo, Instagram' : 'Chia sẻ lên Facebook, Zalo, Instagram'}
+              title={isEn ? 'Share product' : 'Chia sẻ sản phẩm'}
               aria-label="Share"
             >
               <ShareIcon size={15} />

@@ -5,7 +5,6 @@ import { ProductItem, Language } from '@/lib/types';
 import {
   FacebookIcon,
   InstagramIcon,
-  ZaloIcon,
   CopyIcon,
   CheckIcon,
   CloseIcon,
@@ -32,8 +31,8 @@ export default function ShareModal({
   if (!isOpen) return null;
 
   const currentUrl = typeof window !== 'undefined'
-    ? `${window.location.origin}#${product.uid}`
-    : `https://shop-vuong.vercel.app#${product.uid}`;
+    ? `${window.location.origin}/product/${product.uid}`
+    : `https://shop-vuong.vercel.app/product/${product.uid}`;
 
   const title = isEn ? product.title_en : product.title;
   const priceText = isEn
@@ -41,18 +40,12 @@ export default function ShareModal({
     : `${product.price.toLocaleString('vi-VN')}đ`;
 
   const shareText = isEn
-    ? `Discover ${title} (${priceText}) at Vuong Shop Atelier`
+    ? `Discover ${title} (${priceText}) at Vuong Shop`
     : `Xem mẫu ${title} (${priceText}) tại Vương Shop`;
 
   const handleFacebookShare = () => {
     const fbUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(currentUrl)}&quote=${encodeURIComponent(shareText)}`;
     window.open(fbUrl, '_blank', 'width=600,height=500,noopener,noreferrer');
-  };
-
-  const handleZaloShare = () => {
-    // Official Zalo share dialog
-    const zaloUrl = `https://sp.zalo.me/share_inline?link=${encodeURIComponent(currentUrl)}&title=${encodeURIComponent(shareText)}`;
-    window.open(zaloUrl, '_blank', 'width=600,height=500,noopener,noreferrer');
   };
 
   const handleInstagramShare = async () => {
@@ -77,7 +70,7 @@ export default function ShareModal({
   };
 
   const handleNativeShare = async () => {
-    if (navigator.share) {
+    if (typeof navigator !== 'undefined' && navigator.share) {
       try {
         await navigator.share({
           title,
@@ -85,7 +78,7 @@ export default function ShareModal({
           url: currentUrl,
         });
       } catch {
-        // User cancelled or not supported
+        // User cancelled or unsupported
       }
     }
   };
@@ -115,40 +108,23 @@ export default function ShareModal({
           <span className={styles.productPrice}>{priceText}</span>
         </div>
 
+        {/* Facebook and Instagram Buttons */}
         <div className={styles.channelGrid}>
-          {/* Facebook */}
           <button
             type="button"
             className={styles.channelButton}
             onClick={handleFacebookShare}
           >
-            <div className={styles.channelIconBox}>
-              <FacebookIcon size={18} />
-            </div>
+            <FacebookIcon size={20} />
             <span className={styles.channelLabel}>Facebook</span>
           </button>
 
-          {/* Zalo */}
-          <button
-            type="button"
-            className={styles.channelButton}
-            onClick={handleZaloShare}
-          >
-            <div className={styles.channelIconBox}>
-              <ZaloIcon size={18} />
-            </div>
-            <span className={styles.channelLabel}>Zalo</span>
-          </button>
-
-          {/* Instagram */}
           <button
             type="button"
             className={styles.channelButton}
             onClick={handleInstagramShare}
           >
-            <div className={styles.channelIconBox}>
-              <InstagramIcon size={18} />
-            </div>
+            <InstagramIcon size={20} />
             <span className={styles.channelLabel}>Instagram</span>
           </button>
         </div>
@@ -187,7 +163,7 @@ export default function ShareModal({
             onClick={handleNativeShare}
           >
             <ShareIcon size={14} />
-            <span>{isEn ? 'More Share Options (System)' : 'Tuỳ chọn chia sẻ khác'}</span>
+            <span>{isEn ? 'System Share Menu' : 'Tuỳ chọn chia sẻ khác'}</span>
           </button>
         )}
 

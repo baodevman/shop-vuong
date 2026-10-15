@@ -1,6 +1,6 @@
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
-import { getProductByUid, getShopSettings } from '@/lib/prismic';
+import { getProductByUid, getProducts, getShopSettings } from '@/lib/prismic';
 import ShopLayout from '@/components/ShopLayout';
 import ProductDetailView from '@/components/ProductDetailView';
 
@@ -17,7 +17,7 @@ export async function generateMetadata({ params }: ProductPageProps): Promise<Me
   }
 
   return {
-    title: `${product.title_en} (${product.title}) — VƯƠNG SHOP`,
+    title: `${product.title_en} — VƯƠNG SHOP`,
     description: product.description_en || product.description,
     openGraph: {
       title: `${product.title_en} — VƯƠNG SHOP`,
@@ -29,8 +29,9 @@ export async function generateMetadata({ params }: ProductPageProps): Promise<Me
 
 export default async function ProductPage({ params }: ProductPageProps) {
   const { uid } = await params;
-  const [product, settings] = await Promise.all([
+  const [product, allProducts, settings] = await Promise.all([
     getProductByUid(uid),
+    getProducts(),
     getShopSettings(),
   ]);
 
@@ -38,9 +39,18 @@ export default async function ProductPage({ params }: ProductPageProps) {
     notFound();
   }
 
+  // Pick 3 other random or sequential products
+  const relatedProducts = allProducts
+    .filter((p) => p.uid !== product.uid)
+    .slice(0, 3);
+
   return (
     <ShopLayout settings={settings}>
-      <ProductDetailView product={product} settings={settings} />
+      <ProductDetailView
+        product={product}
+        settings={settings}
+        relatedProducts={relatedProducts}
+      />
     </ShopLayout>
   );
 }

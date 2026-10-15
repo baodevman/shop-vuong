@@ -11,6 +11,7 @@
   font-size: 12px;
   color: #888888;
   margin-bottom: 28px;
+  flex-wrap: wrap;
 }
 
 .crumbLink {
@@ -41,6 +42,7 @@
   grid-template-columns: 1fr 1.1fr;
   gap: 48px;
   align-items: flex-start;
+  margin-bottom: 64px;
 }
 
 .galleryColumn {
@@ -131,7 +133,7 @@
 }
 
 .title {
-  font-size: clamp(22px, 2.5vw, 28px);
+  font-size: clamp(22px, 2.5vw, 30px);
   font-weight: 400;
   color: #111111;
   margin: 0 0 16px 0;
@@ -144,7 +146,7 @@
   gap: 12px;
   padding-bottom: 20px;
   border-bottom: 1px solid #eeeeee;
-  margin-bottom: 20px;
+  margin-bottom: 24px;
 }
 
 .price {
@@ -177,131 +179,43 @@
   border-radius: 2px;
 }
 
-.sectionBlock {
-  margin-bottom: 20px;
-}
-
-.sectionHead {
-  margin-bottom: 8px;
+.descSection {
+  margin-bottom: 32px;
 }
 
 .sectionLabel {
-  font-size: 12px;
+  font-size: 11px;
   font-weight: 600;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: #444444;
-  margin: 0 0 8px 0;
-}
-
-.sizeGroup {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-}
-
-.sizeBtn {
-  min-width: 44px;
-  height: 38px;
-  background-color: #ffffff;
-  border: 1px solid #dcdcdc;
-  border-radius: 2px;
-  font-size: 12px;
-  font-weight: 500;
-  color: #111111;
-  cursor: pointer;
-  padding: 0 12px;
-  transition: all 0.15s ease;
-}
-
-.sizeBtn:hover:not(:disabled) {
-  border-color: #111111;
-}
-
-.sizeActive {
-  background-color: #111111;
-  color: #ffffff;
-  border-color: #111111;
-}
-
-.sizeDisabled {
-  opacity: 0.4;
-  cursor: not-allowed;
-  text-decoration: line-through;
+  color: #555555;
+  margin: 0 0 10px 0;
 }
 
 .descText {
-  font-size: 13px;
+  font-size: 14px;
   line-height: 1.7;
-  color: #555555;
-  margin: 0;
-}
-
-.specBox {
-  background-color: #fafafa;
-  border: 1px solid #ebebeb;
-  border-radius: 3px;
-  padding: 14px 16px;
-  margin-bottom: 24px;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-
-.specRow {
-  display: flex;
-  font-size: 12px;
-  line-height: 1.5;
-}
-
-.specKey {
-  width: 90px;
-  font-weight: 600;
   color: #444444;
-  flex-shrink: 0;
-}
-
-.specVal {
-  color: #666666;
 }
 
 .actionsWrap {
   display: flex;
   flex-wrap: wrap;
-  gap: 10px;
-  margin-bottom: 28px;
-}
-
-.zaloBtn {
-  flex: 1;
-  min-width: 200px;
-  background-color: #111111;
-  color: #ffffff;
-  border: 1px solid #111111;
-  border-radius: 3px;
-  padding: 12px 18px;
-  font-size: 13px;
-  font-weight: 600;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  text-decoration: none;
-  transition: all 0.15s ease;
-}
-
-.zaloBtn:hover {
-  background-color: #333333;
+  gap: 12px;
+  margin-bottom: 32px;
 }
 
 .shopeeBtn {
-  background-color: #ffffff;
-  color: #ee4d2d;
+  flex: 1;
+  min-width: 200px;
+  background-color: #ee4d2d;
+  color: #ffffff;
   border: 1px solid #ee4d2d;
   border-radius: 3px;
-  padding: 12px 18px;
+  padding: 13px 20px;
   font-size: 13px;
   font-weight: 600;
+  letter-spacing: 0.04em;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -311,7 +225,7 @@
 }
 
 .shopeeBtn:hover {
-  background-color: #fff5f3;
+  background-color: #d73211;
 }
 
 .shareBtn {
@@ -319,7 +233,7 @@
   color: #111111;
   border: 1px solid #dcdcdc;
   border-radius: 3px;
-  padding: 12px 16px;
+  padding: 13px 20px;
   font-size: 13px;
   font-weight: 500;
   display: flex;
@@ -334,30 +248,70 @@
   background-color: #fafafa;
 }
 
-.benefitsRow {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 12px;
-  padding-top: 20px;
+/* Related / Other Products Section */
+.relatedSection {
+  padding-top: 48px;
   border-top: 1px solid #eeeeee;
 }
 
-.benefitItem {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  font-size: 11px;
-  color: #777777;
+.relatedHeader {
+  margin-bottom: 28px;
 }
 
-@media (max-width: 768px) {
+.relatedSub {
+  display: block;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #888888;
+  margin-bottom: 6px;
+}
+
+.relatedTitle {
+  font-size: 20px;
+  font-weight: 300;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: #111111;
+  margin: 0;
+}
+
+.relatedGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+@media (max-width: 860px) {
   .productLayout {
     grid-template-columns: 1fr;
-    gap: 28px;
+    gap: 32px;
   }
 
-  .benefitsRow {
+  .relatedGrid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
+}
+
+@media (max-width: 600px) {
+  .container {
+    padding: 16px 16px 48px 16px;
+  }
+
+  .relatedGrid {
     grid-template-columns: 1fr;
-    gap: 8px;
+    gap: 16px;
+  }
+
+  .actionsWrap {
+    flex-direction: column;
+  }
+
+  .shopeeBtn,
+  .shareBtn {
+    width: 100%;
+    justify-content: center;
   }
 }

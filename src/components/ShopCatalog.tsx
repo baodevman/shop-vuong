@@ -44,8 +44,7 @@ export default function ShopCatalog({
         const q = searchQuery.toLowerCase();
         const titleMatch = (isEn ? item.title_en : item.title).toLowerCase().includes(q);
         const descMatch = (isEn ? item.description_en : item.description).toLowerCase().includes(q);
-        const matMatch = (isEn ? item.material_en : item.material).toLowerCase().includes(q);
-        if (!titleMatch && !descMatch && !matMatch) return false;
+        if (!titleMatch && !descMatch) return false;
       }
 
       return true;

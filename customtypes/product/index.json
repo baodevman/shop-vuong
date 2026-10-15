@@ -8,8 +8,8 @@
       "uid": {
         "type": "UID",
         "config": {
-          "label": "URL Slug sản phẩm (Ví dụ: dam-ngan-linen-trang)",
-          "placeholder": "dam-ngan-linen-trang"
+          "label": "URL Slug sản phẩm (Ví dụ: dam-ngan-linen-co-vuong)",
+          "placeholder": "dam-ngan-linen-co-vuong"
         }
       },
       "title": {
@@ -24,14 +24,14 @@
         "type": "StructuredText",
         "config": {
           "single": "heading1",
-          "label": "Tên sản phẩm (English - Nếu để trống hệ thống sẽ tự dịch)",
+          "label": "Tên sản phẩm (English)",
           "placeholder": "Square-Neck White Linen Mini Dress"
         }
       },
       "category": {
         "type": "Select",
         "config": {
-          "label": "Phân loại danh mục (3 danh mục chính)",
+          "label": "Danh mục",
           "options": [
             "dam-ngan",
             "dam-dai",
@@ -44,34 +44,41 @@
         "type": "Number",
         "config": {
           "label": "Giá bán hiện tại (VND)",
-          "placeholder": "690000"
+          "placeholder": "580000"
         }
       },
       "original_price": {
         "type": "Number",
         "config": {
-          "label": "Giá gốc so sánh (VND - tuỳ chọn)",
-          "placeholder": "850000"
-        }
-      },
-      "in_stock": {
-        "type": "Boolean",
-        "config": {
-          "label": "Tình trạng còn hàng",
-          "default_value": true
+          "label": "Giá gốc so sánh (VND - tuỳ chọn có khuyến mãi)",
+          "placeholder": "690000"
         }
       },
       "badge": {
         "type": "Text",
         "config": {
-          "label": "Nhãn nổi bật (New, Best Seller...)",
+          "label": "Nhãn nổi bật (Mới / Bán chạy)",
+          "placeholder": "Mới"
+        }
+      },
+      "badge_en": {
+        "type": "Text",
+        "config": {
+          "label": "Nhãn nổi bật (English - New / Best Seller)",
           "placeholder": "New"
+        }
+      },
+      "in_stock": {
+        "type": "Boolean",
+        "config": {
+          "label": "Còn hàng",
+          "default_value": true
         }
       },
       "featured_image": {
         "type": "Image",
         "config": {
-          "label": "Ảnh chính (Tỉ lệ chuẩn 3:4 — Kích thước khuyên dùng: 900x1200px hoặc 600x800px)",
+          "label": "Ảnh chính sản phẩm (Tỉ lệ chuẩn 3:4 — Khuyên dùng 900x1200px hoặc 600x800px)",
           "constraint": {
             "width": 900,
             "height": 1200
@@ -88,24 +95,17 @@
       "gallery": {
         "type": "Group",
         "config": {
-          "label": "Bộ sưu tập ảnh chi tiết (Tỉ lệ chuẩn 3:4, khuyên dùng 900x1200px)",
+          "label": "Bộ sưu tập ảnh chi tiết (Tỉ lệ chuẩn 3:4 — Khuyên dùng 900x1200px)",
           "fields": {
             "image": {
               "type": "Image",
               "config": {
-                "label": "Ảnh chi tiết (Khuyên dùng 900x1200px)",
+                "label": "Ảnh chi tiết",
                 "constraint": {
                   "width": 900,
                   "height": 1200
                 },
                 "thumbnails": []
-              }
-            },
-            "caption": {
-              "type": "Text",
-              "config": {
-                "label": "Mô tả góc chụp",
-                "placeholder": "Góc nghiêng / Cận cảnh chất liệu vải"
               }
             }
           }
@@ -115,68 +115,16 @@
         "type": "StructuredText",
         "config": {
           "multi": "paragraph, preformatted, strong, em, hyperlink, image, embed, list-item, o-list-item",
-          "label": "Mô tả chi tiết sản phẩm (Tiếng Việt)",
-          "placeholder": "Mô tả phom dáng, phong cách thiết kế và cảm giác khi mặc..."
+          "label": "Mô tả sản phẩm (Tiếng Việt)",
+          "placeholder": "Mô tả chi tiết sản phẩm..."
         }
       },
       "description_en": {
         "type": "StructuredText",
         "config": {
           "multi": "paragraph, preformatted, strong, em, hyperlink, image, embed, list-item, o-list-item",
-          "label": "Mô tả chi tiết (English - Nếu để trống hệ thống sẽ tự dịch)",
-          "placeholder": "Detailed English description..."
-        }
-      }
-    },
-    "Specifications": {
-      "material": {
-        "type": "Text",
-        "config": {
-          "label": "Chất liệu vải (Tiếng Việt)",
-          "placeholder": "100% Linen tự nhiên cao cấp"
-        }
-      },
-      "material_en": {
-        "type": "Text",
-        "config": {
-          "label": "Chất liệu vải (English)",
-          "placeholder": "100% Natural Organic Linen"
-        }
-      },
-      "care_instructions": {
-        "type": "Text",
-        "config": {
-          "label": "Hướng dẫn bảo quản (Tiếng Việt)",
-          "placeholder": "Giặt tay nhẹ nhàng, không dùng chất tẩy mạnh"
-        }
-      },
-      "care_instructions_en": {
-        "type": "Text",
-        "config": {
-          "label": "Hướng dẫn bảo quản (English)",
-          "placeholder": "Hand wash gently, do not bleach"
-        }
-      },
-      "sizes": {
-        "type": "Group",
-        "config": {
-          "label": "Kích cỡ khả dụng",
-          "fields": {
-            "size_name": {
-              "type": "Text",
-              "config": {
-                "label": "Size (S, M, L, Freesize)",
-                "placeholder": "S"
-              }
-            },
-            "available": {
-              "type": "Boolean",
-              "config": {
-                "label": "Còn hàng",
-                "default_value": true
-              }
-            }
-          }
+          "label": "Mô tả sản phẩm (English)",
+          "placeholder": "Detailed product description in English..."
         }
       }
     }

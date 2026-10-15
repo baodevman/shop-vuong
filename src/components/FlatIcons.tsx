@@ -46,7 +46,7 @@ export function InstagramIcon({ size = 18, className, color = 'currentColor' }: 
   );
 }
 
-export function ZaloIcon({ size = 18, className, color = 'currentColor' }: IconProps) {
+export function ShopeeIcon({ size = 18, className, color = 'currentColor' }: IconProps) {
   return (
     <svg
       width={size}
@@ -60,10 +60,9 @@ export function ZaloIcon({ size = 18, className, color = 'currentColor' }: IconP
       className={className}
       aria-hidden="true"
     >
-      {/* Crisp flat geometric outline for Zalo */}
-      <rect x="2.5" y="3.5" width="19" height="17" rx="3" />
-      <path d="M7 8h4.5l-4.5 6h4.5" />
-      <circle cx="16" cy="11" r="2.8" />
+      <path d="M6 7l1 14h10l1-14H6z" />
+      <path d="M9 7V5a3 3 0 0 1 6 0v2" />
+      <path d="M13.5 11.5c-.5-.4-1.2-.5-1.7-.3-.6.2-.8.7-.8 1.1 0 .8 1.2 1 1.7 1.3.7.3 1.3.8 1.3 1.7 0 1.1-.9 1.9-2 1.9-.8 0-1.5-.4-1.9-1" />
     </svg>
   );
 }
@@ -191,27 +190,6 @@ export function SearchIcon({ size = 18, className, color = 'currentColor' }: Ico
   );
 }
 
-export function BagIcon({ size = 18, className, color = 'currentColor' }: IconProps) {
-  return (
-    <svg
-      width={size}
-      height={size}
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke={color}
-      strokeWidth="1.8"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      className={className}
-      aria-hidden="true"
-    >
-      <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z" />
-      <path d="M3 6h18" />
-      <path d="M16 10a4 4 0 0 1-8 0" />
-    </svg>
-  );
-}
-
 export function EyeIcon({ size = 18, className, color = 'currentColor' }: IconProps) {
   return (
     <svg
@@ -231,109 +209,3 @@ export function EyeIcon({ size = 18, className, color = 'currentColor' }: IconPr
     </svg>
   );
 }
-
-export function TruckIcon({ size = 18, className, color = 'currentColor' }: IconProps) {
-  return (
-    <svg
-      width={size}
-      height={size}
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke={color}
-      strokeWidth="1.8"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      className={className}
-      aria-hidden="true"
-    >
-      <rect x="1" y="3" width="15" height="13" rx="1" />
-      <polygon points="16 8 20 8 23 11 23 16 16 16 16 8" />
-      <circle cx="5.5" cy="18.5" r="2.5" />
-      <circle cx="18.5" cy="18.5" r="2.5" />
-    </svg>
-  );
-}
-
-export function ShieldCheckIcon({ size = 18, className, color = 'currentColor' }: IconProps) {
-  return (
-    <svg
-      width={size}
-      height={size}
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke={color}
-      strokeWidth="1.8"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      className={className}
-      aria-hidden="true"
-    >
-      <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
-      <path d="m9 12 2 2 4-4" />
-    </svg>
-  );
-}
-
-export function RefreshIcon({ size = 18, className, color = 'currentColor' }: IconProps) {
-  return (
-    <svg
-      width={size}
-      height={size}
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke={color}
-      strokeWidth="1.8"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      className={className}
-      aria-hidden="true"
-    >
-      <polyline points="23 4 23 10 17 10" />
-      <polyline points="1 20 1 14 7 14" />
-      <path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15" />
-    </svg>
-  );
-}
-
-export function FilterIcon({ size = 18, className, color = 'currentColor' }: IconProps) {
-  return (
-    <svg
-      width={size}
-      height={size}
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke={color}
-      strokeWidth="1.8"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      className={className}
-      aria-hidden="true"
-    >
-      <polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3" />
-    </svg>
-  );
-}
-
-export function ShopeeIcon({ size = 18, className, color = 'currentColor' }: IconProps) {
-  return (
-    <svg
-      width={size}
-      height={size}
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke={color}
-      strokeWidth="1.8"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      className={className}
-      aria-hidden="true"
-    >
-      {/* Crisp flat bag with 'S' curve of Shopee */}
-      <path d="M6 7l1 14h10l1-14H6z" />
-      <path d="M9 7V5a3 3 0 0 1 6 0v2" />
-      <path d="M13.5 11.5c-.5-.4-1.2-.5-1.7-.3-.6.2-.8.7-.8 1.1 0 .8 1.2 1 1.7 1.3.7.3 1.3.8 1.3 1.7 0 1.1-.9 1.9-2 1.9-.8 0-1.5-.4-1.9-1" />
-    </svg>
-  );
-}
-
-

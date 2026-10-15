@@ -5,36 +5,29 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { ProductItem, ShopSettings } from '@/lib/types';
 import { useLanguage } from '@/context/LanguageContext';
-import {
-  ShareIcon,
-  ZaloIcon,
-  ShopeeIcon,
-  TruckIcon,
-  ShieldCheckIcon,
-  RefreshIcon,
-} from './FlatIcons';
+import { ShareIcon, ShopeeIcon } from './FlatIcons';
+import ProductCard from './ProductCard';
 import ShareModal from './ShareModal';
 import styles from './ProductDetailView.module.css';
 
 interface ProductDetailViewProps {
   product: ProductItem;
   settings: ShopSettings;
+  relatedProducts?: ProductItem[];
 }
 
 export default function ProductDetailView({
   product,
   settings,
+  relatedProducts = [],
 }: ProductDetailViewProps) {
   const { language } = useLanguage();
   const [activeImgIdx, setActiveImgIdx] = useState(0);
-  const [selectedSize, setSelectedSize] = useState<string>('');
   const [isShareOpen, setIsShareOpen] = useState(false);
 
   const isEn = language === 'en';
   const title = isEn ? product.title_en : product.title;
   const description = isEn ? product.description_en : product.description;
-  const material = isEn ? product.material_en : product.material;
-  const care = isEn ? product.care_instructions_en : product.care_instructions;
 
   const priceText = isEn
     ? `$${(product.price / 25000).toFixed(0)} USD`
@@ -58,15 +51,31 @@ export default function ProductDetailView({
     'set-bo': isEn ? 'Matching Sets' : 'Set bộ',
   }[product.category] || product.category;
 
-  const zaloMessage = encodeURIComponent(
-    `Xin chào Vương Shop, tôi muốn tư vấn mẫu: ${title} (${priceText}) - Link: https://shop-vuong.vercel.app/product/${product.uid}`
-  );
-  const zaloLink = `https://zalo.me/${settings.zalo_phone || '0988123456'}?text=${zaloMessage}`;
+  // Single language badge formatting
+  const getBadgeLabel = () => {
+    if (!product.badge) return null;
+    const b = product.badge.toLowerCase();
+    if (b.includes('mới') || b.includes('new')) {
+      return isEn ? 'NEW' : 'MỚI';
+    }
+    if (b.includes('bán chạy') || b.includes('best seller')) {
+      return isEn ? 'BEST SELLER' : 'BÁN CHẠY';
+    }
+    if (b.includes('thủ công') || b.includes('artisan')) {
+      return isEn ? 'ARTISAN' : 'THỦ CÔNG';
+    }
+    if (b.includes('giới hạn') || b.includes('limited')) {
+      return isEn ? 'LIMITED' : 'GIỚI HẠN';
+    }
+    return product.badge;
+  };
+
+  const badgeText = getBadgeLabel();
 
   return (
     <>
       <div className={styles.container}>
-        {/* Breadcrumb navigation */}
+        {/* Breadcrumb navigation - pure single language */}
         <nav className={styles.breadcrumb} aria-label="Breadcrumb">
           <Link href="/" className={styles.crumbLink}>
             {isEn ? 'Home' : 'Trang chủ'}
@@ -91,8 +100,8 @@ export default function ProductDetailView({
                 sizes="(max-width: 768px) 100vw, 50vw"
                 className={styles.mainImage}
               />
-              {product.badge && (
-                <span className={styles.badge}>{product.badge}</span>
+              {badgeText && (
+                <span className={styles.badge}>{badgeText}</span>
               )}
             </div>
 
@@ -119,7 +128,7 @@ export default function ProductDetailView({
             )}
           </div>
 
-          {/* Details Column */}
+          {/* Details Column: Title, Price, Description, Actions */}
           <div className={styles.infoColumn}>
             <div className={styles.categoryBadge}>
               <Link href={`/category/${product.category}`}>
@@ -140,70 +149,23 @@ export default function ProductDetailView({
                 </span>
               ) : (
                 <span className={styles.outStock}>
-                  {isEn ? 'Pre-order only' : 'Hàng đặt may'}
+                  {isEn ? 'Pre-order' : 'Hàng đặt may'}
                 </span>
               )}
             </div>
 
-            {/* Sizes */}
-            {product.sizes && product.sizes.length > 0 && (
-              <div className={styles.sectionBlock}>
-                <div className={styles.sectionHead}>
-                  <span className={styles.sectionLabel}>
-                    {isEn ? 'Available Sizes' : 'Kích cỡ (Size)'}
-                  </span>
-                </div>
-                <div className={styles.sizeGroup}>
-                  {product.sizes.map((s) => {
-                    const isSelected = (selectedSize || product.sizes[0].size_name) === s.size_name;
-                    return (
-                      <button
-                        key={s.size_name}
-                        type="button"
-                        disabled={!s.available}
-                        className={`${styles.sizeBtn} ${isSelected ? styles.sizeActive : ''} ${!s.available ? styles.sizeDisabled : ''}`}
-                        onClick={() => setSelectedSize(s.size_name)}
-                      >
-                        {s.size_name}
-                      </button>
-                    );
-                  })}
-                </div>
-              </div>
-            )}
-
-            {/* Description */}
-            <div className={styles.sectionBlock}>
+            {/* Description only */}
+            <div className={styles.descSection}>
               <h2 className={styles.sectionLabel}>
-                {isEn ? 'Garment Description' : 'Mô tả trang phục'}
+                {isEn ? 'Garment Description' : 'Mô tả sản phẩm'}
               </h2>
-              <p className={styles.descText}>{description}</p>
-            </div>
-
-            {/* Specifications */}
-            <div className={styles.specBox}>
-              <div className={styles.specRow}>
-                <span className={styles.specKey}>{isEn ? 'Material' : 'Chất liệu'}:</span>
-                <span className={styles.specVal}>{material}</span>
-              </div>
-              <div className={styles.specRow}>
-                <span className={styles.specKey}>{isEn ? 'Care Guide' : 'Bảo quản'}:</span>
-                <span className={styles.specVal}>{care}</span>
+              <div className={styles.descText}>
+                {description}
               </div>
             </div>
 
-            {/* CTA Buttons: Zalo, Shopee, Share */}
+            {/* Actions: Shopee & Share only (NO ZALO) */}
             <div className={styles.actionsWrap}>
-              <a
-                href={zaloLink}
-                target="_blank"
-                rel="noopener noreferrer"
-                className={styles.zaloBtn}
-              >
-                <ZaloIcon size={18} />
-                <span>{isEn ? 'Consult & Order via Zalo' : 'Tư vấn & Mua qua Zalo'}</span>
-              </a>
-
               {settings.shopee_url && (
                 <a
                   href={settings.shopee_url}
@@ -212,7 +174,7 @@ export default function ProductDetailView({
                   className={styles.shopeeBtn}
                 >
                   <ShopeeIcon size={18} />
-                  <span>{isEn ? 'View on Shopee' : 'Xem trên Shopee'}</span>
+                  <span>{isEn ? 'Order on Shopee' : 'Mua trên Shopee'}</span>
                 </a>
               )}
 
@@ -220,29 +182,38 @@ export default function ProductDetailView({
                 type="button"
                 className={styles.shareBtn}
                 onClick={() => setIsShareOpen(true)}
+                aria-label={isEn ? 'Share garment' : 'Chia sẻ sản phẩm'}
               >
                 <ShareIcon size={16} />
                 <span>{isEn ? 'Share' : 'Chia sẻ'}</span>
               </button>
             </div>
-
-            {/* Benefits */}
-            <div className={styles.benefitsRow}>
-              <div className={styles.benefitItem}>
-                <TruckIcon size={15} />
-                <span>{isEn ? 'Nationwide Delivery' : 'Giao hàng toàn quốc'}</span>
-              </div>
-              <div className={styles.benefitItem}>
-                <ShieldCheckIcon size={15} />
-                <span>{isEn ? 'Artisan Tailoring' : 'Đường may tỉ mỉ'}</span>
-              </div>
-              <div className={styles.benefitItem}>
-                <RefreshIcon size={15} />
-                <span>{isEn ? 'Exchange in 7 Days' : 'Hỗ trợ đổi size'}</span>
-              </div>
-            </div>
           </div>
         </div>
+
+        {/* Other Products Section: 3 items */}
+        {relatedProducts && relatedProducts.length > 0 && (
+          <section className={styles.relatedSection}>
+            <div className={styles.relatedHeader}>
+              <span className={styles.relatedSub}>
+                {isEn ? 'RECOMMENDED' : 'GỢI Ý THỜI TRANG'}
+              </span>
+              <h3 className={styles.relatedTitle}>
+                {isEn ? 'Other Garments' : 'Sản phẩm khác'}
+              </h3>
+            </div>
+
+            <div className={styles.relatedGrid}>
+              {relatedProducts.slice(0, 3).map((item) => (
+                <ProductCard
+                  key={item.id}
+                  product={item}
+                  language={language}
+                />
+              ))}
+            </div>
+          </section>
+        )}
       </div>
 
       <ShareModal

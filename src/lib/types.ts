@@ -1,16 +1,5 @@
 export type Language = 'vi' | 'en';
 
-export interface ProductColor {
-  name: string;
-  name_en: string;
-  hex_code: string;
-}
-
-export interface ProductSize {
-  size_name: string;
-  available: boolean;
-}
-
 export interface ProductItem {
   id: string;
   uid: string;
@@ -21,17 +10,12 @@ export interface ProductItem {
   price: number;
   original_price?: number;
   badge?: string;
+  badge_en?: string;
   in_stock: boolean;
   featured_image: string;
   gallery: string[];
   description: string;
   description_en: string;
-  material: string;
-  material_en: string;
-  care_instructions: string;
-  care_instructions_en: string;
-  sizes: ProductSize[];
-  colors?: ProductColor[];
 }
 
 export interface CategoryItem {
@@ -50,8 +34,6 @@ export interface ShopSettings {
   facebook_url: string;
   instagram_url: string;
   shopee_url: string;
-  zalo_phone?: string;
-  zalo?: string;
   address: string;
   address_en: string;
 }

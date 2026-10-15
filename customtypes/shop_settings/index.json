@@ -47,13 +47,6 @@
           "placeholder": "https://shopee.vn/vuongshop"
         }
       },
-      "zalo_phone": {
-        "type": "Text",
-        "config": {
-          "label": "Số Zalo tư vấn",
-          "placeholder": "0988123456"
-        }
-      },
       "address": {
         "type": "Text",
         "config": {
