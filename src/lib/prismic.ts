@@ -1,6 +1,7 @@
 import * as prismic from '@prismicio/client';
 import { ProductItem, CategoryItem, ShopSettings } from './types';
 import { mockProducts, mockCategories, mockShopSettings } from './mock-data';
+import { translateProductItem, translateToEnglish } from './translator';
 
 export const repositoryName =
   process.env.NEXT_PUBLIC_PRISMIC_ENVIRONMENT ||
@@ -18,12 +19,18 @@ export function createClient(config: prismic.ClientConfig = {}) {
   });
 }
 
-function mapProductDoc(doc: any): ProductItem {
+async function mapProductDoc(doc: any): Promise<ProductItem> {
   const d = doc.data;
   const titleVi = prismic.asText(d.title) || d.title || 'Sản phẩm';
-  const titleEn = prismic.asText(d.title_en) || d.title_en || titleVi;
   const descVi = prismic.asText(d.description) || d.description || '';
-  const descEn = prismic.asText(d.description_en) || d.description_en || descVi;
+  const badgeVi = d.badge || undefined;
+
+  // Auto-translate from Vietnamese to English
+  const translated = await translateProductItem({
+    title: titleVi,
+    description: descVi,
+    badge: badgeVi,
+  });
 
   const galleryUrls: string[] = [];
   if (Array.isArray(d.gallery)) {
@@ -38,17 +45,17 @@ function mapProductDoc(doc: any): ProductItem {
     id: doc.id,
     uid: doc.uid || doc.id,
     title: titleVi,
-    title_en: titleEn,
+    title_en: translated.title_en || titleVi,
     category: (d.category as any) || 'dam-ngan',
     price: Number(d.price) || 0,
     original_price: d.original_price ? Number(d.original_price) : undefined,
-    badge: d.badge || undefined,
-    badge_en: d.badge_en || undefined,
+    badge: badgeVi,
+    badge_en: translated.badge_en || badgeVi,
     in_stock: d.in_stock !== false,
     featured_image: mainImageUrl,
     gallery: galleryUrls.length > 0 ? galleryUrls : [mainImageUrl],
     description: descVi,
-    description_en: descEn,
+    description_en: translated.description_en || descVi,
   };
 }
 
@@ -65,10 +72,10 @@ export async function getProducts(categoryUid?: string): Promise<ProductItem[]> 
     });
 
     if (response && response.length > 0) {
-      return response.map(mapProductDoc);
+      return await Promise.all(response.map(mapProductDoc));
     }
   } catch {
-    // Graceful fallback
+    // Graceful fallback to mock data
   }
 
   if (categoryUid && categoryUid !== 'all') {
@@ -81,7 +88,7 @@ export async function getProductByUid(uid: string): Promise<ProductItem | null> 
   try {
     const client = createClient();
     const doc = await client.getByUID('product', uid);
-    if (doc) return mapProductDoc(doc);
+    if (doc) return await mapProductDoc(doc);
   } catch {
     // Fallback
   }
@@ -94,13 +101,19 @@ export async function getCategories(): Promise<CategoryItem[]> {
     const client = createClient();
     const response = await client.getAllByType('category');
     if (response && response.length > 0) {
-      return response.map((doc: any) => ({
-        id: doc.id,
-        uid: doc.uid || doc.id,
-        name: doc.data.name || 'Danh mục',
-        name_en: doc.data.name_en || doc.data.name || 'Category',
-        description: doc.data.description || '',
-      }));
+      return await Promise.all(
+        response.map(async (doc: any) => {
+          const nameVi = doc.data.name || 'Danh mục';
+          const nameEn = await translateToEnglish(nameVi);
+          return {
+            id: doc.id,
+            uid: doc.uid || doc.id,
+            name: nameVi,
+            name_en: nameEn,
+            description: doc.data.description || '',
+          };
+        })
+      );
     }
   } catch {
     // Fallback
@@ -114,6 +127,8 @@ export async function getShopSettings(): Promise<ShopSettings> {
     const doc: any = await client.getSingle('shop_settings');
     if (doc?.data) {
       const d = doc.data;
+      const addrVi = d.address || mockShopSettings.address;
+      const addrEn = d.address_en || (await translateToEnglish(addrVi));
       return {
         shop_name: d.shop_name || mockShopSettings.shop_name,
         tagline: d.tagline || mockShopSettings.tagline,
@@ -121,8 +136,8 @@ export async function getShopSettings(): Promise<ShopSettings> {
         facebook_url: d.facebook_url || mockShopSettings.facebook_url,
         instagram_url: d.instagram_url || mockShopSettings.instagram_url,
         shopee_url: d.shopee_url || mockShopSettings.shopee_url,
-        address: d.address || mockShopSettings.address,
-        address_en: d.address_en || mockShopSettings.address_en,
+        address: addrVi,
+        address_en: addrEn,
       };
     }
   } catch {

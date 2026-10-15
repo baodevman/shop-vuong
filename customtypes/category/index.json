@@ -19,25 +19,11 @@
           "placeholder": "Đầm ngắn"
         }
       },
-      "name_en": {
-        "type": "Text",
-        "config": {
-          "label": "Tên danh mục (English - vd: Mini Dresses, Maxi Dresses, Co-ord Sets)",
-          "placeholder": "Mini Dresses"
-        }
-      },
       "description": {
         "type": "Text",
         "config": {
-          "label": "Mô tả ngắn danh mục",
-          "placeholder": "Bộ sưu tập đầm ngắn phong cách tối giản thanh lịch"
-        }
-      },
-      "order": {
-        "type": "Number",
-        "config": {
-          "label": "Thứ tự hiển thị (1, 2, 3...)",
-          "placeholder": "1"
+          "label": "Mô tả danh mục",
+          "placeholder": "Bộ sưu tập đầm ngắn may đo thanh lịch"
         }
       }
     }

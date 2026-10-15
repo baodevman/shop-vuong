@@ -16,16 +16,8 @@
         "type": "StructuredText",
         "config": {
           "single": "heading1",
-          "label": "Tên sản phẩm (Tiếng Việt)",
+          "label": "Tên sản phẩm",
           "placeholder": "Đầm Ngắn Linen Trắng Cổ Vuông"
-        }
-      },
-      "title_en": {
-        "type": "StructuredText",
-        "config": {
-          "single": "heading1",
-          "label": "Tên sản phẩm (English)",
-          "placeholder": "Square-Neck White Linen Mini Dress"
         }
       },
       "category": {
@@ -50,22 +42,15 @@
       "original_price": {
         "type": "Number",
         "config": {
-          "label": "Giá gốc so sánh (VND - tuỳ chọn có khuyến mãi)",
+          "label": "Giá gốc so sánh (VND - tuỳ chọn khi có khuyến mãi)",
           "placeholder": "690000"
         }
       },
       "badge": {
         "type": "Text",
         "config": {
-          "label": "Nhãn nổi bật (Mới / Bán chạy)",
+          "label": "Nhãn nổi bật (Ví dụ: Mới, Bán chạy, Giảm giá...)",
           "placeholder": "Mới"
-        }
-      },
-      "badge_en": {
-        "type": "Text",
-        "config": {
-          "label": "Nhãn nổi bật (English - New / Best Seller)",
-          "placeholder": "New"
         }
       },
       "in_stock": {
@@ -78,7 +63,7 @@
       "featured_image": {
         "type": "Image",
         "config": {
-          "label": "Ảnh chính sản phẩm (Tỉ lệ chuẩn 3:4 — Khuyên dùng 900x1200px hoặc 600x800px)",
+          "label": "Ảnh chính (Tỉ lệ chuẩn 3:4 — Khuyên dùng 900x1200px hoặc 600x800px)",
           "constraint": {
             "width": 900,
             "height": 1200
@@ -95,12 +80,12 @@
       "gallery": {
         "type": "Group",
         "config": {
-          "label": "Bộ sưu tập ảnh chi tiết (Tỉ lệ chuẩn 3:4 — Khuyên dùng 900x1200px)",
+          "label": "Bộ sưu tập ảnh chi tiết (Tỉ lệ chuẩn 3:4)",
           "fields": {
             "image": {
               "type": "Image",
               "config": {
-                "label": "Ảnh chi tiết",
+                "label": "Ảnh chi tiết (Tỉ lệ 3:4, khuyên dùng 900x1200px)",
                 "constraint": {
                   "width": 900,
                   "height": 1200
@@ -116,15 +101,7 @@
         "config": {
           "multi": "paragraph, preformatted, strong, em, hyperlink, image, embed, list-item, o-list-item",
           "label": "Mô tả sản phẩm (Tiếng Việt)",
-          "placeholder": "Mô tả chi tiết sản phẩm..."
-        }
-      },
-      "description_en": {
-        "type": "StructuredText",
-        "config": {
-          "multi": "paragraph, preformatted, strong, em, hyperlink, image, embed, list-item, o-list-item",
-          "label": "Mô tả sản phẩm (English)",
-          "placeholder": "Detailed product description in English..."
+          "placeholder": "Mô tả chi tiết sản phẩm bằng tiếng Việt..."
         }
       }
     }
