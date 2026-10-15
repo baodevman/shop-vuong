@@ -2,6 +2,7 @@ import { ProductItem, CategoryItem, ShopSettings } from './types';
 
 export const mockShopSettings: ShopSettings = {
   shop_name: 'VƯƠNG SHOP',
+  logo_url: undefined,
   tagline: 'Thời trang may đo tối giản tông trắng',
   phone: '0988 123 456',
   facebook_url: 'https://facebook.com/vuongshop',
@@ -9,6 +10,9 @@ export const mockShopSettings: ShopSettings = {
   shopee_url: 'https://shopee.vn/vuongshop',
   address: '128 Đường Lê Lợi, Phường Bến Thành, Quận 1, TP. Hồ Chí Minh',
   address_en: '128 Le Loi Street, Ben Thanh Ward, District 1, Ho Chi Minh City',
+  site_title: 'VƯƠNG SHOP — Minimalist Clothing Atelier | Thời Trang May Đo Tối Giản',
+  meta_description: 'Cửa hàng đầm và set bộ may đo tối giản tông trắng thanh lịch từ sợi tự nhiên thuần khiết.',
+  keywords: 'thời trang tối giản, đầm trắng, đầm linen, set bộ, vương shop, minimalist atelier',
 };
 
 export const mockCategories: CategoryItem[] = [

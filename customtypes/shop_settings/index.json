@@ -1,6 +1,6 @@
 {
   "id": "shop_settings",
-  "label": "Cài đặt Cửa Hàng / Shop Settings",
+  "label": "Cài đặt Cửa Hàng & SEO / Shop Settings",
   "repeatable": false,
   "status": true,
   "json": {
@@ -10,6 +10,14 @@
         "config": {
           "label": "Tên shop",
           "placeholder": "VƯƠNG SHOP"
+        }
+      },
+      "logo": {
+        "type": "Image",
+        "config": {
+          "label": "Logo thương hiệu (Ảnh PNG nền trong suốt hoặc SVG)",
+          "constraint": {},
+          "thumbnails": []
         }
       },
       "tagline": {
@@ -50,15 +58,53 @@
       "address": {
         "type": "Text",
         "config": {
-          "label": "Địa chỉ cửa hàng",
+          "label": "Địa chỉ cửa hàng (Tiếng Việt - Hệ thống tự dịch sang Tiếng Anh)",
           "placeholder": "128 Đường Lê Lợi, Phường Bến Thành, Quận 1, TP. Hồ Chí Minh"
         }
-      },
-      "address_en": {
+      }
+    },
+    "SEO & Metadata": {
+      "site_title": {
         "type": "Text",
         "config": {
-          "label": "Địa chỉ (English)",
-          "placeholder": "128 Le Loi Street, Ben Thanh Ward, District 1, Ho Chi Minh City"
+          "label": "Tên web hiển thị trên Tab trình duyệt (SEO Title)",
+          "placeholder": "VƯƠNG SHOP — Minimalist Clothing Atelier | Thời Trang May Đo Tối Giản"
+        }
+      },
+      "meta_description": {
+        "type": "Text",
+        "config": {
+          "label": "Mô tả web hiển thị trên Google Search (Meta Description)",
+          "placeholder": "Cửa hàng đầm và set bộ may đo tối giản tông trắng thanh lịch từ sợi tự nhiên."
+        }
+      },
+      "favicon": {
+        "type": "Image",
+        "config": {
+          "label": "Favicon tab trình duyệt (Ảnh vuông 32x32px hoặc 64x64px PNG/ICO)",
+          "constraint": {
+            "width": 64,
+            "height": 64
+          },
+          "thumbnails": []
+        }
+      },
+      "og_image": {
+        "type": "Image",
+        "config": {
+          "label": "Ảnh xem trước khi chia sẻ link Facebook/Zalo/Google (OpenGraph Image, khuyên dùng 1200x630px)",
+          "constraint": {
+            "width": 1200,
+            "height": 630
+          },
+          "thumbnails": []
+        }
+      },
+      "keywords": {
+        "type": "Text",
+        "config": {
+          "label": "Từ khoá SEO (ngăn cách bởi dấu phẩy)",
+          "placeholder": "thời trang tối giản, đầm trắng, đầm linen, set bộ, vương shop"
         }
       }
     }

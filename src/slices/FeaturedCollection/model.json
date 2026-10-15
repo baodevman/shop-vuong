@@ -14,15 +14,8 @@
         "heading": {
           "type": "Text",
           "config": {
-            "label": "Tiêu đề khối",
+            "label": "Tiêu đề khối (Tiếng Việt)",
             "placeholder": "DANH MỤC THỜI TRANG"
-          }
-        },
-        "heading_en": {
-          "type": "Text",
-          "config": {
-            "label": "Tiêu đề khối (EN)",
-            "placeholder": "CURATED COLLECTIONS"
           }
         }
       },
@@ -31,12 +24,6 @@
           "type": "Text",
           "config": {
             "label": "Tên bộ sưu tập (Tiếng Việt)"
-          }
-        },
-        "title_en": {
-          "type": "Text",
-          "config": {
-            "label": "Tên bộ sưu tập (English)"
           }
         },
         "image": {
@@ -50,7 +37,7 @@
         "category_key": {
           "type": "Text",
           "config": {
-            "label": "Mã danh mục (tops, bottoms, dresses, outerwear)"
+            "label": "Mã danh mục (dam-ngan, dam-dai, set-bo)"
           }
         }
       }

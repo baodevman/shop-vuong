@@ -18,25 +18,11 @@
             "placeholder": "VẺ ĐẸP CỦA SỰ TINH GIẢN"
           }
         },
-        "title_en": {
-          "type": "Text",
-          "config": {
-            "label": "Tiêu đề (English)",
-            "placeholder": "THE ESSENCE OF MINIMALISM"
-          }
-        },
         "subtitle": {
           "type": "Text",
           "config": {
             "label": "Mô tả phụ (Tiếng Việt)",
             "placeholder": "Bộ sưu tập may đo sắc trắng tinh khôi, chất liệu linen & cotton hữu cơ thuần khiết."
-          }
-        },
-        "subtitle_en": {
-          "type": "Text",
-          "config": {
-            "label": "Mô tả phụ (English)",
-            "placeholder": "Curated pure white atelier collection in sustainable linen & organic cotton."
           }
         },
         "button_text": {
@@ -46,19 +32,18 @@
             "placeholder": "Khám Phá Bộ Sưu Tập"
           }
         },
-        "button_text_en": {
-          "type": "Text",
-          "config": {
-            "label": "Chữ nút CTA (English)",
-            "placeholder": "Explore Collection"
-          }
-        },
         "banner_image": {
           "type": "Image",
           "config": {
             "label": "Hình ảnh banner",
             "constraint": {},
             "thumbnails": []
+          }
+        },
+        "button_link": {
+          "type": "Link",
+          "config": {
+            "label": "Liên kết của nút"
           }
         }
       },

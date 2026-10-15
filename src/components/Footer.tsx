@@ -2,6 +2,7 @@
 
 import React from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { Language, ShopSettings } from '@/lib/types';
 import { FacebookIcon, InstagramIcon, ShopeeIcon } from './FlatIcons';
 import styles from './Footer.module.css';
@@ -21,10 +22,24 @@ export default function Footer({ language, settings }: FooterProps) {
           {/* Logo & Tagline */}
           <div className={styles.logoCol}>
             <Link href="/" className={styles.logoLink}>
-              <span className={styles.brandTitle}>{settings.shop_name || 'VƯƠNG SHOP'}</span>
-              <span className={styles.brandSub}>
-                {isEn ? 'MINIMALIST CLOTHING' : 'THỜI TRANG TỐI GIẢN'}
-              </span>
+              {settings.logo_url ? (
+                <div className={styles.logoImageWrap}>
+                  <Image
+                    src={settings.logo_url}
+                    alt={settings.shop_name || 'Logo'}
+                    width={140}
+                    height={38}
+                    className={styles.logoImg}
+                  />
+                </div>
+              ) : (
+                <>
+                  <span className={styles.brandTitle}>{settings.shop_name || 'VƯƠNG SHOP'}</span>
+                  <span className={styles.brandSub}>
+                    {isEn ? 'MINIMALIST CLOTHING' : 'THỜI TRANG TỐI GIẢN'}
+                  </span>
+                </>
+              )}
             </Link>
             <p className={styles.address}>
               {isEn ? settings.address_en : settings.address}

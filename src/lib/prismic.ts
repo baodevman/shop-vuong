@@ -130,9 +130,10 @@ export async function getShopSettings(): Promise<ShopSettings> {
     if (doc?.data) {
       const d = doc.data;
       const addrVi = d.address || mockShopSettings.address;
-      const addrEn = d.address_en || (await translateToEnglish(addrVi));
+      const addrEn = await translateToEnglish(addrVi);
       return {
         shop_name: d.shop_name || mockShopSettings.shop_name,
+        logo_url: d.logo?.url || undefined,
         tagline: d.tagline || mockShopSettings.tagline,
         phone: d.phone_number || mockShopSettings.phone,
         facebook_url: d.facebook_url || mockShopSettings.facebook_url,
@@ -140,6 +141,11 @@ export async function getShopSettings(): Promise<ShopSettings> {
         shopee_url: d.shopee_url || mockShopSettings.shopee_url,
         address: addrVi,
         address_en: addrEn,
+        site_title: d.site_title || mockShopSettings.site_title,
+        meta_description: d.meta_description || mockShopSettings.meta_description,
+        favicon_url: d.favicon?.url || undefined,
+        og_image_url: d.og_image?.url || undefined,
+        keywords: d.keywords || mockShopSettings.keywords,
       };
     }
   } catch {

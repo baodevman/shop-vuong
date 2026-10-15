@@ -33,6 +33,18 @@
   margin-bottom: 12px;
 }
 
+.logoImageWrap {
+  display: flex;
+  align-items: center;
+}
+
+.logoImg {
+  height: 36px;
+  width: auto;
+  max-width: 150px;
+  object-fit: contain;
+}
+
 .brandTitle {
   font-size: 18px;
   font-weight: 700;

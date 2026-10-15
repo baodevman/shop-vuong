@@ -19,13 +19,6 @@
           "placeholder": "Miễn phí vận chuyển toàn quốc cho đơn hàng từ 500.000đ"
         }
       },
-      "announcement_text_en": {
-        "type": "Text",
-        "config": {
-          "label": "Thông báo đầu trang (English)",
-          "placeholder": "Complimentary nationwide shipping for orders over 500,000 VND"
-        }
-      },
       "hero_title": {
         "type": "Text",
         "config": {
@@ -33,25 +26,11 @@
           "placeholder": "BỘ SƯU TẬP MÙA HÈ TỐI GIẢN"
         }
       },
-      "hero_title_en": {
-        "type": "Text",
-        "config": {
-          "label": "Tiêu đề Hero Banner (English)",
-          "placeholder": "THE MINIMALIST SUMMER ATELIER"
-        }
-      },
       "hero_subtitle": {
         "type": "Text",
         "config": {
           "label": "Phụ đề Hero (Tiếng Việt)",
           "placeholder": "Chất liệu linen tự nhiên, đường may thủ công tỉ mỉ, phom dáng thanh thoát."
-        }
-      },
-      "hero_subtitle_en": {
-        "type": "Text",
-        "config": {
-          "label": "Phụ đề Hero (English)",
-          "placeholder": "Pure natural linens, refined artisan tailoring, effortless silhouettes."
         }
       },
       "hero_image": {

@@ -31,6 +31,7 @@ export interface CategoryItem {
 
 export interface ShopSettings {
   shop_name: string;
+  logo_url?: string;
   tagline: string;
   phone: string;
   facebook_url: string;
@@ -38,4 +39,10 @@ export interface ShopSettings {
   shopee_url: string;
   address: string;
   address_en: string;
+  // SEO & Metadata
+  site_title?: string;
+  meta_description?: string;
+  favicon_url?: string;
+  og_image_url?: string;
+  keywords?: string;
 }

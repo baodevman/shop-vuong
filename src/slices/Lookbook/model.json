@@ -18,13 +18,6 @@
             "placeholder": "LOOKBOOK HÈ 2026 — SẮC TRẮNG THUẦN KHIẾT"
           }
         },
-        "title_en": {
-          "type": "Text",
-          "config": {
-            "label": "Tiêu đề Lookbook (English)",
-            "placeholder": "LOOKBOOK SUMMER 2026 — MONOCHROME ATELIER"
-          }
-        },
         "quote": {
           "type": "Text",
           "config": {

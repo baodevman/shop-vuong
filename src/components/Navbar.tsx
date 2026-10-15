@@ -2,6 +2,7 @@
 
 import React from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { Language, ShopSettings } from '@/lib/types';
 import {
   GlobeIcon,
@@ -30,10 +31,25 @@ export default function Navbar({
         {/* Brand Logo */}
         <div className={styles.logoCol}>
           <Link href="/" className={styles.logoLink}>
-            <span className={styles.brandTitle}>{settings.shop_name || 'VƯƠNG SHOP'}</span>
-            <span className={styles.brandSub}>
-              {isEn ? 'MINIMALIST ATELIER' : 'THỜI TRANG TỐI GIẢN'}
-            </span>
+            {settings.logo_url ? (
+              <div className={styles.logoImageWrap}>
+                <Image
+                  src={settings.logo_url}
+                  alt={settings.shop_name || 'Logo'}
+                  width={150}
+                  height={42}
+                  priority
+                  className={styles.logoImg}
+                />
+              </div>
+            ) : (
+              <>
+                <span className={styles.brandTitle}>{settings.shop_name || 'VƯƠNG SHOP'}</span>
+                <span className={styles.brandSub}>
+                  {isEn ? 'MINIMALIST ATELIER' : 'THỜI TRANG TỐI GIẢN'}
+                </span>
+              </>
+            )}
           </Link>
         </div>
 
