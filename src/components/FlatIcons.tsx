@@ -314,3 +314,26 @@ export function FilterIcon({ size = 18, className, color = 'currentColor' }: Ico
   );
 }
 
+export function ShopeeIcon({ size = 18, className, color = 'currentColor' }: IconProps) {
+  return (
+    <svg
+      width={size}
+      height={size}
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke={color}
+      strokeWidth="1.8"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className={className}
+      aria-hidden="true"
+    >
+      {/* Crisp flat bag with 'S' curve of Shopee */}
+      <path d="M6 7l1 14h10l1-14H6z" />
+      <path d="M9 7V5a3 3 0 0 1 6 0v2" />
+      <path d="M13.5 11.5c-.5-.4-1.2-.5-1.7-.3-.6.2-.8.7-.8 1.1 0 .8 1.2 1 1.7 1.3.7.3 1.3.8 1.3 1.7 0 1.1-.9 1.9-2 1.9-.8 0-1.5-.4-1.9-1" />
+    </svg>
+  );
+}
+
+

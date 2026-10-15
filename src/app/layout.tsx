@@ -1,13 +1,13 @@
 import type { Metadata } from 'next';
 import './globals.css';
+import { LanguageProvider } from '@/context/LanguageContext';
 
 export const metadata: Metadata = {
-  title: 'VƯƠNG SHOP — Thời Trang May Đo Tối Giản | Minimalist Clothing Atelier',
-  description: 'Cửa hàng quần áo thời trang tối giản may đo, phong cách thanh lịch tông trắng chủ đạo, chất liệu linen và cotton tự nhiên nguyên bản.',
-  keywords: ['thời trang tối giản', 'shop quần áo', 'áo sơ mi linen', 'quần âu trắng', 'minimalist fashion', 'vuong shop', 'atelier'],
+  title: 'VƯƠNG SHOP — Minimalist Clothing Atelier | Thời Trang May Đo Tối Giản',
+  description: 'Cửa hàng đầm và set bộ may đo tối giản tông trắng thanh lịch. Minimalist white-toned dresses and matching sets crafted from natural fibers.',
   openGraph: {
-    title: 'VƯƠNG SHOP — Thời Trang May Đo Tối Giản',
-    description: 'Bộ sưu tập quần áo tối giản tông trắng thanh lịch từ chất liệu tự nhiên.',
+    title: 'VƯƠNG SHOP — Minimalist Clothing Atelier',
+    description: 'Minimalist white-toned dresses and matching sets crafted from natural fibers.',
     type: 'website',
   },
 };
@@ -18,8 +18,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="vi">
-      <body>{children}</body>
+    <html lang="en">
+      <body>
+        <LanguageProvider>
+          {children}
+        </LanguageProvider>
+      </body>
     </html>
   );
 }

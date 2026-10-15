@@ -16,49 +16,56 @@
         "type": "Text",
         "config": {
           "label": "Khẩu hiệu / Slogan",
-          "placeholder": "Thời trang may đo tối giản tông trắng thanh lịch"
+          "placeholder": "Thời trang may đo tối giản tông trắng"
         }
       },
       "phone_number": {
         "type": "Text",
         "config": {
           "label": "Số điện thoại hotline",
-          "placeholder": "0987 654 321"
+          "placeholder": "0988 123 456"
+        }
+      },
+      "facebook_url": {
+        "type": "Text",
+        "config": {
+          "label": "Link Facebook Shop",
+          "placeholder": "https://facebook.com/vuongshop"
+        }
+      },
+      "instagram_url": {
+        "type": "Text",
+        "config": {
+          "label": "Link Instagram Shop",
+          "placeholder": "https://instagram.com/vuongshop"
+        }
+      },
+      "shopee_url": {
+        "type": "Text",
+        "config": {
+          "label": "Link Shopee Shop",
+          "placeholder": "https://shopee.vn/vuongshop"
         }
       },
       "zalo_phone": {
         "type": "Text",
         "config": {
           "label": "Số Zalo tư vấn",
-          "placeholder": "0987654321"
-        }
-      },
-      "zalo_link": {
-        "type": "Text",
-        "config": {
-          "label": "Link Zalo chat (https://zalo.me/...)",
-          "placeholder": "https://zalo.me/0987654321"
-        }
-      },
-      "facebook_page": {
-        "type": "Text",
-        "config": {
-          "label": "Link Fanpage Facebook",
-          "placeholder": "https://facebook.com/shopvuong"
-        }
-      },
-      "instagram_handle": {
-        "type": "Text",
-        "config": {
-          "label": "Link Instagram",
-          "placeholder": "https://instagram.com/shopvuong"
+          "placeholder": "0988123456"
         }
       },
       "address": {
         "type": "Text",
         "config": {
-          "label": "Địa chỉ showroom / tiệm",
-          "placeholder": "128 Đường Lê Lợi, Quận 1, TP. Hồ Chí Minh"
+          "label": "Địa chỉ cửa hàng",
+          "placeholder": "128 Đường Lê Lợi, Phường Bến Thành, Quận 1, TP. Hồ Chí Minh"
+        }
+      },
+      "address_en": {
+        "type": "Text",
+        "config": {
+          "label": "Địa chỉ (English)",
+          "placeholder": "128 Le Loi Street, Ben Thanh Ward, District 1, Ho Chi Minh City"
         }
       }
     }

@@ -1,7 +1,8 @@
 import { getProducts, getCategories, getShopSettings } from '@/lib/prismic';
-import ShopClient from '@/components/ShopClient';
+import ShopLayout from '@/components/ShopLayout';
+import CatalogClientWrapper from '@/components/CatalogClientWrapper';
 
-export const revalidate = 60; // ISR cache revalidation
+export const revalidate = 60;
 
 export default async function HomePage() {
   const [products, categories, settings] = await Promise.all([
@@ -11,10 +12,12 @@ export default async function HomePage() {
   ]);
 
   return (
-    <ShopClient
-      initialProducts={products}
-      categories={categories}
-      settings={settings}
-    />
+    <ShopLayout settings={settings}>
+      <CatalogClientWrapper
+        products={products}
+        categories={categories}
+        activeCategoryUid="all"
+      />
+    </ShopLayout>
   );
 }

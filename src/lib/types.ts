@@ -17,7 +17,7 @@ export interface ProductItem {
   title: string;
   title_en: string;
   subtitle?: string;
-  category: 'all' | 'tops' | 'bottoms' | 'dresses' | 'outerwear' | 'accessories';
+  category: 'dam-ngan' | 'dam-dai' | 'set-bo' | string;
   price: number;
   original_price?: number;
   badge?: string;
@@ -31,26 +31,27 @@ export interface ProductItem {
   care_instructions: string;
   care_instructions_en: string;
   sizes: ProductSize[];
-  colors: ProductColor[];
+  colors?: ProductColor[];
 }
 
 export interface CategoryItem {
   id: string;
+  uid: string;
   name: string;
   name_en: string;
-  description: string;
-  description_en: string;
-  image: string;
+  description?: string;
+  image?: string;
 }
 
 export interface ShopSettings {
   shop_name: string;
-  tagline_vi: string;
-  tagline_en: string;
+  tagline: string;
   phone: string;
-  zalo: string;
-  facebook: string;
-  instagram: string;
-  address_vi: string;
+  facebook_url: string;
+  instagram_url: string;
+  shopee_url: string;
+  zalo_phone?: string;
+  zalo?: string;
+  address: string;
   address_en: string;
 }

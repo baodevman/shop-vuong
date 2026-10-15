@@ -1,23 +1,19 @@
 'use client';
 
 import React, { useState } from 'react';
+import Link from 'next/link';
 import Image from 'next/image';
 import { ProductItem, Language } from '@/lib/types';
-import { EyeIcon, ShareIcon } from './FlatIcons';
+import { ShareIcon, EyeIcon } from './FlatIcons';
 import ShareModal from './ShareModal';
 import styles from './ProductCard.module.css';
 
 interface ProductCardProps {
   product: ProductItem;
   language: Language;
-  onQuickView: (product: ProductItem) => void;
 }
 
-export default function ProductCard({
-  product,
-  language,
-  onQuickView,
-}: ProductCardProps) {
+export default function ProductCard({ product, language }: ProductCardProps) {
   const [isHovered, setIsHovered] = useState(false);
   const [isShareOpen, setIsShareOpen] = useState(false);
 
@@ -38,6 +34,12 @@ export default function ProductCard({
     ? product.gallery[1]
     : product.featured_image;
 
+  const categoryName = {
+    'dam-ngan': isEn ? 'Mini Dress' : 'Đầm ngắn',
+    'dam-dai': isEn ? 'Maxi Dress' : 'Đầm dài',
+    'set-bo': isEn ? 'Matching Set' : 'Set bộ',
+  }[product.category] || product.category;
+
   return (
     <>
       <div
@@ -45,73 +47,61 @@ export default function ProductCard({
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
       >
-        <div className={styles.imageContainer} onClick={() => onQuickView(product)}>
-          <Image
-            src={displayImage}
-            alt={title}
-            fill
-            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-            className={styles.image}
-          />
+        <Link
+          href={`/product/${product.uid}`}
+          className={styles.imageLink}
+          aria-label={title}
+        >
+          <div className={styles.imageContainer}>
+            <Image
+              src={displayImage}
+              alt={title}
+              fill
+              sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+              className={styles.image}
+            />
 
-          {product.badge && (
-            <span className={styles.badge}>{product.badge}</span>
-          )}
+            {product.badge && (
+              <span className={styles.badge}>{product.badge}</span>
+            )}
 
-          <div className={styles.cardOverlay}>
-            <button
-              type="button"
-              className={styles.overlayBtn}
-              onClick={(e) => {
-                e.stopPropagation();
-                onQuickView(product);
-              }}
-              aria-label={isEn ? 'Quick view' : 'Xem chi tiết'}
+            <div className={styles.cardOverlay}>
+              <span className={styles.overlayViewBtn}>
+                <EyeIcon size={14} />
+                <span>{isEn ? 'View Detail' : 'Xem chi tiết'}</span>
+              </span>
+            </div>
+          </div>
+        </Link>
+
+        <div className={styles.details}>
+          <div className={styles.topRow}>
+            <Link
+              href={`/category/${product.category}`}
+              className={styles.categoryName}
             >
-              <EyeIcon size={14} />
-              <span>{isEn ? 'Quick View' : 'Xem nhanh'}</span>
-            </button>
+              {categoryName.toUpperCase()}
+            </Link>
 
             <button
               type="button"
-              className={styles.overlayIconBtn}
+              className={styles.shareBtn}
               onClick={(e) => {
+                e.preventDefault();
                 e.stopPropagation();
                 setIsShareOpen(true);
               }}
               title={isEn ? 'Share to Facebook, Zalo, Instagram' : 'Chia sẻ lên Facebook, Zalo, Instagram'}
-              aria-label={isEn ? 'Share garment' : 'Chia sẻ'}
+              aria-label="Share"
             >
               <ShareIcon size={15} />
             </button>
           </div>
-        </div>
 
-        <div className={styles.details}>
-          <div className={styles.categoryLine}>
-            <span className={styles.categoryName}>
-              {product.category.toUpperCase()}
-            </span>
-            {product.colors && product.colors.length > 0 && (
-              <div className={styles.miniColors}>
-                {product.colors.map((c, i) => (
-                  <span
-                    key={i}
-                    className={styles.miniColorDot}
-                    style={{ backgroundColor: c.hex_code }}
-                    title={isEn ? c.name_en : c.name}
-                  />
-                ))}
-              </div>
-            )}
-          </div>
-
-          <h3
-            className={styles.title}
-            onClick={() => onQuickView(product)}
-            title={title}
-          >
-            {title}
+          <h3 className={styles.title}>
+            <Link href={`/product/${product.uid}`} className={styles.titleLink}>
+              {title}
+            </Link>
           </h3>
 
           <div className={styles.priceRow}>

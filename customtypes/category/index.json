@@ -1,6 +1,6 @@
 {
   "id": "category",
-  "label": "Danh mục thời trang / Clothing Category",
+  "label": "Danh mục sản phẩm / Product Category",
   "repeatable": true,
   "status": true,
   "json": {
@@ -8,37 +8,36 @@
       "uid": {
         "type": "UID",
         "config": {
-          "label": "Slug danh mục",
-          "placeholder": "ao-so-mi"
+          "label": "Slug danh mục (Ví dụ: dam-ngan, dam-dai, set-bo)",
+          "placeholder": "dam-ngan"
         }
       },
       "name": {
         "type": "Text",
         "config": {
-          "label": "Tên danh mục (Tiếng Việt)",
-          "placeholder": "Áo Sơ Mi & Áo Thun"
+          "label": "Tên danh mục (Tiếng Việt - vd: Đầm ngắn, Đầm dài, Set bộ)",
+          "placeholder": "Đầm ngắn"
         }
       },
       "name_en": {
         "type": "Text",
         "config": {
-          "label": "Tên danh mục (English)",
-          "placeholder": "Shirts & Tops"
+          "label": "Tên danh mục (English - vd: Mini Dresses, Maxi Dresses, Co-ord Sets)",
+          "placeholder": "Mini Dresses"
         }
       },
       "description": {
         "type": "Text",
         "config": {
-          "label": "Mô tả danh mục",
-          "placeholder": "Bộ sưu tập áo may đo phong cách thanh lịch tối giản."
+          "label": "Mô tả ngắn danh mục",
+          "placeholder": "Bộ sưu tập đầm ngắn phong cách tối giản thanh lịch"
         }
       },
-      "image": {
-        "type": "Image",
+      "order": {
+        "type": "Number",
         "config": {
-          "label": "Ảnh bìa danh mục",
-          "constraint": {},
-          "thumbnails": []
+          "label": "Thứ tự hiển thị (1, 2, 3...)",
+          "placeholder": "1"
         }
       }
     }
