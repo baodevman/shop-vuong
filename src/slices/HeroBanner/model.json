@@ -1,0 +1,68 @@
+{
+  "id": "hero_banner",
+  "type": "SharedSlice",
+  "name": "HeroBanner",
+  "description": "Banner nổi bật đầu trang với hình ảnh thời trang và slogan tối giản",
+  "variations": [
+    {
+      "id": "default",
+      "name": "Default",
+      "docURL": "...",
+      "version": "initial",
+      "description": "Default",
+      "primary": {
+        "title": {
+          "type": "Text",
+          "config": {
+            "label": "Tiêu đề (Tiếng Việt)",
+            "placeholder": "VẺ ĐẸP CỦA SỰ TINH GIẢN"
+          }
+        },
+        "title_en": {
+          "type": "Text",
+          "config": {
+            "label": "Tiêu đề (English)",
+            "placeholder": "THE ESSENCE OF MINIMALISM"
+          }
+        },
+        "subtitle": {
+          "type": "Text",
+          "config": {
+            "label": "Mô tả phụ (Tiếng Việt)",
+            "placeholder": "Bộ sưu tập may đo sắc trắng tinh khôi, chất liệu linen & cotton hữu cơ thuần khiết."
+          }
+        },
+        "subtitle_en": {
+          "type": "Text",
+          "config": {
+            "label": "Mô tả phụ (English)",
+            "placeholder": "Curated pure white atelier collection in sustainable linen & organic cotton."
+          }
+        },
+        "button_text": {
+          "type": "Text",
+          "config": {
+            "label": "Chữ nút CTA (Tiếng Việt)",
+            "placeholder": "Khám Phá Bộ Sưu Tập"
+          }
+        },
+        "button_text_en": {
+          "type": "Text",
+          "config": {
+            "label": "Chữ nút CTA (English)",
+            "placeholder": "Explore Collection"
+          }
+        },
+        "banner_image": {
+          "type": "Image",
+          "config": {
+            "label": "Hình ảnh banner",
+            "constraint": {},
+            "thumbnails": []
+          }
+        }
+      },
+      "items": {}
+    }
+  ]
+}

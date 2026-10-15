@@ -1,0 +1,87 @@
+{
+  "id": "homepage",
+  "label": "Trang chủ / Homepage",
+  "repeatable": false,
+  "status": true,
+  "json": {
+    "Main": {
+      "title": {
+        "type": "Text",
+        "config": {
+          "label": "Tiêu đề trang (SEO)",
+          "placeholder": "VƯƠNG SHOP — Thời Trang Tối Giản Tinh Tế"
+        }
+      },
+      "announcement_text": {
+        "type": "Text",
+        "config": {
+          "label": "Thông báo đầu trang (Tiếng Việt)",
+          "placeholder": "Miễn phí vận chuyển toàn quốc cho đơn hàng từ 500.000đ"
+        }
+      },
+      "announcement_text_en": {
+        "type": "Text",
+        "config": {
+          "label": "Thông báo đầu trang (English)",
+          "placeholder": "Complimentary nationwide shipping for orders over 500,000 VND"
+        }
+      },
+      "hero_title": {
+        "type": "Text",
+        "config": {
+          "label": "Tiêu đề Hero Banner (Tiếng Việt)",
+          "placeholder": "BỘ SƯU TẬP MÙA HÈ TỐI GIẢN"
+        }
+      },
+      "hero_title_en": {
+        "type": "Text",
+        "config": {
+          "label": "Tiêu đề Hero Banner (English)",
+          "placeholder": "THE MINIMALIST SUMMER ATELIER"
+        }
+      },
+      "hero_subtitle": {
+        "type": "Text",
+        "config": {
+          "label": "Phụ đề Hero (Tiếng Việt)",
+          "placeholder": "Chất liệu linen tự nhiên, đường may thủ công tỉ mỉ, phom dáng thanh thoát."
+        }
+      },
+      "hero_subtitle_en": {
+        "type": "Text",
+        "config": {
+          "label": "Phụ đề Hero (English)",
+          "placeholder": "Pure natural linens, refined artisan tailoring, effortless silhouettes."
+        }
+      },
+      "hero_image": {
+        "type": "Image",
+        "config": {
+          "label": "Ảnh bìa Hero chính",
+          "constraint": {},
+          "thumbnails": []
+        }
+      },
+      "slices": {
+        "type": "Slices",
+        "fieldset": "Homepage Slices",
+        "config": {
+          "choices": {
+            "hero_banner": {
+              "type": "SharedSlice"
+            },
+            "featured_collection": {
+              "type": "SharedSlice"
+            },
+            "lookbook": {
+              "type": "SharedSlice"
+            },
+            "brand_story": {
+              "type": "SharedSlice"
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,179 @@
+.footer {
+  background-color: #ffffff;
+  border-top: 1px solid #eeeeee;
+  padding: 64px 24px 32px 24px;
+}
+
+.container {
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr 1fr 1.2fr;
+  gap: 36px;
+  margin-bottom: 48px;
+}
+
+.brandCol {
+  display: flex;
+  flex-direction: column;
+}
+
+.brandName {
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  color: #111111;
+  margin-bottom: 12px;
+}
+
+.tagline {
+  font-size: 13px;
+  color: #666666;
+  line-height: 1.6;
+  margin: 0 0 16px 0;
+}
+
+.address {
+  font-size: 12px;
+  color: #888888;
+  line-height: 1.5;
+  margin: 0;
+}
+
+.linkCol {
+  display: flex;
+  flex-direction: column;
+}
+
+.colTitle {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  color: #111111;
+  margin: 0 0 16px 0;
+  text-transform: uppercase;
+}
+
+.linkList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.linkList a {
+  text-decoration: none;
+  font-size: 13px;
+  color: #666666;
+  transition: color 0.15s ease;
+}
+
+.linkList a:hover {
+  color: #111111;
+}
+
+.cmsText {
+  font-size: 13px;
+  color: #666666;
+  line-height: 1.6;
+  margin: 0 0 12px 0;
+}
+
+.cmsBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background-color: #fafafa;
+  border: 1px solid #e0e0e0;
+  border-radius: 2px;
+  padding: 4px 8px;
+  font-size: 11px;
+  font-family: monospace;
+  color: #333333;
+  width: fit-content;
+}
+
+.cmsDot {
+  width: 6px;
+  height: 6px;
+  background-color: #2e7d32;
+  border-radius: 50%;
+}
+
+.contactCol {
+  display: flex;
+  flex-direction: column;
+}
+
+.phoneText {
+  font-size: 13px;
+  color: #444444;
+  margin: 0 0 16px 0;
+}
+
+.socialButtons {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.socialBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+  background-color: #ffffff;
+  border: 1px solid #e5e5e5;
+  border-radius: 2px;
+  padding: 8px 12px;
+  font-size: 12px;
+  color: #333333;
+  transition: all 0.15s ease;
+  width: fit-content;
+}
+
+.socialBtn:hover {
+  border-color: #111111;
+  background-color: #fafafa;
+  color: #111111;
+}
+
+.bottomBar {
+  padding-top: 24px;
+  border-top: 1px solid #f0f0f0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  font-size: 12px;
+  color: #888888;
+}
+
+.copyright {
+  margin: 0;
+}
+
+.bottomLinks {
+  display: flex;
+  gap: 8px;
+}
+
+@media (max-width: 900px) {
+  .grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 28px;
+  }
+}
+
+@media (max-width: 600px) {
+  .grid {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+}

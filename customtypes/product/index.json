@@ -1,0 +1,225 @@
+{
+  "id": "product",
+  "label": "Sản phẩm Quần Áo / Clothing Product",
+  "repeatable": true,
+  "status": true,
+  "json": {
+    "Main": {
+      "uid": {
+        "type": "UID",
+        "config": {
+          "label": "Đường dẫn định danh (Slug / UID)",
+          "placeholder": "ao-so-mi-linen-trang"
+        }
+      },
+      "title": {
+        "type": "StructuredText",
+        "config": {
+          "single": "heading1",
+          "label": "Tên sản phẩm (Tiếng Việt)",
+          "placeholder": "Áo Sơ Mi Linen Trắng Tinh Khôi"
+        }
+      },
+      "title_en": {
+        "type": "StructuredText",
+        "config": {
+          "single": "heading1",
+          "label": "Tên sản phẩm (English)",
+          "placeholder": "Pure White Linen Oversized Shirt"
+        }
+      },
+      "category": {
+        "type": "Select",
+        "config": {
+          "label": "Danh mục sản phẩm",
+          "options": [
+            "tops",
+            "bottoms",
+            "dresses",
+            "outerwear",
+            "accessories"
+          ],
+          "default_value": "tops"
+        }
+      },
+      "price": {
+        "type": "Number",
+        "config": {
+          "label": "Giá bán (VND)",
+          "placeholder": "490000"
+        }
+      },
+      "original_price": {
+        "type": "Number",
+        "config": {
+          "label": "Giá gốc / Giá so sánh (VND)",
+          "placeholder": "650000"
+        }
+      },
+      "badge": {
+        "type": "Select",
+        "config": {
+          "label": "Nhãn huy hiệu nổi bật",
+          "options": [
+            "Mới / New",
+            "Bán chạy / Best Seller",
+            "Thủ công / Artisanal",
+            "Giới hạn / Limited",
+            "Ưu đãi / Sale"
+          ],
+          "default_value": "Mới / New"
+        }
+      },
+      "in_stock": {
+        "type": "Boolean",
+        "config": {
+          "label": "Còn hàng",
+          "default_value": true
+        }
+      },
+      "featured_image": {
+        "type": "Image",
+        "config": {
+          "label": "Ảnh đại diện chính",
+          "constraint": {},
+          "thumbnails": [
+            {
+              "name": "thumbnail",
+              "width": 600,
+              "height": 750
+            }
+          ]
+        }
+      },
+      "gallery": {
+        "type": "Group",
+        "config": {
+          "label": "Bộ sưu tập ảnh chi tiết",
+          "fields": {
+            "image": {
+              "type": "Image",
+              "config": {
+                "label": "Hình ảnh chi tiết",
+                "constraint": {},
+                "thumbnails": []
+              }
+            },
+            "caption": {
+              "type": "Text",
+              "config": {
+                "label": "Chú thích ảnh",
+                "placeholder": "Góc nhìn tà áo / Cận cảnh chất liệu vải"
+              }
+            }
+          }
+        }
+      },
+      "description": {
+        "type": "StructuredText",
+        "config": {
+          "multi": "paragraph, preformatted, strong, em, hyperlink, image, embed, list-item, o-list-item",
+          "label": "Mô tả sản phẩm (Tiếng Việt)",
+          "placeholder": "Mô tả chi tiết form dáng, kiểu cách, độ co giãn và cảm giác khi mặc..."
+        }
+      },
+      "description_en": {
+        "type": "StructuredText",
+        "config": {
+          "multi": "paragraph, preformatted, strong, em, hyperlink, image, embed, list-item, o-list-item",
+          "label": "Mô tả sản phẩm (English)",
+          "placeholder": "Detailed product description in English..."
+        }
+      }
+    },
+    "Specifications": {
+      "material": {
+        "type": "Text",
+        "config": {
+          "label": "Chất liệu (Tiếng Việt)",
+          "placeholder": "100% Linen tự nhiên dệt thoáng khí"
+        }
+      },
+      "material_en": {
+        "type": "Text",
+        "config": {
+          "label": "Chất liệu (English)",
+          "placeholder": "100% Natural Breathable French Linen"
+        }
+      },
+      "care_instructions": {
+        "type": "Text",
+        "config": {
+          "label": "Hướng dẫn giặt ủi (Tiếng Việt)",
+          "placeholder": "Giặt tay nhẹ nhàng hoặc giặt máy chế độ nhẹ, không dùng chất tẩy mạnh, ủi ở nhiệt độ trung bình."
+        }
+      },
+      "care_instructions_en": {
+        "type": "Text",
+        "config": {
+          "label": "Hướng dẫn giặt ủi (English)",
+          "placeholder": "Gentle hand wash or delicate machine wash, do not bleach, medium iron."
+        }
+      },
+      "sizes": {
+        "type": "Group",
+        "config": {
+          "label": "Bảng kích cỡ (Sizes)",
+          "fields": {
+            "size_name": {
+              "type": "Text",
+              "config": {
+                "label": "Size (S, M, L, XL, Freesize)",
+                "placeholder": "S"
+              }
+            },
+            "available": {
+              "type": "Boolean",
+              "config": {
+                "label": "Còn hàng",
+                "default_value": true
+              }
+            }
+          }
+        }
+      },
+      "colors": {
+        "type": "Group",
+        "config": {
+          "label": "Màu sắc (Colors)",
+          "fields": {
+            "name": {
+              "type": "Text",
+              "config": {
+                "label": "Tên màu (Tiếng Việt)",
+                "placeholder": "Trắng Ngà"
+              }
+            },
+            "name_en": {
+              "type": "Text",
+              "config": {
+                "label": "Tên màu (English)",
+                "placeholder": "Ivory White"
+              }
+            },
+            "hex_code": {
+              "type": "Text",
+              "config": {
+                "label": "Mã màu Hex",
+                "placeholder": "#FAF9F6"
+              }
+            }
+          }
+        }
+      }
+    },
+    "Page Builder Slices": {
+      "slices": {
+        "type": "Slices",
+        "fieldset": "Product Slices",
+        "config": {
+          "choices": {}
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,59 @@
+{
+  "id": "featured_collection",
+  "type": "SharedSlice",
+  "name": "FeaturedCollection",
+  "description": "Các danh mục hoặc bộ sưu tập nổi bật hiển thị dạng thẻ tối giản",
+  "variations": [
+    {
+      "id": "default",
+      "name": "Default",
+      "docURL": "...",
+      "version": "initial",
+      "description": "Default",
+      "primary": {
+        "heading": {
+          "type": "Text",
+          "config": {
+            "label": "Tiêu đề khối",
+            "placeholder": "DANH MỤC THỜI TRANG"
+          }
+        },
+        "heading_en": {
+          "type": "Text",
+          "config": {
+            "label": "Tiêu đề khối (EN)",
+            "placeholder": "CURATED COLLECTIONS"
+          }
+        }
+      },
+      "items": {
+        "title": {
+          "type": "Text",
+          "config": {
+            "label": "Tên bộ sưu tập (Tiếng Việt)"
+          }
+        },
+        "title_en": {
+          "type": "Text",
+          "config": {
+            "label": "Tên bộ sưu tập (English)"
+          }
+        },
+        "image": {
+          "type": "Image",
+          "config": {
+            "label": "Ảnh đại diện",
+            "constraint": {},
+            "thumbnails": []
+          }
+        },
+        "category_key": {
+          "type": "Text",
+          "config": {
+            "label": "Mã danh mục (tops, bottoms, dresses, outerwear)"
+          }
+        }
+      }
+    }
+  ]
+}

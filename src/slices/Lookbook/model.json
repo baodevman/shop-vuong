@@ -1,0 +1,54 @@
+{
+  "id": "lookbook",
+  "type": "SharedSlice",
+  "name": "Lookbook",
+  "description": "Showcase hình ảnh lookbook chụp thực tế tại shop hoặc ngoại cảnh",
+  "variations": [
+    {
+      "id": "default",
+      "name": "Default",
+      "docURL": "...",
+      "version": "initial",
+      "description": "Default",
+      "primary": {
+        "title": {
+          "type": "Text",
+          "config": {
+            "label": "Tiêu đề Lookbook (Tiếng Việt)",
+            "placeholder": "LOOKBOOK HÈ 2026 — SẮC TRẮNG THUẦN KHIẾT"
+          }
+        },
+        "title_en": {
+          "type": "Text",
+          "config": {
+            "label": "Tiêu đề Lookbook (English)",
+            "placeholder": "LOOKBOOK SUMMER 2026 — MONOCHROME ATELIER"
+          }
+        },
+        "quote": {
+          "type": "Text",
+          "config": {
+            "label": "Trích dẫn nghệ thuật",
+            "placeholder": "Sự tối giản không phải là thiếu hụt, mà là sự hoàn hảo khi không còn gì để lược bớt."
+          }
+        }
+      },
+      "items": {
+        "look_image": {
+          "type": "Image",
+          "config": {
+            "label": "Ảnh lookbook",
+            "constraint": {},
+            "thumbnails": []
+          }
+        },
+        "look_caption": {
+          "type": "Text",
+          "config": {
+            "label": "Chú thích phối đồ"
+          }
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,164 @@
+.heroSection {
+  background-color: #ffffff;
+  border-bottom: 1px solid #eeeeee;
+  padding: 48px 24px;
+}
+
+.heroInner {
+  max-width: 1280px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 48px;
+  align-items: center;
+}
+
+.contentCol {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.badgeLabel {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #666666;
+  background-color: #f7f7f7;
+  padding: 6px 12px;
+  border-radius: 2px;
+  border: 1px solid #ebebeb;
+  margin-bottom: 20px;
+}
+
+.heroTitle {
+  font-size: clamp(32px, 4.5vw, 52px);
+  font-weight: 300;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  color: #111111;
+  margin: 0 0 20px 0;
+  text-transform: uppercase;
+}
+
+.heroSubtitle {
+  font-size: 16px;
+  line-height: 1.6;
+  color: #555555;
+  max-width: 520px;
+  margin: 0 0 32px 0;
+  font-weight: 400;
+}
+
+.actions {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 40px;
+}
+
+.ctaButton {
+  background-color: #111111;
+  color: #ffffff;
+  border: 1px solid #111111;
+  padding: 14px 28px;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  border-radius: 3px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.ctaButton:hover {
+  background-color: #ffffff;
+  color: #111111;
+}
+
+.metaFeatures {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+  padding-top: 24px;
+  border-top: 1px solid #f0f0f0;
+  width: 100%;
+}
+
+.featureItem {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  color: #777777;
+  letter-spacing: 0.02em;
+}
+
+.featureDot {
+  width: 4px;
+  height: 4px;
+  background-color: #111111;
+  border-radius: 50%;
+}
+
+.visualCol {
+  width: 100%;
+}
+
+.imageFrame {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  background-color: #f8f8f8;
+  border: 1px solid #ebebeb;
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.heroImage {
+  object-fit: cover;
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.imageFrame:hover .heroImage {
+  transform: scale(1.02);
+}
+
+.imageBadge {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  background-color: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(8px);
+  border: 1px solid #e5e5e5;
+  border-radius: 2px;
+  padding: 10px 16px;
+  display: flex;
+  flex-direction: column;
+}
+
+.taglineSmall {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  color: #111111;
+}
+
+.taglineSub {
+  font-size: 9px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  color: #888888;
+}
+
+@media (max-width: 900px) {
+  .heroInner {
+    grid-template-columns: 1fr;
+    gap: 36px;
+  }
+
+  .heroSection {
+    padding: 32px 16px;
+  }
+}

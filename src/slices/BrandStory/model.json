@@ -1,0 +1,61 @@
+{
+  "id": "brand_story",
+  "type": "SharedSlice",
+  "name": "BrandStory",
+  "description": "Câu chuyện thương hiệu, cam kết chất lượng vải và dịch vụ tư vấn",
+  "variations": [
+    {
+      "id": "default",
+      "name": "Default",
+      "docURL": "...",
+      "version": "initial",
+      "description": "Default",
+      "primary": {
+        "tagline": {
+          "type": "Text",
+          "config": {
+            "label": "Dòng mở đầu",
+            "placeholder": "VỀ VƯƠNG SHOP"
+          }
+        },
+        "story_heading": {
+          "type": "Text",
+          "config": {
+            "label": "Tiêu đề câu chuyện (Tiếng Việt)",
+            "placeholder": "Chúng tôi tin vào vẻ đẹp bền vững của sắc trắng nguyên bản"
+          }
+        },
+        "story_heading_en": {
+          "type": "Text",
+          "config": {
+            "label": "Tiêu đề câu chuyện (English)",
+            "placeholder": "We believe in the enduring grace of pure monochrome"
+          }
+        },
+        "story_content": {
+          "type": "StructuredText",
+          "config": {
+            "multi": "paragraph, strong, em",
+            "label": "Nội dung câu chuyện (Tiếng Việt)"
+          }
+        },
+        "story_content_en": {
+          "type": "StructuredText",
+          "config": {
+            "multi": "paragraph, strong, em",
+            "label": "Nội dung câu chuyện (English)"
+          }
+        },
+        "image": {
+          "type": "Image",
+          "config": {
+            "label": "Hình ảnh xưởng may / showroom",
+            "constraint": {},
+            "thumbnails": []
+          }
+        }
+      },
+      "items": {}
+    }
+  ]
+}

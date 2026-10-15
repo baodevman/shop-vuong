@@ -1,0 +1,231 @@
+.backdrop {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.45);
+  backdrop-filter: blur(2px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  padding: 16px;
+}
+
+.modal {
+  background-color: #ffffff;
+  width: 100%;
+  max-width: 440px;
+  border: 1px solid #e0e0e0;
+  border-radius: 4px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
+  padding: 24px;
+  position: relative;
+  animation: fadeIn 0.18s ease-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.titleWrap {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #111111;
+}
+
+.title {
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  margin: 0;
+}
+
+.closeBtn {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: #777777;
+  padding: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 2px;
+  transition: color 0.15s ease;
+}
+
+.closeBtn:hover {
+  color: #111111;
+  background-color: #f5f5f5;
+}
+
+.productSnippet {
+  background-color: #fafafa;
+  border: 1px solid #eeeeee;
+  border-radius: 3px;
+  padding: 12px;
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+}
+
+.productName {
+  font-size: 13px;
+  font-weight: 500;
+  color: #222222;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.productPrice {
+  font-size: 13px;
+  font-weight: 600;
+  color: #111111;
+  white-space: nowrap;
+}
+
+.channelGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.channelButton {
+  background-color: #ffffff;
+  border: 1px solid #e5e5e5;
+  border-radius: 3px;
+  padding: 14px 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  transition: all 0.18s ease;
+}
+
+.channelButton:hover {
+  border-color: #111111;
+  background-color: #fafafa;
+}
+
+.channelIconBox {
+  color: #111111;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.channelLabel {
+  font-size: 12px;
+  font-weight: 500;
+  color: #333333;
+}
+
+.copySection {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.urlInput {
+  flex: 1;
+  background-color: #fafafa;
+  border: 1px solid #e0e0e0;
+  border-radius: 3px;
+  padding: 10px 12px;
+  font-size: 12px;
+  color: #666666;
+  outline: none;
+}
+
+.copyBtn {
+  background-color: #111111;
+  color: #ffffff;
+  border: 1px solid #111111;
+  border-radius: 3px;
+  padding: 10px 16px;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  white-space: nowrap;
+}
+
+.copyBtn:hover {
+  background-color: #333333;
+}
+
+.nativeShareBtn {
+  width: 100%;
+  background: transparent;
+  border: 1px dashed #d5d5d5;
+  border-radius: 3px;
+  padding: 10px;
+  font-size: 12px;
+  color: #555555;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.nativeShareBtn:hover {
+  border-color: #111111;
+  color: #111111;
+  background-color: #fafafa;
+}
+
+.toast {
+  position: absolute;
+  bottom: -44px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #111111;
+  color: #ffffff;
+  padding: 8px 16px;
+  font-size: 12px;
+  border-radius: 3px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  white-space: nowrap;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  animation: toastFade 0.2s ease-out;
+}
+
+@keyframes toastFade {
+  from {
+    opacity: 0;
+    transform: translate(-50%, 4px);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, 0);
+  }
+}
