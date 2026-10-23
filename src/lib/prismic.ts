@@ -25,10 +25,14 @@ async function mapProductDoc(doc: any): Promise<ProductItem> {
   const descVi = prismic.asText(d.description) || d.description || '';
   const badgeVi = d.badge || undefined;
 
-  // Auto-translate from Vietnamese to English
+  const descHtml = d.description ? prismic.asHTML(d.description) : '';
+  const descEnDirect = d.description_en ? prismic.asText(d.description_en) : '';
+  const descEnHtml = d.description_en ? prismic.asHTML(d.description_en) : '';
+
+  // Auto-translate title and badge for English catalog view
   const translated = await translateProductItem({
     title: titleVi,
-    description: descVi,
+    description: '',
     badge: badgeVi,
   });
 
@@ -68,11 +72,14 @@ async function mapProductDoc(doc: any): Promise<ProductItem> {
     badge_en: translated.badge_en || badgeVi,
     colors: colors.length > 0 ? colors : undefined,
     size_chart_image: d.size_chart_image?.url || undefined,
+    size_chart_image_en: d.size_chart_image_en?.url || undefined,
     in_stock: d.in_stock !== false,
     featured_image: mainImageUrl,
     gallery: galleryUrls.length > 0 ? galleryUrls : (mainImageUrl ? [mainImageUrl] : []),
     description: descVi,
-    description_en: translated.description_en || descVi,
+    description_en: descEnDirect || descVi,
+    description_html: descHtml || undefined,
+    description_en_html: descEnHtml || undefined,
   };
 }
 

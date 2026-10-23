@@ -74,7 +74,7 @@ export default function Navbar({
                 aria-label="Call Phone"
                 onClick={() => trackContactClick('phone', settings.phone)}
               >
-                <PhoneIcon size={16} />
+                <PhoneIcon size={15} />
               </a>
             )}
 
@@ -89,7 +89,7 @@ export default function Navbar({
                 aria-label="Google Maps"
                 onClick={() => trackContactClick('maps', mapsUrl)}
               >
-                <MapPinIcon size={17} />
+                <MapPinIcon size={15} />
               </a>
             )}
 
@@ -104,7 +104,7 @@ export default function Navbar({
                 aria-label="Facebook"
                 onClick={() => trackContactClick('facebook', settings.facebook_url)}
               >
-                <FacebookIcon size={16} />
+                <FacebookIcon size={15} />
               </a>
             )}
 
@@ -119,7 +119,7 @@ export default function Navbar({
                 aria-label="Instagram"
                 onClick={() => trackContactClick('instagram', settings.instagram_url)}
               >
-                <InstagramIcon size={16} />
+                <InstagramIcon size={15} />
               </a>
             )}
 
@@ -134,7 +134,7 @@ export default function Navbar({
                 aria-label="Shopee"
                 onClick={() => trackContactClick('shopee', settings.shopee_url)}
               >
-                <ShopeeIcon size={16} />
+                <ShopeeIcon size={15} />
               </a>
             )}
           </div>

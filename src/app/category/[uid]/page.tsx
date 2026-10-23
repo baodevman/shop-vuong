@@ -25,6 +25,13 @@ export async function generateMetadata({ params }: CategoryPageProps): Promise<M
   return {
     title: `${category.name} (${category.name_en}) — ${shopName}`,
     description: category.description || `Minimalist collection for ${category.name_en}`,
+    icons: settings.favicon_url
+      ? {
+          icon: settings.favicon_url,
+          shortcut: settings.favicon_url,
+          apple: settings.favicon_url,
+        }
+      : undefined,
   };
 }
 

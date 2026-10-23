@@ -16,9 +16,18 @@ export async function generateMetadata(): Promise<Metadata> {
     settings.meta_description ||
     'Cửa hàng đầm và set bộ may đo tối giản tông trắng thanh lịch từ sợi tự nhiên thuần khiết.';
 
-  const icons = settings.favicon_url
-    ? [{ rel: 'icon', url: settings.favicon_url }]
-    : undefined;
+  const faviconUrl = settings.favicon_url || '/favicon.ico';
+
+  const icons = {
+    icon: [
+      { url: faviconUrl },
+      { url: faviconUrl, sizes: '32x32' },
+      { url: faviconUrl, sizes: '64x64' },
+      { url: faviconUrl, sizes: '180x180' },
+    ],
+    shortcut: faviconUrl,
+    apple: faviconUrl,
+  };
 
   const ogImages = settings.og_image_url
     ? [{ url: settings.og_image_url }]

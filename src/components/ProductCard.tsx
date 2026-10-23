@@ -101,6 +101,7 @@ export default function ProductCard({
               fill
               sizes="(max-width: 640px) 50vw, (max-width: 1024px) 50vw, 33vw"
               className={styles.image}
+              unoptimized
             />
 
             {badgeText && (

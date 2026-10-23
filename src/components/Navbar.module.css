@@ -32,10 +32,12 @@
 }
 
 .logoImg {
-  height: 54px;
-  width: auto;
+  max-height: 56px;
   max-width: 240px;
+  width: auto;
+  height: auto;
   object-fit: contain;
+  display: block;
   transition: transform 0.2s ease;
 }
 
@@ -44,7 +46,7 @@
 }
 
 .brandTitle {
-  font-size: 22px;
+  font-size: 24px;
   font-weight: 700;
   letter-spacing: 0.16em;
   color: #111111;
@@ -63,7 +65,7 @@
 .quickContactCol {
   display: flex;
   align-items: center;
-  gap: 16px;
+  gap: 14px;
 }
 
 .contactItem {
@@ -73,16 +75,16 @@
   text-decoration: none;
   font-size: 13px;
   color: #444444;
-  padding: 6px 12px;
-  background-color: #fafafa;
-  border: 1px solid #eeeeee;
+  padding: 4px 8px;
+  background-color: transparent;
+  border: none;
   border-radius: 3px;
   transition: all 0.15s ease;
 }
 
 .contactItem:hover {
-  border-color: #111111;
   color: #111111;
+  background-color: #f7f7f7;
 }
 
 .contactLabel {
@@ -100,27 +102,27 @@
 .socialGroup {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 4px;
 }
 
 .socialBtn {
-  background-color: #ffffff;
-  border: 1px solid #e0e0e0;
-  border-radius: 3px;
-  width: 34px;
-  height: 34px;
+  background-color: transparent;
+  border: none;
+  border-radius: 50%;
+  width: 28px;
+  height: 28px;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #333333;
+  color: #444444;
   text-decoration: none;
   transition: all 0.15s ease;
 }
 
 .socialBtn:hover {
-  border-color: #111111;
-  color: #111111;
-  background-color: #fafafa;
+  color: #000000;
+  background-color: #f5f5f5;
+  transform: scale(1.1);
 }
 
 .langBtn {
@@ -153,14 +155,83 @@
   color: #888888;
 }
 
+/* Tablet Styles */
+@media (max-width: 992px) {
+  .container {
+    padding: 12px 20px;
+    gap: 16px;
+  }
+
+  .logoImg {
+    max-height: 44px;
+    max-width: 185px;
+  }
+
+  .brandTitle {
+    font-size: 20px;
+    letter-spacing: 0.14em;
+  }
+}
+
+/* Mobile Styles */
 @media (max-width: 640px) {
   .container {
-    padding: 12px 16px;
-    flex-wrap: wrap;
-    gap: 12px;
+    padding: 10px 14px;
+    flex-wrap: nowrap;
+    gap: 10px;
+  }
+
+  .logoImg {
+    max-height: 36px;
+    max-width: 145px;
+  }
+
+  .brandTitle {
+    font-size: 16px;
+    letter-spacing: 0.1em;
+  }
+
+  .brandSub {
+    font-size: 8px;
+    letter-spacing: 0.14em;
+  }
+
+  .socialGroup {
+    gap: 3px;
+  }
+
+  .socialBtn {
+    width: 26px;
+    height: 26px;
+  }
+
+  .langBtn {
+    padding: 4px 7px;
+    font-size: 10px;
   }
 
   .contactItem {
     display: none;
+  }
+}
+
+/* Small Mobile Screens */
+@media (max-width: 380px) {
+  .container {
+    padding: 8px 10px;
+  }
+
+  .logoImg {
+    max-height: 30px;
+    max-width: 120px;
+  }
+
+  .brandTitle {
+    font-size: 14px;
+  }
+
+  .socialBtn {
+    width: 24px;
+    height: 24px;
   }
 }

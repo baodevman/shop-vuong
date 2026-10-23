@@ -20,45 +20,28 @@
 }
 
 .hamburgerBtn {
-  background-color: #ffffff;
-  border: 1px solid #dcdcdc;
-  border-radius: 3px;
-  padding: 7px 14px;
-  font-size: 13px;
+  width: 42px;
+  height: 42px;
+  background-color: transparent;
+  border: none;
+  border-radius: 4px;
   color: #111111;
   display: flex;
   align-items: center;
-  gap: 8px;
+  justify-content: center;
   cursor: pointer;
   transition: all 0.15s ease;
-  font-family: inherit;
   outline: none;
 }
 
 .hamburgerBtn:hover {
-  border-color: #111111;
-  background-color: #fafafa;
+  background-color: #f5f5f5;
+  color: #000000;
 }
 
 .hamburgerBtnActive {
   background-color: #111111;
   color: #ffffff;
-  border-color: #111111;
-}
-
-.hamburgerBtnText {
-  letter-spacing: 0.02em;
-}
-
-.dropdownChevron {
-  font-size: 10px;
-  margin-left: 2px;
-  transition: transform 0.2s ease;
-  display: inline-block;
-}
-
-.dropdownChevronUp {
-  transform: rotate(180deg);
 }
 
 .dropdownMenu {
@@ -376,5 +359,9 @@
   .grid {
     grid-template-columns: repeat(2, 1fr) !important;
     gap: 6px !important;
+  }
+
+  .modalBackdrop {
+    padding: 6px;
   }
 }

@@ -102,7 +102,15 @@
       "size_chart_image": {
         "type": "Image",
         "config": {
-          "label": "Ảnh Bảng Size",
+          "label": "Ảnh Bảng Size (Tiếng Việt)",
+          "constraint": {},
+          "thumbnails": []
+        }
+      },
+      "size_chart_image_en": {
+        "type": "Image",
+        "config": {
+          "label": "Ảnh Bảng Size (Tiếng Anh - Tuỳ chọn)",
           "constraint": {},
           "thumbnails": []
         }

@@ -21,11 +21,14 @@ export interface ProductItem {
   badge_en?: string;
   colors?: ColorVariation[];
   size_chart_image?: string;
+  size_chart_image_en?: string;
   in_stock: boolean;
   featured_image: string;
   gallery: string[];
   description: string;
   description_en: string;
+  description_html?: string;
+  description_en_html?: string;
 }
 
 export interface CategoryItem {

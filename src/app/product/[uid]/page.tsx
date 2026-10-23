@@ -26,6 +26,13 @@ export async function generateMetadata({ params }: ProductPageProps): Promise<Me
   return {
     title: `${productTitle} — ${shopName}`,
     description: product.description_en || product.description,
+    icons: settings.favicon_url
+      ? {
+          icon: settings.favicon_url,
+          shortcut: settings.favicon_url,
+          apple: settings.favicon_url,
+        }
+      : undefined,
     openGraph: {
       title: `${productTitle} — ${shopName}`,
       description: product.description_en || product.description,

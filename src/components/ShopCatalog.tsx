@@ -203,14 +203,9 @@ function ShopCatalogInner({
             onClick={() => setIsCategoryMenuOpen((prev) => !prev)}
             aria-expanded={isCategoryMenuOpen}
             aria-label={isEn ? 'Categories Menu' : 'Menu danh mục sản phẩm'}
+            title={isEn ? 'Categories' : 'Danh mục sản phẩm'}
           >
-            {isCategoryMenuOpen ? <CloseIcon size={16} /> : <MenuIcon size={16} />}
-            <span className={styles.hamburgerBtnText}>
-              {isEn ? 'Category:' : 'Danh mục:'} <strong>{activeLabel}</strong>
-            </span>
-            <span className={`${styles.dropdownChevron} ${isCategoryMenuOpen ? styles.dropdownChevronUp : ''}`}>
-              ▾
-            </span>
+            {isCategoryMenuOpen ? <CloseIcon size={22} /> : <MenuIcon size={22} />}
           </button>
 
           {/* Dropdown Menu */}

@@ -51,7 +51,8 @@ Admin nên chuẩn bị hình ảnh theo đúng tỉ lệ và kích thước khu
      - *Ảnh theo màu (`color_image`):* **Upload ảnh sản phẩm chụp với màu này (chuẩn tỉ lệ 3:4)**.  
        👉 **Tính năng đổi ảnh thông minh:** Khi khách hàng nhấp vào chấm màu ngoài thẻ sản phẩm ở trang chủ hoặc nhấp chọn màu trong trang chi tiết, **ảnh sản phẩm sẽ lập tức đổi sang đúng ảnh của màu đó**!  
        *(Nếu sản phẩm chỉ có 1 màu hoặc chưa có ảnh riêng cho từng màu thì có thể bỏ trống ô ảnh này).*
-   - **Ảnh Bảng Size (`size_chart_image`)**: Bấm chọn/upload ảnh bảng quy đổi kích cỡ (số đo vòng 1, 2, 3 tương ứng với size S, M, L). Bảng size sẽ tự động hiển thị ngay phía trên phần mô tả trang phục.
+   - **Ảnh Bảng Size Tiếng Việt (`size_chart_image`)**: Bấm chọn/upload ảnh bảng quy đổi kích cỡ tiếng Việt (số đo vòng 1, 2, 3 tương ứng với size S, M, L).
+   - **Ảnh Bảng Size Tiếng Anh (`size_chart_image_en` - Tuỳ chọn)**: Upload riêng hình bảng size tiếng Anh cho khách quốc tế. Khi khách hàng bấm chọn ngôn ngữ **EN**, website sẽ tự động hiển thị hình bảng size tiếng Anh này (nếu chưa upload, web sẽ dùng ảnh tiếng Việt dự phòng). Khách hàng có thể chạm/click vào ảnh bảng size để phóng to toàn màn hình và tự do zoom xem chi tiết.
    - **Còn hàng**: Mặc định là `true` (còn hàng). Tắt đi nếu đã hết hàng hoặc chuyển sang nhận đặt may (Pre-order).
    - **Ảnh đại diện (Tỉ lệ 3:4)**: Bấm chọn và upload file ảnh đứng (kích thước khuyên dùng **900 x 1200 px**).
    - **Album ảnh sản phẩm**: Bấm nút **Add an item** để thêm từng ảnh chụp các góc độ khác nhau của trang phục (cận chất vải, mặt sau, góc nghiêng,...).

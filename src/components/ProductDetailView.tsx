@@ -36,10 +36,56 @@ export default function ProductDetailView({
   );
   const [isShareOpen, setIsShareOpen] = useState(false);
   const [isDescExpanded, setIsDescExpanded] = useState(false);
+  const [isSizeZoomOpen, setIsSizeZoomOpen] = useState(false);
 
   const isEn = language === 'en';
   const title = isEn ? product.title_en : product.title;
   const description = isEn ? product.description_en : product.description;
+
+  // Client-side translation state
+  const [translatedHtml, setTranslatedHtml] = useState<string | null>(
+    product.description_en_html || null
+  );
+  const [isTranslating, setIsTranslating] = useState(false);
+
+  // Client-side translation when user switches to English and no English version exists
+  useEffect(() => {
+    if (isEn && !translatedHtml && (product.description_html || product.description)) {
+      let isCancelled = false;
+      setIsTranslating(true);
+      fetch('/api/translate', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          html: product.description_html,
+          text: product.description,
+        }),
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          if (!isCancelled && data.translatedHtml) {
+            setTranslatedHtml(data.translatedHtml);
+          }
+        })
+        .catch((err) => {
+          console.error('Translation error:', err);
+        })
+        .finally(() => {
+          if (!isCancelled) {
+            setIsTranslating(false);
+          }
+        });
+
+      return () => {
+        isCancelled = true;
+      };
+    }
+  }, [isEn, translatedHtml, product.description_html, product.description]);
+
+  // Language-aware size chart: Show English size chart if available when English is selected, otherwise Vietnamese
+  const sizeChartUrl = isEn
+    ? (product.size_chart_image_en || product.size_chart_image)
+    : (product.size_chart_image || product.size_chart_image_en);
 
   const priceText = isEn
     ? `$${product.price_usd} USD`
@@ -104,26 +150,8 @@ export default function ProductDetailView({
         )}
 
         <div className={styles.productLayout}>
-          {/* Gallery Column: Fixed uniform aspect ratio */}
+          {/* Gallery Column: Thumbnails on top with horizontal scroll, then Full Image below */}
           <div className={styles.galleryColumn}>
-            <div className={styles.mainImageBox}>
-              {currentImage ? (
-                <Image
-                  src={currentImage}
-                  alt={title}
-                  fill
-                  priority
-                  sizes="(max-width: 768px) 100vw, 50vw"
-                  className={styles.mainImage}
-                />
-              ) : (
-                <div className={styles.noImagePlaceholder}>VƯƠNG SHOP</div>
-              )}
-              {badgeText && (
-                <span className={styles.badge}>{badgeText}</span>
-              )}
-            </div>
-
             {gallery.length > 1 && (
               <div className={styles.thumbnails}>
                 {gallery.map((img, idx) => (
@@ -143,11 +171,31 @@ export default function ProductDetailView({
                       fill
                       sizes="80px"
                       className={styles.thumbImage}
+                      unoptimized
                     />
                   </button>
                 ))}
               </div>
             )}
+
+            <div className={styles.mainImageBox}>
+              {currentImage ? (
+                <Image
+                  src={currentImage}
+                  alt={title}
+                  fill
+                  priority
+                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 480px"
+                  className={styles.mainImage}
+                  unoptimized
+                />
+              ) : (
+                <div className={styles.noImagePlaceholder}>VƯƠNG SHOP</div>
+              )}
+              {badgeText && (
+                <span className={styles.badge}>{badgeText}</span>
+              )}
+            </div>
           </div>
 
           {/* Details Column: Title, Price, Color Variations below Price, Size Chart, Description, Actions */}
@@ -172,17 +220,9 @@ export default function ProductDetailView({
               )}
             </div>
 
-            {/* Color Variations below Price */}
+            {/* Color Variations below Price - Clean icons and names without redundant label */}
             {product.colors && product.colors.length > 0 && (
               <div className={styles.colorSection}>
-                <span className={styles.colorSectionLabel}>
-                  {isEn ? 'Colors:' : 'Màu sắc:'}
-                  {selectedColorIdx !== null && product.colors[selectedColorIdx] && (
-                    <span className={styles.selectedColorName}>
-                      {' — '}{product.colors[selectedColorIdx].name}
-                    </span>
-                  )}
-                </span>
                 <div className={styles.colorList}>
                   {product.colors.map((c, idx) => {
                     const isSelected = selectedColorIdx === idx;
@@ -217,35 +257,83 @@ export default function ProductDetailView({
               </div>
             )}
 
-            {/* Size Chart Section above Description */}
-            {product.size_chart_image && (
+            {/* Size Chart Section above Description with compact preview & click to zoom */}
+            {sizeChartUrl && (
               <div className={styles.sizeSection}>
-                <h2 className={styles.sectionLabel}>
-                  {isEn ? 'Size Guide' : 'Bảng size'}
-                </h2>
-                <div className={styles.sizeChartBox}>
+                <div className={styles.sizeSectionHeader}>
+                  <h2 className={styles.sectionLabel}>
+                    {isEn ? 'Size Guide' : 'Bảng size'}
+                  </h2>
+                  <span className={styles.sizeZoomHint} onClick={() => setIsSizeZoomOpen(true)}>
+                    {isEn ? 'Click to zoom 🔍' : 'Chạm để phóng to 🔍'}
+                  </span>
+                </div>
+                <div
+                  className={styles.sizeChartBox}
+                  onClick={() => setIsSizeZoomOpen(true)}
+                  role="button"
+                  tabIndex={0}
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter' || e.key === ' ') setIsSizeZoomOpen(true);
+                  }}
+                  title={isEn ? 'Click to enlarge size chart' : 'Click để phóng to bảng size'}
+                >
                   <Image
-                    src={product.size_chart_image}
+                    src={sizeChartUrl}
                     alt={isEn ? `${title} Size Guide` : `Bảng size ${title}`}
-                    width={800}
-                    height={600}
+                    width={600}
+                    height={400}
                     className={styles.sizeChartImg}
+                    unoptimized
                   />
+                  <div className={styles.zoomOverlayBadge}>
+                    <span>{isEn ? 'Zoom 🔍' : 'Phóng to 🔍'}</span>
+                  </div>
                 </div>
               </div>
             )}
 
-            {/* Description with read more toggle */}
+            {/* Description with live translation & rich paragraphs */}
             <div className={styles.descSection}>
               <h2 className={styles.sectionLabel}>
                 {isEn ? 'Garment Description' : 'Mô tả sản phẩm'}
               </h2>
-              <div
-                className={`${styles.descText} ${!isDescExpanded ? styles.descTextCollapsed : ''}`}
-              >
-                {description}
-              </div>
-              {description && description.length > 120 && (
+
+              {isEn && isTranslating && (
+                <div className={styles.translatingNotice}>
+                  <span className={styles.translateSpinner} aria-hidden="true" />
+                  <span>Translating product details to English...</span>
+                </div>
+              )}
+
+              {isEn ? (
+                translatedHtml ? (
+                  <div
+                    className={`${styles.descHtml} ${!isDescExpanded ? styles.descTextCollapsed : ''}`}
+                    dangerouslySetInnerHTML={{ __html: translatedHtml }}
+                  />
+                ) : (
+                  <div
+                    className={`${styles.descText} ${!isDescExpanded ? styles.descTextCollapsed : ''}`}
+                  >
+                    {product.description_en || product.description}
+                  </div>
+                )
+              ) : product.description_html ? (
+                <div
+                  className={`${styles.descHtml} ${!isDescExpanded ? styles.descTextCollapsed : ''}`}
+                  dangerouslySetInnerHTML={{ __html: product.description_html }}
+                />
+              ) : (
+                <div
+                  className={`${styles.descText} ${!isDescExpanded ? styles.descTextCollapsed : ''}`}
+                >
+                  {product.description}
+                </div>
+              )}
+
+              {/* Show toggle button if content is long */}
+              {((isEn && (translatedHtml || product.description_en)) || product.description) && (
                 <button
                   type="button"
                   className={styles.toggleDescBtn}
@@ -305,7 +393,11 @@ export default function ProductDetailView({
                     <ProductCard
                       product={item}
                       language={language}
-                      onSelectProduct={onSelectRelatedProduct}
+                      onSelectProduct={() => {
+                        if (typeof window !== 'undefined') {
+                          window.location.href = `/product/${item.uid}`;
+                        }
+                      }}
                     />
                   </div>
                 ))}
@@ -321,6 +413,35 @@ export default function ProductDetailView({
         isOpen={isShareOpen}
         onClose={() => setIsShareOpen(false)}
       />
+
+      {/* Size Chart Zoom Modal */}
+      {isSizeZoomOpen && sizeChartUrl && (
+        <div
+          className={styles.sizeModalBackdrop}
+          onClick={() => setIsSizeZoomOpen(false)}
+        >
+          <div
+            className={styles.sizeModalContent}
+            onClick={(e) => e.stopPropagation()}
+          >
+            <button
+              type="button"
+              className={styles.sizeModalCloseBtn}
+              onClick={() => setIsSizeZoomOpen(false)}
+              aria-label="Close"
+            >
+              <CloseIcon size={18} />
+            </button>
+            <div className={styles.sizeModalImgWrap}>
+              <img
+                src={sizeChartUrl}
+                alt={isEn ? `${title} Size Guide` : `Bảng size ${title}`}
+                className={styles.sizeModalImg}
+              />
+            </div>
+          </div>
+        </div>
+      )}
     </>
   );
 }
