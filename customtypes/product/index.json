@@ -67,6 +67,46 @@
           "placeholder": "Mới"
         }
       },
+      "colors": {
+        "type": "Group",
+        "config": {
+          "label": "Phân loại màu sắc (Color Variations)",
+          "fields": {
+            "color_name": {
+              "type": "Text",
+              "config": {
+                "label": "Tên màu",
+                "placeholder": "Trắng, Đen, Be..."
+              }
+            },
+            "color_code": {
+              "type": "Color",
+              "config": {
+                "label": "Mã màu (Hex)"
+              }
+            },
+            "color_image": {
+              "type": "Image",
+              "config": {
+                "label": "Ảnh theo màu",
+                "constraint": {
+                  "width": 900,
+                  "height": 1200
+                },
+                "thumbnails": []
+              }
+            }
+          }
+        }
+      },
+      "size_chart_image": {
+        "type": "Image",
+        "config": {
+          "label": "Ảnh Bảng Size",
+          "constraint": {},
+          "thumbnails": []
+        }
+      },
       "in_stock": {
         "type": "Boolean",
         "config": {

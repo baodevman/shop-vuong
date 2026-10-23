@@ -15,7 +15,7 @@
       "logo": {
         "type": "Image",
         "config": {
-          "label": "Logo thương hiệu",
+          "label": "Logo thương hiệu (Kích thước tùy chỉnh, tối đa cao 64px, rộng 260px)",
           "constraint": {},
           "thumbnails": []
         }
@@ -32,6 +32,13 @@
         "config": {
           "label": "Hotline",
           "placeholder": "0988 123 456"
+        }
+      },
+      "google_maps_url": {
+        "type": "Text",
+        "config": {
+          "label": "Link Google Maps chỉ đường",
+          "placeholder": "https://maps.google.com/..."
         }
       },
       "facebook_url": {
@@ -60,6 +67,21 @@
         "config": {
           "label": "Địa chỉ cửa hàng",
           "placeholder": "128 Đường Lê Lợi, Phường Bến Thành, Quận 1, TP. Hồ Chí Minh"
+        }
+      },
+      "top_banner": {
+        "type": "Image",
+        "config": {
+          "label": "Ảnh Banner dưới Topbar",
+          "constraint": {},
+          "thumbnails": []
+        }
+      },
+      "top_banner_link": {
+        "type": "Text",
+        "config": {
+          "label": "Link click Banner (tuỳ chọn)",
+          "placeholder": "https://... hoặc /category/dam-dai"
         }
       }
     },

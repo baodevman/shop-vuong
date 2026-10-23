@@ -11,7 +11,7 @@ import styles from './ProductCard.module.css';
 interface ProductCardProps {
   product: ProductItem;
   language: Language;
-  onSelectProduct?: (product: ProductItem) => void;
+  onSelectProduct?: (product: ProductItem, colorIndex?: number) => void;
 }
 
 export default function ProductCard({
@@ -21,6 +21,7 @@ export default function ProductCard({
 }: ProductCardProps) {
   const [isHovered, setIsHovered] = useState(false);
   const [isShareOpen, setIsShareOpen] = useState(false);
+  const [selectedColorIdx, setSelectedColorIdx] = useState<number | null>(null);
 
   const isEn = language === 'en';
   const title = isEn ? product.title_en : product.title;
@@ -37,9 +38,13 @@ export default function ProductCard({
       ? `${product.original_price_vnd.toLocaleString('vi-VN')}đ`
       : null;
 
-  const displayImage = isHovered && product.gallery && product.gallery.length > 1
-    ? product.gallery[1]
-    : product.featured_image;
+  const activeColorImage = selectedColorIdx !== null ? product.colors?.[selectedColorIdx]?.image : null;
+
+  const displayImage = activeColorImage
+    ? activeColorImage
+    : (isHovered && product.gallery && product.gallery.length > 1
+        ? product.gallery[1]
+        : product.featured_image);
 
   const categoryName = {
     'dam-ngan': isEn ? 'Short Dress' : 'Đầm ngắn',
@@ -71,7 +76,7 @@ export default function ProductCard({
   const handleProductClick = (e: React.MouseEvent) => {
     if (onSelectProduct) {
       e.preventDefault();
-      onSelectProduct(product);
+      onSelectProduct(product, selectedColorIdx !== null ? selectedColorIdx : undefined);
     }
   };
 
@@ -111,13 +116,46 @@ export default function ProductCard({
         </Link>
 
         <div className={styles.details}>
-          <div className={styles.topRow}>
-            <Link
-              href={`/category/${product.category}`}
-              className={styles.categoryName}
-            >
-              {categoryName.toUpperCase()}
-            </Link>
+          <div className={styles.titleAndColorRow}>
+            <h3 className={styles.title}>
+              <Link
+                href={`/product/${product.uid}`}
+                onClick={handleProductClick}
+                className={styles.titleLink}
+              >
+                {title}
+              </Link>
+            </h3>
+
+            {/* Color variations shown prominently on the right of title */}
+            {product.colors && product.colors.length > 0 && (
+              <div className={styles.colorSwatches} title={product.colors.map(c => c.name).join(', ')}>
+                {product.colors.map((c, idx) => (
+                  <button
+                    key={idx}
+                    type="button"
+                    className={`${styles.colorCircle} ${selectedColorIdx === idx ? styles.colorCircleActive : ''}`}
+                    style={{ backgroundColor: c.code || '#f0f0f0' }}
+                    title={c.name}
+                    aria-label={c.name}
+                    onClick={(e) => {
+                      e.preventDefault();
+                      e.stopPropagation();
+                      setSelectedColorIdx(idx === selectedColorIdx ? null : idx);
+                    }}
+                  />
+                ))}
+              </div>
+            )}
+          </div>
+
+          <div className={styles.priceRow}>
+            <div className={styles.priceWrap}>
+              <span className={styles.price}>{priceText}</span>
+              {originalPriceText && (
+                <span className={styles.originalPrice}>{originalPriceText}</span>
+              )}
+            </div>
 
             <button
               type="button"
@@ -130,25 +168,8 @@ export default function ProductCard({
               title={isEn ? 'Share product' : 'Chia sẻ sản phẩm'}
               aria-label="Share"
             >
-              <ShareIcon size={15} />
+              <ShareIcon size={14} />
             </button>
-          </div>
-
-          <h3 className={styles.title}>
-            <Link
-              href={`/product/${product.uid}`}
-              onClick={handleProductClick}
-              className={styles.titleLink}
-            >
-              {title}
-            </Link>
-          </h3>
-
-          <div className={styles.priceRow}>
-            <span className={styles.price}>{priceText}</span>
-            {originalPriceText && (
-              <span className={styles.originalPrice}>{originalPriceText}</span>
-            )}
           </div>
         </div>
       </div>

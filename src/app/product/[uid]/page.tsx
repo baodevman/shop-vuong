@@ -39,10 +39,10 @@ export default async function ProductPage({ params }: ProductPageProps) {
     notFound();
   }
 
-  // Pick 4 other products for balanced 2x2 grid on mobile
+  // Pick 10 other products for horizontal scroll showcase
   const relatedProducts = allProducts
     .filter((p) => p.uid !== product.uid)
-    .slice(0, 4);
+    .slice(0, 10);
 
   return (
     <ShopLayout settings={settings}>

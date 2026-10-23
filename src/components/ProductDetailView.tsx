@@ -1,7 +1,6 @@
 'use client';
 
 import React, { useState } from 'react';
-import Link from 'next/link';
 import Image from 'next/image';
 import { ProductItem, ShopSettings } from '@/lib/types';
 import { useLanguage } from '@/context/LanguageContext';
@@ -15,6 +14,7 @@ interface ProductDetailViewProps {
   settings: ShopSettings;
   relatedProducts?: ProductItem[];
   isModal?: boolean;
+  initialColorIndex?: number;
   onClose?: () => void;
   onSelectRelatedProduct?: (product: ProductItem) => void;
 }
@@ -24,12 +24,17 @@ export default function ProductDetailView({
   settings,
   relatedProducts = [],
   isModal = false,
+  initialColorIndex,
   onClose,
   onSelectRelatedProduct,
 }: ProductDetailViewProps) {
   const { language } = useLanguage();
   const [activeImgIdx, setActiveImgIdx] = useState(0);
+  const [selectedColorIdx, setSelectedColorIdx] = useState<number | null>(
+    typeof initialColorIndex === 'number' ? initialColorIndex : null
+  );
   const [isShareOpen, setIsShareOpen] = useState(false);
+  const [isDescExpanded, setIsDescExpanded] = useState(false);
 
   const isEn = language === 'en';
   const title = isEn ? product.title_en : product.title;
@@ -49,15 +54,10 @@ export default function ProductDetailView({
 
   const gallery = product.gallery && product.gallery.length > 0
     ? product.gallery
-    : [product.featured_image];
+    : (product.featured_image ? [product.featured_image] : []);
 
-  const currentImage = gallery[activeImgIdx] || product.featured_image;
-
-  const categoryName = {
-    'dam-ngan': isEn ? 'Short Dresses' : 'Đầm ngắn',
-    'dam-dai': isEn ? 'Maxi Dresses' : 'Đầm dài',
-    'set-bo': isEn ? 'Matching Sets' : 'Set bộ',
-  }[product.category] || product.category;
+  const activeColorImage = selectedColorIdx !== null ? product.colors?.[selectedColorIdx]?.image : null;
+  const currentImage = activeColorImage || gallery[activeImgIdx] || product.featured_image;
 
   // Single language badge formatting
   const getBadgeLabel = () => {
@@ -95,37 +95,22 @@ export default function ProductDetailView({
           </button>
         )}
 
-        {/* Breadcrumb navigation - pure single language */}
-        {!isModal ? (
-          <nav className={styles.breadcrumb} aria-label="Breadcrumb">
-            <Link href="/" className={styles.crumbLink}>
-              {isEn ? 'Home' : 'Trang chủ'}
-            </Link>
-            <span className={styles.crumbSep}>/</span>
-            <Link href={`/category/${product.category}`} className={styles.crumbLink}>
-              {categoryName}
-            </Link>
-            <span className={styles.crumbSep}>/</span>
-            <span className={styles.crumbCurrent}>{title}</span>
-          </nav>
-        ) : (
-          <div className={styles.modalCategoryBadge}>
-            <span>{categoryName.toUpperCase()}</span>
-          </div>
-        )}
-
         <div className={styles.productLayout}>
-          {/* Gallery Column: 3:4 aspect ratio */}
+          {/* Gallery Column: Fixed uniform aspect ratio */}
           <div className={styles.galleryColumn}>
             <div className={styles.mainImageBox}>
-              <Image
-                src={currentImage}
-                alt={title}
-                fill
-                priority
-                sizes="(max-width: 768px) 100vw, 50vw"
-                className={styles.mainImage}
-              />
+              {currentImage ? (
+                <Image
+                  src={currentImage}
+                  alt={title}
+                  fill
+                  priority
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                  className={styles.mainImage}
+                />
+              ) : (
+                <div className={styles.noImagePlaceholder}>VƯƠNG SHOP</div>
+              )}
               {badgeText && (
                 <span className={styles.badge}>{badgeText}</span>
               )}
@@ -137,8 +122,11 @@ export default function ProductDetailView({
                   <button
                     key={idx}
                     type="button"
-                    className={`${styles.thumbBtn} ${activeImgIdx === idx ? styles.thumbActive : ''}`}
-                    onClick={() => setActiveImgIdx(idx)}
+                    className={`${styles.thumbBtn} ${activeImgIdx === idx && !activeColorImage ? styles.thumbActive : ''}`}
+                    onClick={() => {
+                      setActiveImgIdx(idx);
+                      setSelectedColorIdx(null);
+                    }}
                     aria-label={`View photo ${idx + 1}`}
                   >
                     <Image
@@ -154,16 +142,12 @@ export default function ProductDetailView({
             )}
           </div>
 
-          {/* Details Column: Title, Price, Description, Actions */}
+          {/* Details Column: Title, Price, Color Variations below Price, Size Chart, Description, Actions */}
           <div className={styles.infoColumn}>
-            <div className={styles.categoryBadge}>
-              <Link href={`/category/${product.category}`}>
-                {categoryName.toUpperCase()}
-              </Link>
-            </div>
-
+            {/* Title directly without category on top */}
             <h1 className={styles.title}>{title}</h1>
 
+            {/* Price Row */}
             <div className={styles.priceRow}>
               <span className={styles.price}>{priceText}</span>
               {originalPriceText && (
@@ -180,17 +164,92 @@ export default function ProductDetailView({
               )}
             </div>
 
-            {/* Description only */}
+            {/* Color Variations below Price */}
+            {product.colors && product.colors.length > 0 && (
+              <div className={styles.colorSection}>
+                <span className={styles.colorSectionLabel}>
+                  {isEn ? 'Colors:' : 'Màu sắc:'}
+                  {selectedColorIdx !== null && product.colors[selectedColorIdx] && (
+                    <span className={styles.selectedColorName}>
+                      {' — '}{product.colors[selectedColorIdx].name}
+                    </span>
+                  )}
+                </span>
+                <div className={styles.colorList}>
+                  {product.colors.map((c, idx) => {
+                    const isSelected = selectedColorIdx === idx;
+                    return (
+                      <button
+                        key={idx}
+                        type="button"
+                        className={`${styles.colorItemBtn} ${isSelected ? styles.colorItemBtnActive : ''}`}
+                        title={c.name}
+                        onClick={() => {
+                          if (isSelected) {
+                            setSelectedColorIdx(null);
+                          } else {
+                            setSelectedColorIdx(idx);
+                            if (c.image) {
+                              const foundIdx = gallery.findIndex((g) => g === c.image);
+                              if (foundIdx >= 0) setActiveImgIdx(foundIdx);
+                            }
+                          }
+                        }}
+                      >
+                        <span
+                          className={styles.colorBadgeCircle}
+                          style={{ backgroundColor: c.code || '#f0f0f0' }}
+                        />
+                        <span className={styles.colorNameText}>{c.name}</span>
+                      </button>
+                    );
+                  })}
+                </div>
+              </div>
+            )}
+
+            {/* Size Chart Section above Description */}
+            {product.size_chart_image && (
+              <div className={styles.sizeSection}>
+                <h2 className={styles.sectionLabel}>
+                  {isEn ? 'Size Guide' : 'Bảng size'}
+                </h2>
+                <div className={styles.sizeChartBox}>
+                  <Image
+                    src={product.size_chart_image}
+                    alt={isEn ? `${title} Size Guide` : `Bảng size ${title}`}
+                    width={800}
+                    height={600}
+                    className={styles.sizeChartImg}
+                  />
+                </div>
+              </div>
+            )}
+
+            {/* Description with read more toggle */}
             <div className={styles.descSection}>
               <h2 className={styles.sectionLabel}>
                 {isEn ? 'Garment Description' : 'Mô tả sản phẩm'}
               </h2>
-              <div className={styles.descText}>
+              <div
+                className={`${styles.descText} ${!isDescExpanded ? styles.descTextCollapsed : ''}`}
+              >
                 {description}
               </div>
+              {description && description.length > 120 && (
+                <button
+                  type="button"
+                  className={styles.toggleDescBtn}
+                  onClick={() => setIsDescExpanded(!isDescExpanded)}
+                >
+                  {isDescExpanded
+                    ? (isEn ? 'Show less ↑' : 'Thu gọn ↑')
+                    : (isEn ? 'Read more ↓' : 'Xem thêm ↓')}
+                </button>
+              )}
             </div>
 
-            {/* Actions: Shopee & Share only (NO ZALO) */}
+            {/* Actions: Shopee & Share */}
             <div className={styles.actionsWrap}>
               {settings.shopee_url && (
                 <a
@@ -217,7 +276,7 @@ export default function ProductDetailView({
           </div>
         </div>
 
-        {/* Other Products Section: 3 items */}
+        {/* Other Products Section: 10 items with horizontal scroll */}
         {relatedProducts && relatedProducts.length > 0 && (
           <section className={styles.relatedSection}>
             <div className={styles.relatedHeader}>
@@ -229,15 +288,18 @@ export default function ProductDetailView({
               </h3>
             </div>
 
-            <div className={styles.relatedGrid}>
-              {relatedProducts.slice(0, 4).map((item) => (
-                <ProductCard
-                  key={item.id}
-                  product={item}
-                  language={language}
-                  onSelectProduct={onSelectRelatedProduct}
-                />
-              ))}
+            <div className={styles.relatedScrollWrapper}>
+              <div className={styles.relatedScrollGrid}>
+                {relatedProducts.slice(0, 10).map((item) => (
+                  <div key={item.id} className={styles.relatedCardItem}>
+                    <ProductCard
+                      product={item}
+                      language={language}
+                      onSelectProduct={onSelectRelatedProduct}
+                    />
+                  </div>
+                ))}
+              </div>
             </div>
           </section>
         )}

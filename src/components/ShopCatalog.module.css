@@ -1,19 +1,24 @@
 .catalogWrapper {
-  max-width: 1280px;
+  max-width: 1360px;
   margin: 0 auto;
-  padding: 32px 24px 64px 24px;
+  padding: 24px 20px 64px 20px;
 }
 
 .categoryNavigation {
   margin-bottom: 24px;
   border-bottom: 1px solid #eeeeee;
-  padding-bottom: 16px;
+  padding-bottom: 14px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
 }
 
 .categoryTabs {
   display: flex;
   flex-wrap: wrap;
-  gap: 10px;
+  gap: 8px;
 }
 
 .tabItem {
@@ -24,7 +29,7 @@
   background-color: #fafafa;
   border: 1px solid #e5e5e5;
   border-radius: 3px;
-  padding: 10px 20px;
+  padding: 8px 16px;
   letter-spacing: 0.04em;
   transition: all 0.15s ease;
 }
@@ -41,114 +46,21 @@
   font-weight: 600;
 }
 
-.controlBar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 16px;
-  flex-wrap: wrap;
-  margin-bottom: 24px;
-  background-color: #ffffff;
-}
-
-.searchBox {
+/* Sort aligned horizontally with menu tabs on the far right */
+.sortContainer {
   display: flex;
   align-items: center;
   gap: 8px;
-  background-color: #ffffff;
-  border: 1px solid #dcdcdc;
-  border-radius: 3px;
-  padding: 8px 12px;
-  width: 280px;
-  transition: border-color 0.15s ease;
+  margin-left: auto;
 }
 
-.searchBox:focus-within {
-  border-color: #111111;
-}
-
-.searchInput {
-  border: none;
-  outline: none;
-  font-size: 13px;
-  color: #111111;
-  width: 100%;
-  background: transparent;
-}
-
-.clearBtn {
-  background: transparent;
-  border: none;
-  cursor: pointer;
-  color: #888888;
-  display: flex;
-  align-items: center;
-  padding: 2px;
-}
-
-.clearBtn:hover {
-  color: #111111;
-}
-
-.filterSelectors {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-  flex-wrap: wrap;
-}
-
-.selectWrap {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.selectLabel {
+.sortLabel {
   font-size: 12px;
   font-weight: 500;
   color: #666666;
 }
 
-.limitButtons {
-  display: flex;
-  border: 1px solid #dcdcdc;
-  border-radius: 3px;
-  overflow: hidden;
-}
-
-.limitBtn {
-  background-color: #ffffff;
-  border: none;
-  border-right: 1px solid #eeeeee;
-  padding: 6px 12px;
-  font-size: 12px;
-  font-weight: 500;
-  color: #555555;
-  cursor: pointer;
-  transition: all 0.15s ease;
-}
-
-.limitBtn:last-child {
-  border-right: none;
-}
-
-.limitBtn:hover {
-  background-color: #f7f7f7;
-  color: #111111;
-}
-
-.limitBtnActive {
-  background-color: #111111;
-  color: #ffffff;
-  font-weight: 600;
-}
-
-.limitBtnActive:hover {
-  background-color: #111111;
-  color: #ffffff;
-}
-
-.selectInput {
+.sortSelect {
   background-color: #ffffff;
   border: 1px solid #dcdcdc;
   border-radius: 3px;
@@ -160,38 +72,16 @@
   transition: border-color 0.15s ease;
 }
 
-.selectInput:hover,
-.selectInput:focus {
+.sortSelect:hover,
+.sortSelect:focus {
   border-color: #111111;
 }
 
-.filterNotice {
-  background-color: #fafafa;
-  border: 1px solid #eeeeee;
-  border-radius: 3px;
-  padding: 10px 16px;
-  margin-bottom: 24px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  font-size: 12px;
-  color: #555555;
-}
-
-.resetFilterBtn {
-  background: transparent;
-  border: none;
-  font-size: 12px;
-  color: #111111;
-  text-decoration: underline;
-  cursor: pointer;
-}
-
-/* Product Grid: 3 columns on desktop */
+/* Product Grid: Tighter gap, cards are larger and more impactful */
 .grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 28px;
+  gap: 14px;
 }
 
 /* Pagination */
@@ -273,6 +163,7 @@
   border-radius: 3px;
   padding: 56px 20px;
   text-align: center;
+  margin: 32px 0;
 }
 
 .emptyText {
@@ -282,8 +173,10 @@
 }
 
 .resetBtn {
+  display: inline-block;
   background-color: #111111;
   color: #ffffff;
+  text-decoration: none;
   border: 1px solid #111111;
   border-radius: 3px;
   padding: 10px 20px;
@@ -349,29 +242,25 @@
 
 /* Responsive Media Queries */
 @media (max-width: 900px) {
-  .controlBar {
-    flex-direction: column;
-    align-items: stretch;
+  .categoryNavigation {
+    gap: 12px;
   }
 
-  .searchBox {
+  .sortContainer {
     width: 100%;
-  }
-
-  .filterSelectors {
-    justify-content: space-between;
+    justify-content: flex-end;
   }
 }
 
-/* CRITICAL: Mobile display MUST show 2 items per row */
+/* Mobile display: 2 columns with reduced gap */
 @media (max-width: 768px) {
   .catalogWrapper {
-    padding: 16px 12px 48px 12px;
+    padding: 16px 10px 48px 10px;
   }
 
   .grid {
     grid-template-columns: repeat(2, 1fr) !important;
-    gap: 12px !important;
+    gap: 8px !important;
   }
 
   .modalBackdrop {
@@ -386,10 +275,6 @@
 @media (max-width: 480px) {
   .grid {
     grid-template-columns: repeat(2, 1fr) !important;
-    gap: 10px !important;
-  }
-
-  .filterSelectors {
-    gap: 10px;
+    gap: 6px !important;
   }
 }

@@ -1,5 +1,5 @@
 import * as prismic from '@prismicio/client';
-import { ProductItem, CategoryItem, ShopSettings } from './types';
+import { ProductItem, CategoryItem, ShopSettings, ColorVariation } from './types';
 import { mockProducts, mockCategories, mockShopSettings } from './mock-data';
 import { translateProductItem, translateToEnglish } from './translator';
 
@@ -39,7 +39,20 @@ async function mapProductDoc(doc: any): Promise<ProductItem> {
     }
   }
 
-  const mainImageUrl = d.featured_image?.url || mockProducts[0].featured_image;
+  const mainImageUrl = d.featured_image?.url || '';
+
+  const colors: ColorVariation[] = [];
+  if (Array.isArray(d.colors)) {
+    for (const c of d.colors) {
+      if (c?.color_name) {
+        colors.push({
+          name: c.color_name,
+          code: c.color_code || undefined,
+          image: c.color_image?.url || undefined,
+        });
+      }
+    }
+  }
 
   return {
     id: doc.id,
@@ -53,9 +66,11 @@ async function mapProductDoc(doc: any): Promise<ProductItem> {
     original_price_usd: d.original_price_usd ? Number(d.original_price_usd) : (d.original_price ? Math.round(Number(d.original_price) / 25000) : undefined),
     badge: badgeVi,
     badge_en: translated.badge_en || badgeVi,
+    colors: colors.length > 0 ? colors : undefined,
+    size_chart_image: d.size_chart_image?.url || undefined,
     in_stock: d.in_stock !== false,
     featured_image: mainImageUrl,
-    gallery: galleryUrls.length > 0 ? galleryUrls : [mainImageUrl],
+    gallery: galleryUrls.length > 0 ? galleryUrls : (mainImageUrl ? [mainImageUrl] : []),
     description: descVi,
     description_en: translated.description_en || descVi,
   };
@@ -71,19 +86,19 @@ export async function getProducts(categoryUid?: string): Promise<ProductItem[]> 
 
     const response = await client.getAllByType('product', {
       filters: predicates,
+      orderings: [
+        { field: 'document.first_publication_date', direction: 'desc' },
+      ],
     });
 
     if (response && response.length > 0) {
       return await Promise.all(response.map(mapProductDoc));
     }
-  } catch {
-    // Graceful fallback to mock data
+  } catch (error) {
+    console.error('Error fetching products from Prismic:', error);
   }
 
-  if (categoryUid && categoryUid !== 'all') {
-    return mockProducts.filter((p) => p.category === categoryUid);
-  }
-  return mockProducts;
+  return [];
 }
 
 export async function getProductByUid(uid: string): Promise<ProductItem | null> {
@@ -91,11 +106,10 @@ export async function getProductByUid(uid: string): Promise<ProductItem | null> 
     const client = createClient();
     const doc = await client.getByUID('product', uid);
     if (doc) return await mapProductDoc(doc);
-  } catch {
-    // Fallback
+  } catch (error) {
+    console.error(`Error fetching product ${uid} from Prismic:`, error);
   }
-  const found = mockProducts.find((p) => p.uid === uid || p.id === uid);
-  return found || null;
+  return null;
 }
 
 export async function getCategories(): Promise<CategoryItem[]> {
@@ -136,11 +150,14 @@ export async function getShopSettings(): Promise<ShopSettings> {
         logo_url: d.logo?.url || undefined,
         tagline: d.tagline || mockShopSettings.tagline,
         phone: d.phone_number || mockShopSettings.phone,
+        google_maps_url: d.google_maps_url || undefined,
         facebook_url: d.facebook_url || mockShopSettings.facebook_url,
         instagram_url: d.instagram_url || mockShopSettings.instagram_url,
         shopee_url: d.shopee_url || mockShopSettings.shopee_url,
         address: addrVi,
         address_en: addrEn,
+        top_banner_url: d.top_banner?.url || undefined,
+        top_banner_link: d.top_banner_link || undefined,
         site_title: d.site_title || mockShopSettings.site_title,
         meta_description: d.meta_description || mockShopSettings.meta_description,
         favicon_url: d.favicon?.url || undefined,

@@ -1,0 +1,42 @@
+.bannerSection {
+  width: 100%;
+  background-color: #fafafa;
+  border-bottom: 1px solid #eeeeee;
+  overflow: hidden;
+}
+
+.bannerLink {
+  display: block;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.bannerContainer {
+  position: relative;
+  width: 100%;
+  max-width: 1440px;
+  margin: 0 auto;
+  max-height: 380px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.bannerImg {
+  width: 100%;
+  height: auto;
+  max-height: 380px;
+  object-fit: cover;
+  display: block;
+}
+
+@media (max-width: 768px) {
+  .bannerContainer {
+    max-height: 220px;
+  }
+
+  .bannerImg {
+    max-height: 220px;
+  }
+}

@@ -94,30 +94,67 @@
   flex: 1;
 }
 
-.topRow {
+.titleAndColorRow {
   display: flex;
   justify-content: space-between;
-  align-items: center;
-  margin-bottom: 6px;
+  align-items: flex-start;
+  gap: 8px;
+  margin-bottom: 8px;
 }
 
-.categoryName {
-  font-size: 10px;
-  font-weight: 600;
-  letter-spacing: 0.12em;
-  color: #888888;
-  text-decoration: none;
-  transition: color 0.15s ease;
-}
-
-.categoryName:hover {
+.title {
+  font-size: 13px;
+  font-weight: 500;
   color: #111111;
+  margin: 0;
+  line-height: 1.4;
+  flex: 1;
+}
+
+.colorSwatches {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-shrink: 0;
+  padding-top: 1px;
+}
+
+.colorCircle {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  border: 1.5px solid rgba(0, 0, 0, 0.15);
+  display: inline-block;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+  transition: all 0.15s ease;
+  cursor: pointer;
+  padding: 0;
+  background: transparent;
+  outline: none;
+}
+
+.colorCircle:hover {
+  transform: scale(1.15);
+  border-color: rgba(0, 0, 0, 0.4);
+}
+
+.colorCircleActive {
+  transform: scale(1.12);
+  outline: 2px solid #111111;
+  outline-offset: 2px;
+  border-color: #ffffff;
+}
+
+.priceWrap {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
 }
 
 .shareBtn {
   background: transparent;
   border: none;
-  color: #888888;
+  color: #999999;
   padding: 4px;
   cursor: pointer;
   display: flex;
@@ -129,14 +166,6 @@
 
 .shareBtn:hover {
   color: #111111;
-}
-
-.title {
-  font-size: 13px;
-  font-weight: 400;
-  color: #111111;
-  margin: 0 0 10px 0;
-  line-height: 1.4;
 }
 
 .titleLink {

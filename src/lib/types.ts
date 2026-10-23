@@ -1,5 +1,11 @@
 export type Language = 'vi' | 'en';
 
+export interface ColorVariation {
+  name: string;
+  code?: string;
+  image?: string;
+}
+
 export interface ProductItem {
   id: string;
   uid: string;
@@ -13,6 +19,8 @@ export interface ProductItem {
   original_price_usd?: number;
   badge?: string;
   badge_en?: string;
+  colors?: ColorVariation[];
+  size_chart_image?: string;
   in_stock: boolean;
   featured_image: string;
   gallery: string[];
@@ -34,11 +42,14 @@ export interface ShopSettings {
   logo_url?: string;
   tagline: string;
   phone: string;
+  google_maps_url?: string;
   facebook_url: string;
   instagram_url: string;
   shopee_url: string;
   address: string;
   address_en: string;
+  top_banner_url?: string;
+  top_banner_link?: string;
   // SEO & Metadata
   site_title?: string;
   meta_description?: string;
