@@ -10,16 +10,18 @@ interface TopBannerProps {
   settings: ShopSettings;
 }
 
+const SAMPLE_FALLBACK_BANNER =
+  'https://images.unsplash.com/photo-1490481651871-ab68de25d43d?q=80&w=2070&auto=format&fit=crop';
+
 export default function TopBanner({ settings }: TopBannerProps) {
-  if (!settings.top_banner_url) {
-    return null;
-  }
+  // Use banner from Prismic if uploaded by admin, otherwise use sample fallback banner
+  const bannerUrl = settings.top_banner_url || SAMPLE_FALLBACK_BANNER;
 
   const content = (
     <div className={styles.bannerContainer}>
       <Image
-        src={settings.top_banner_url}
-        alt={settings.shop_name ? `${settings.shop_name} Banner` : 'Banner'}
+        src={bannerUrl}
+        alt={settings.shop_name ? `${settings.shop_name} Banner` : 'VƯƠNG SHOP Banner'}
         width={1920}
         height={480}
         priority

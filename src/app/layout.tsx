@@ -3,6 +3,7 @@ import './globals.css';
 import { getShopSettings } from '@/lib/prismic';
 import { LanguageProvider } from '@/context/LanguageContext';
 import PageTransitionLoading from '@/components/PageTransitionLoading';
+import GoogleAnalytics from '@/components/GoogleAnalytics';
 
 export async function generateMetadata(): Promise<Metadata> {
   const settings = await getShopSettings();
@@ -55,6 +56,7 @@ export default function RootLayout({
   return (
     <html lang="vi">
       <body>
+        <GoogleAnalytics />
         <LanguageProvider>
           <PageTransitionLoading />
           {children}

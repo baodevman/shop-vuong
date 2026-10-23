@@ -1,9 +1,10 @@
 'use client';
 
-import React, { useState, useMemo, useEffect, useCallback, Suspense } from 'react';
+import React, { useState, useMemo, useEffect, useCallback, useRef, Suspense } from 'react';
 import Link from 'next/link';
 import { useRouter, usePathname, useSearchParams } from 'next/navigation';
 import { ProductItem, CategoryItem, ShopSettings, Language } from '@/lib/types';
+import { MenuIcon, CloseIcon, CheckIcon } from './FlatIcons';
 import ProductCard from './ProductCard';
 import ProductDetailView from './ProductDetailView';
 import styles from './ShopCatalog.module.css';
@@ -39,6 +40,7 @@ function ShopCatalogInner({
 
   // Modal State for Product Detail tracking
   const [selectedProduct, setSelectedProduct] = useState<ProductItem | null>(null);
+  const [selectedColorIdx, setSelectedColorIdx] = useState<number | undefined>(undefined);
   const [originalCatalogUrl, setOriginalCatalogUrl] = useState<string>('');
 
   const isEn = language === 'en';
@@ -85,7 +87,7 @@ function ShopCatalogInner({
   }, [filteredProducts, safeCurrentPage, itemsPerPage]);
 
   // Modal Open Handler with Browser History Push
-  const handleOpenProduct = (product: ProductItem) => {
+  const handleOpenProduct = (product: ProductItem, colorIndex?: number) => {
     if (typeof window !== 'undefined') {
       setOriginalCatalogUrl(window.location.pathname + window.location.search);
       // Push state to browser history with the product's dedicated URL
@@ -96,11 +98,13 @@ function ShopCatalogInner({
       );
     }
     setSelectedProduct(product);
+    setSelectedColorIdx(colorIndex);
   };
 
   // Modal Close Handler
   const handleCloseProduct = useCallback(() => {
     setSelectedProduct(null);
+    setSelectedColorIdx(undefined);
     if (typeof window !== 'undefined') {
       if (window.history.state?.isShopVuongModal) {
         window.history.back();
@@ -150,30 +154,90 @@ function ShopCatalogInner({
     };
   }, [selectedProduct]);
 
+  // Category Hamburger Menu State & Ref
+  const [isCategoryMenuOpen, setIsCategoryMenuOpen] = useState(false);
+  const categoryMenuRef = useRef<HTMLDivElement>(null);
+
+  // Close dropdown when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (e: MouseEvent) => {
+      if (categoryMenuRef.current && !categoryMenuRef.current.contains(e.target as Node)) {
+        setIsCategoryMenuOpen(false);
+      }
+    };
+    if (isCategoryMenuOpen) {
+      document.addEventListener('mousedown', handleClickOutside);
+    }
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, [isCategoryMenuOpen]);
+
+  // Close dropdown on ESC
+  useEffect(() => {
+    const handleEsc = (e: KeyboardEvent) => {
+      if (e.key === 'Escape' && isCategoryMenuOpen) {
+        setIsCategoryMenuOpen(false);
+      }
+    };
+    window.addEventListener('keydown', handleEsc);
+    return () => window.removeEventListener('keydown', handleEsc);
+  }, [isCategoryMenuOpen]);
+
   const allTabs = [
-    { uid: 'all', name: 'Tất cả', name_en: 'All Dresses & Sets', path: '/' },
+    { uid: 'all', name: 'Tất cả sản phẩm', name_en: 'All Dresses & Sets', path: '/' },
     { uid: 'dam-ngan', name: 'Đầm ngắn', name_en: 'Short Dresses', path: '/category/dam-ngan' },
     { uid: 'dam-dai', name: 'Đầm dài', name_en: 'Maxi & Midi Dresses', path: '/category/dam-dai' },
     { uid: 'set-bo', name: 'Set bộ', name_en: 'Matching Sets', path: '/category/set-bo' },
   ];
 
+  const currentTab = allTabs.find((t) => t.uid === activeCategoryUid) || allTabs[0];
+  const activeLabel = isEn ? currentTab.name_en : currentTab.name;
+
   return (
     <div className={styles.catalogWrapper} id="catalog-content">
-      {/* Category Navigation Tabs inline with Sort Box on the far right */}
+      {/* Category Hamburger Menu inline with Sort Box on the far right */}
       <div className={styles.categoryNavigation}>
-        <div className={styles.categoryTabs}>
-          {allTabs.map((tab) => {
-            const isActive = activeCategoryUid === tab.uid;
-            return (
-              <Link
-                key={tab.uid}
-                href={tab.path}
-                className={`${styles.tabItem} ${isActive ? styles.tabItemActive : ''}`}
-              >
-                {isEn ? tab.name_en : tab.name}
-              </Link>
-            );
-          })}
+        <div className={styles.hamburgerMenuWrapper} ref={categoryMenuRef}>
+          <button
+            type="button"
+            className={`${styles.hamburgerBtn} ${isCategoryMenuOpen ? styles.hamburgerBtnActive : ''}`}
+            onClick={() => setIsCategoryMenuOpen((prev) => !prev)}
+            aria-expanded={isCategoryMenuOpen}
+            aria-label={isEn ? 'Categories Menu' : 'Menu danh mục sản phẩm'}
+          >
+            {isCategoryMenuOpen ? <CloseIcon size={16} /> : <MenuIcon size={16} />}
+            <span className={styles.hamburgerBtnText}>
+              {isEn ? 'Category:' : 'Danh mục:'} <strong>{activeLabel}</strong>
+            </span>
+            <span className={`${styles.dropdownChevron} ${isCategoryMenuOpen ? styles.dropdownChevronUp : ''}`}>
+              ▾
+            </span>
+          </button>
+
+          {/* Dropdown Menu */}
+          {isCategoryMenuOpen && (
+            <div className={styles.dropdownMenu}>
+              <div className={styles.dropdownHeader}>
+                {isEn ? 'Collections' : 'Danh mục sản phẩm'}
+              </div>
+              <div className={styles.dropdownList}>
+                {allTabs.map((tab) => {
+                  const isActive = activeCategoryUid === tab.uid;
+                  return (
+                    <Link
+                      key={tab.uid}
+                      href={tab.path}
+                      onClick={() => setIsCategoryMenuOpen(false)}
+                      className={`${styles.dropdownItem} ${isActive ? styles.dropdownItemActive : ''}`}
+                    >
+                      <span className={styles.itemDot} />
+                      <span className={styles.itemName}>{isEn ? tab.name_en : tab.name}</span>
+                      {isActive && <CheckIcon size={14} className={styles.checkIcon} />}
+                    </Link>
+                  );
+                })}
+              </div>
+            </div>
+          )}
         </div>
 
         {/* Sort Selector: Aligned with menu tabs on the far right */}
@@ -291,6 +355,7 @@ function ShopCatalogInner({
                 .filter((p) => p.id !== selectedProduct.id)
                 .slice(0, 10)}
               isModal={true}
+              initialColorIndex={selectedColorIdx}
               onClose={handleCloseProduct}
               onSelectRelatedProduct={(related) => {
                 handleOpenProduct(related);

@@ -44,6 +44,7 @@ export interface ShopSettings {
   phone: string;
   google_maps_url?: string;
   facebook_url: string;
+  messenger_url?: string;
   instagram_url: string;
   shopee_url: string;
   address: string;

@@ -152,6 +152,7 @@ export async function getShopSettings(): Promise<ShopSettings> {
         phone: d.phone_number || mockShopSettings.phone,
         google_maps_url: d.google_maps_url || undefined,
         facebook_url: d.facebook_url || mockShopSettings.facebook_url,
+        messenger_url: d.messenger_url || undefined,
         instagram_url: d.instagram_url || mockShopSettings.instagram_url,
         shopee_url: d.shopee_url || mockShopSettings.shopee_url,
         address: addrVi,

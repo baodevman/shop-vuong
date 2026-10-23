@@ -10,17 +10,24 @@ interface ProductPageProps {
 
 export async function generateMetadata({ params }: ProductPageProps): Promise<Metadata> {
   const { uid } = await params;
-  const product = await getProductByUid(uid);
+  const [product, settings] = await Promise.all([
+    getProductByUid(uid),
+    getShopSettings(),
+  ]);
+
+  const shopName = settings.shop_name || 'VƯƠNG SHOP';
 
   if (!product) {
-    return { title: 'Product Not Found | VƯƠNG SHOP' };
+    return { title: `Product Not Found | ${shopName}` };
   }
 
+  const productTitle = product.title || product.title_en;
+
   return {
-    title: `${product.title_en} — VƯƠNG SHOP`,
+    title: `${productTitle} — ${shopName}`,
     description: product.description_en || product.description,
     openGraph: {
-      title: `${product.title_en} — VƯƠNG SHOP`,
+      title: `${productTitle} — ${shopName}`,
       description: product.description_en || product.description,
       images: [{ url: product.featured_image }],
     },

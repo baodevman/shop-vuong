@@ -44,8 +44,15 @@
       "facebook_url": {
         "type": "Text",
         "config": {
-          "label": "Link Facebook",
-          "placeholder": "https://facebook.com/vuongshop"
+          "label": "Link Facebook / Fanpage",
+          "placeholder": "https://facebook.com/mamasg.atelier"
+        }
+      },
+      "messenger_url": {
+        "type": "Text",
+        "config": {
+          "label": "Link Messenger (Tùy chọn, tự tạo từ Facebook nếu để trống)",
+          "placeholder": "https://m.me/mamasg.atelier"
         }
       },
       "instagram_url": {

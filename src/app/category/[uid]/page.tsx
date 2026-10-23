@@ -10,15 +10,20 @@ interface CategoryPageProps {
 
 export async function generateMetadata({ params }: CategoryPageProps): Promise<Metadata> {
   const { uid } = await params;
-  const categories = await getCategories();
+  const [categories, settings] = await Promise.all([
+    getCategories(),
+    getShopSettings(),
+  ]);
+
+  const shopName = settings.shop_name || 'VƯƠNG SHOP';
   const category = categories.find((c) => c.uid === uid || c.id === uid);
 
   if (!category) {
-    return { title: 'Category | VƯƠNG SHOP' };
+    return { title: `Category | ${shopName}` };
   }
 
   return {
-    title: `${category.name_en} (${category.name}) — VƯƠNG SHOP`,
+    title: `${category.name} (${category.name_en}) — ${shopName}`,
     description: category.description || `Minimalist collection for ${category.name_en}`,
   };
 }

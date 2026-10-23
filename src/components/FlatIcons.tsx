@@ -209,6 +209,27 @@ export function CloseIcon({ size = 18, className, color = 'currentColor' }: Icon
   );
 }
 
+export function MenuIcon({ size = 18, className, color = 'currentColor' }: IconProps) {
+  return (
+    <svg
+      width={size}
+      height={size}
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke={color}
+      strokeWidth="1.8"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className={className}
+      aria-hidden="true"
+    >
+      <line x1="3" y1="6" x2="21" y2="6" />
+      <line x1="3" y1="12" x2="21" y2="12" />
+      <line x1="3" y1="18" x2="21" y2="18" />
+    </svg>
+  );
+}
+
 export function SearchIcon({ size = 18, className, color = 'currentColor' }: IconProps) {
   return (
     <svg
@@ -245,6 +266,21 @@ export function EyeIcon({ size = 18, className, color = 'currentColor' }: IconPr
     >
       <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
       <circle cx="12" cy="12" r="3" />
+    </svg>
+  );
+}
+
+export function MessengerIcon({ size = 22, className, color = 'currentColor' }: IconProps) {
+  return (
+    <svg
+      width={size}
+      height={size}
+      viewBox="0 0 24 24"
+      fill={color}
+      className={className}
+      aria-hidden="true"
+    >
+      <path d="M12 2C6.477 2 2 6.145 2 11.258c0 2.91 1.455 5.513 3.735 7.18V22l3.418-1.875c.915.254 1.884.391 2.847.391 5.523 0 10-4.145 10-9.258C22 6.145 17.523 2 12 2zm1.05 12.443l-2.61-2.784-5.093 2.784 5.6-5.943 2.678 2.784 5.025-2.784-5.6 5.943z" />
     </svg>
   );
 }

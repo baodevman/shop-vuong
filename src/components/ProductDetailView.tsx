@@ -1,10 +1,11 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 import { ProductItem, ShopSettings } from '@/lib/types';
 import { useLanguage } from '@/context/LanguageContext';
 import { ShareIcon, ShopeeIcon, CloseIcon } from './FlatIcons';
+import { trackProductView, trackContactClick, trackColorSelect } from '@/lib/analytics';
 import ProductCard from './ProductCard';
 import ShareModal from './ShareModal';
 import styles from './ProductDetailView.module.css';
@@ -58,6 +59,13 @@ export default function ProductDetailView({
 
   const activeColorImage = selectedColorIdx !== null ? product.colors?.[selectedColorIdx]?.image : null;
   const currentImage = activeColorImage || gallery[activeImgIdx] || product.featured_image;
+
+  // Track product view in Google Analytics
+  useEffect(() => {
+    if (product) {
+      trackProductView(product);
+    }
+  }, [product]);
 
   // Single language badge formatting
   const getBadgeLabel = () => {
@@ -189,6 +197,7 @@ export default function ProductDetailView({
                             setSelectedColorIdx(null);
                           } else {
                             setSelectedColorIdx(idx);
+                            trackColorSelect(title, c.name);
                             if (c.image) {
                               const foundIdx = gallery.findIndex((g) => g === c.image);
                               if (foundIdx >= 0) setActiveImgIdx(foundIdx);
@@ -257,6 +266,7 @@ export default function ProductDetailView({
                   target="_blank"
                   rel="noopener noreferrer"
                   className={styles.shopeeBtn}
+                  onClick={() => trackContactClick('shopee', settings.shopee_url)}
                 >
                   <ShopeeIcon size={18} />
                   <span>{isEn ? 'Order on Shopee' : 'Mua trên Shopee'}</span>

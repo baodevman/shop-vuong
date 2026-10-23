@@ -2,6 +2,7 @@
 
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import { Language } from '@/lib/types';
+import { trackLanguageChange } from '@/lib/analytics';
 
 interface LanguageContextType {
   language: Language;
@@ -31,6 +32,7 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
     setLanguageState((prev) => {
       const next = prev === 'en' ? 'vi' : 'en';
       localStorage.setItem('vuong_lang', next);
+      trackLanguageChange(next);
       return next;
     });
   };
@@ -38,6 +40,7 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
   const setLanguage = (lang: Language) => {
     setLanguageState(lang);
     localStorage.setItem('vuong_lang', lang);
+    trackLanguageChange(lang);
   };
 
   return (

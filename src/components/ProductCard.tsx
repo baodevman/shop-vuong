@@ -5,6 +5,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { ProductItem, Language } from '@/lib/types';
 import { ShareIcon, EyeIcon } from './FlatIcons';
+import { trackColorSelect } from '@/lib/analytics';
 import ShareModal from './ShareModal';
 import styles from './ProductCard.module.css';
 
@@ -141,7 +142,11 @@ export default function ProductCard({
                     onClick={(e) => {
                       e.preventDefault();
                       e.stopPropagation();
-                      setSelectedColorIdx(idx === selectedColorIdx ? null : idx);
+                      const next = idx === selectedColorIdx ? null : idx;
+                      setSelectedColorIdx(next);
+                      if (next !== null) {
+                        trackColorSelect(title, c.name);
+                      }
                     }}
                   />
                 ))}

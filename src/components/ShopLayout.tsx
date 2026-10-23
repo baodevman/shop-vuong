@@ -6,6 +6,7 @@ import { useLanguage } from '@/context/LanguageContext';
 import Navbar from './Navbar';
 import TopBanner from './TopBanner';
 import Footer from './Footer';
+import MessengerBubble from './MessengerBubble';
 
 interface ShopLayoutProps {
   settings: ShopSettings;
@@ -25,6 +26,7 @@ export default function ShopLayout({ settings, children }: ShopLayoutProps) {
       <TopBanner settings={settings} />
       <main style={{ flex: 1 }}>{children}</main>
       <Footer language={language} settings={settings} />
+      <MessengerBubble settings={settings} language={language} />
     </div>
   );
 }

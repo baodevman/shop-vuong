@@ -12,6 +12,7 @@ import {
   MapPinIcon,
   PhoneIcon,
 } from './FlatIcons';
+import { trackContactClick } from '@/lib/analytics';
 import styles from './Navbar.module.css';
 
 interface NavbarProps {
@@ -71,6 +72,7 @@ export default function Navbar({
                 className={styles.socialBtn}
                 title={isEn ? `Call: ${settings.phone}` : `Gọi ngay: ${settings.phone}`}
                 aria-label="Call Phone"
+                onClick={() => trackContactClick('phone', settings.phone)}
               >
                 <PhoneIcon size={16} />
               </a>
@@ -85,6 +87,7 @@ export default function Navbar({
                 className={styles.socialBtn}
                 title={isEn ? 'Google Maps Location' : 'Vị trí Google Maps'}
                 aria-label="Google Maps"
+                onClick={() => trackContactClick('maps', mapsUrl)}
               >
                 <MapPinIcon size={17} />
               </a>
@@ -99,6 +102,7 @@ export default function Navbar({
                 className={styles.socialBtn}
                 title="Facebook"
                 aria-label="Facebook"
+                onClick={() => trackContactClick('facebook', settings.facebook_url)}
               >
                 <FacebookIcon size={16} />
               </a>
@@ -113,6 +117,7 @@ export default function Navbar({
                 className={styles.socialBtn}
                 title="Instagram"
                 aria-label="Instagram"
+                onClick={() => trackContactClick('instagram', settings.instagram_url)}
               >
                 <InstagramIcon size={16} />
               </a>
@@ -127,6 +132,7 @@ export default function Navbar({
                 className={styles.socialBtn}
                 title="Shopee"
                 aria-label="Shopee"
+                onClick={() => trackContactClick('shopee', settings.shopee_url)}
               >
                 <ShopeeIcon size={16} />
               </a>
