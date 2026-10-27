@@ -1,7 +1,7 @@
 .bannerSection {
   width: 100%;
-  background-color: #fafafa;
-  border-bottom: 1px solid #eeeeee;
+  background-color: #f9fafb;
+  border-bottom: 1px solid #e5e7eb;
   overflow: hidden;
 }
 
@@ -14,29 +14,31 @@
 .bannerContainer {
   position: relative;
   width: 100%;
-  max-width: 1440px;
-  margin: 0 auto;
-  max-height: 380px;
+  height: auto;
   overflow: hidden;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  display: block;
+  background-color: transparent;
 }
 
 .bannerImg {
   width: 100%;
   height: auto;
-  max-height: 380px;
-  object-fit: cover;
   display: block;
+  object-fit: cover;
+  object-position: top center;
 }
 
-@media (max-width: 768px) {
+/* Desktop: Giới hạn chiều cao banner để tránh phải cuộn nhiều, tập trung vào phần trên của ảnh */
+@media (min-width: 769px) {
   .bannerContainer {
-    max-height: 220px;
+    height: clamp(320px, 34vw, 420px);
+    max-height: 420px;
   }
 
   .bannerImg {
-    max-height: 220px;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top center;
   }
 }

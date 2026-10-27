@@ -5,7 +5,7 @@ import Image from 'next/image';
 import { ProductItem, ShopSettings } from '@/lib/types';
 import { useLanguage } from '@/context/LanguageContext';
 import { ShareIcon, ShopeeIcon, CloseIcon } from './FlatIcons';
-import { trackProductView, trackContactClick, trackColorSelect } from '@/lib/analytics';
+import { trackProductView, trackContactClick, trackColorSelect, trackReadMore } from '@/lib/analytics';
 import ProductCard from './ProductCard';
 import ShareModal from './ShareModal';
 import styles from './ProductDetailView.module.css';
@@ -337,7 +337,15 @@ export default function ProductDetailView({
                 <button
                   type="button"
                   className={styles.toggleDescBtn}
-                  onClick={() => setIsDescExpanded(!isDescExpanded)}
+                  onClick={() => {
+                    const nextExpanded = !isDescExpanded;
+                    setIsDescExpanded(nextExpanded);
+                    trackReadMore(
+                      { uid: product.uid, title: product.title },
+                      nextExpanded ? 'expand' : 'collapse',
+                      language
+                    );
+                  }}
                 >
                   {isDescExpanded
                     ? (isEn ? 'Show less ↑' : 'Thu gọn ↑')

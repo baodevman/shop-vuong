@@ -22,8 +22,8 @@ export default function TopBanner({ settings }: TopBannerProps) {
       <Image
         src={bannerUrl}
         alt={settings.shop_name ? `${settings.shop_name} Banner` : 'VƯƠNG SHOP Banner'}
-        width={1920}
-        height={480}
+        width={3240}
+        height={2160}
         priority
         className={styles.bannerImg}
       />

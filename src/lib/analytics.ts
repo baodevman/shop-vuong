@@ -93,3 +93,29 @@ export function trackColorSelect(productTitle: string, colorName: string) {
     color_name: colorName,
   });
 }
+
+/**
+ * 5. Track Read More / Description Expand
+ * Tracks whether users want to read more about the product
+ */
+export function trackReadMore(
+  product: { uid: string; title: string },
+  action: 'expand' | 'collapse',
+  language: string
+) {
+  trackEvent('product_description_toggle', {
+    action, // 'expand' or 'collapse'
+    product_uid: product.uid,
+    product_title: product.title,
+    language,
+  });
+
+  if (action === 'expand') {
+    trackEvent('read_more_description', {
+      product_uid: product.uid,
+      product_title: product.title,
+      language,
+    });
+  }
+}
+
