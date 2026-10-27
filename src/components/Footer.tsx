@@ -18,6 +18,17 @@ export default function Footer({ language, settings }: FooterProps) {
         <p className={styles.copyText}>
           © {currentYear} {settings.shop_name || 'VƯƠNG SHOP'}. All rights reserved.
         </p>
+        <p className={styles.creditText}>
+          Designed & Developed by{' '}
+          <a
+            href="https://devmants.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            className={styles.author}
+          >
+            DEVMAN
+          </a>
+        </p>
       </div>
     </footer>
   );

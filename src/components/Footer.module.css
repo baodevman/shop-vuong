@@ -10,8 +10,10 @@
   margin: 0 auto;
   padding: 0 24px;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
+  gap: 6px;
 }
 
 .copyText {
@@ -20,4 +22,24 @@
   letter-spacing: 0.05em;
   text-align: center;
   margin: 0;
+}
+
+.creditText {
+  font-size: 11px;
+  color: #999999;
+  letter-spacing: 0.03em;
+  text-align: center;
+  margin: 0;
+}
+
+.author {
+  font-weight: 600;
+  color: #555555;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.author:hover {
+  color: #111111;
+  text-decoration: underline;
 }
