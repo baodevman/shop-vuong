@@ -24,21 +24,5 @@
   width: 100%;
   height: auto;
   display: block;
-  object-fit: cover;
-  object-position: top center;
 }
 
-/* Desktop: Giới hạn chiều cao banner để tránh phải cuộn nhiều, tập trung vào phần trên của ảnh */
-@media (min-width: 769px) {
-  .bannerContainer {
-    height: clamp(320px, 34vw, 420px);
-    max-height: 420px;
-  }
-
-  .bannerImg {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: top center;
-  }
-}

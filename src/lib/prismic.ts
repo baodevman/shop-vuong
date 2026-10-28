@@ -166,6 +166,8 @@ export async function getShopSettings(): Promise<ShopSettings> {
         address_en: addrEn,
         top_banner_url: d.top_banner?.url || undefined,
         top_banner_link: d.top_banner_link || undefined,
+        top_banner_width: d.top_banner?.dimensions?.width || undefined,
+        top_banner_height: d.top_banner?.dimensions?.height || undefined,
         site_title: d.site_title || mockShopSettings.site_title,
         meta_description: d.meta_description || mockShopSettings.meta_description,
         favicon_url: d.favicon?.url || undefined,

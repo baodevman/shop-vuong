@@ -54,6 +54,8 @@ export interface ShopSettings {
   address_en: string;
   top_banner_url?: string;
   top_banner_link?: string;
+  top_banner_width?: number;
+  top_banner_height?: number;
   // SEO & Metadata
   site_title?: string;
   meta_description?: string;

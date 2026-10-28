@@ -16,14 +16,16 @@ const SAMPLE_FALLBACK_BANNER =
 export default function TopBanner({ settings }: TopBannerProps) {
   // Use banner from Prismic if uploaded by admin, otherwise use sample fallback banner
   const bannerUrl = settings.top_banner_url || SAMPLE_FALLBACK_BANNER;
+  const bannerWidth = settings.top_banner_width || 3240;
+  const bannerHeight = settings.top_banner_height || 2160;
 
   const content = (
     <div className={styles.bannerContainer}>
       <Image
         src={bannerUrl}
         alt={settings.shop_name ? `${settings.shop_name} Banner` : 'VƯƠNG SHOP Banner'}
-        width={3240}
-        height={2160}
+        width={bannerWidth}
+        height={bannerHeight}
         priority
         className={styles.bannerImg}
       />
